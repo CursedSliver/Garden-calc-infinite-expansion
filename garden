@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Cookie Clicker Farm Calculator</title>
+		<link href="https://fonts.googleapis.com/css?family=Merriweather:900&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+		<link href="style.css" rel="stylesheet">
+		<!-- Global site tag (gtag.js) - Google Analytics -->
+		<script async src="https://www.googletagmanager.com/gtag/js?id=UA-122458148-1"></script>
+		<script>
+			window.dataLayer = window.dataLayer || [];
+			function gtag(){dataLayer.push(arguments);}
+			gtag('js', new Date());
+
+			gtag('config', 'UA-122458148-1');
+		</script>
+		<script src="main.js"></script>
+	</head>
+	<body>
+		<div id="container">
+			<div class="bar"></div>
+			<div id="garden">
+				<div id="gardenPanel" class="framed">
+					<div class="title">Seeds</div>
+					<div class="line"></div>
+					<div id="gardenSeeds"></div>
+				</div>
+				<div id="mid">
+					<div id="gardenPlot"></div>
+					<div id="settings">
+						<button id="woodchips" class="disabled"></button>
+						<div id="level-select" class="framed">
+							<button id="level-sub">-</button>
+							<div id="level-mid">Level <span id="level">9</span></div>
+							<button id="level-add">+</button>
+						</div>
+						<button id="clear"></button>
+					</div>
+				</div>
+				<div id="gardenStats" class="framed">
+					<div class="title">Stats</div>
+					<div class="line"></div>
+					<div id="stats"></div>
+				</div>
+			</div>
+			<div class="bar"></div>
+		<div>
+	</body>
+</html>
