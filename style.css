@@ -46,24 +46,6 @@ button:focus {
 	outline: none;
 }
 
-label { 
-	display: inline-block; 
-	color: #fff; 
-	margin-top: -4px; 
-	padding: 2px; 
-	font-size: 11px; 
-	margin-bottom: 2px; 
-}
-
-input[type="text"] { 
-	background-image: url(images/shadedBordersSoft.png), url(images/darkNoise.jpg); 
-	border-image: url(images/frameBorder.png) 3 round; 
-	width: 90%; 
-	padding: 4px; 
-	box-sizing: border-box; 
-	color: #ccc; 
-}
-
 .framed {
 	background-image: url(images/shadedBordersSoft.png), url(images/darkNoise.jpg);
 	background-size: 100% 100%, auto;
@@ -73,23 +55,12 @@ input[type="text"] {
 	border-radius: 2px;
 	color: #ccc;
 }
-
-.framed:hover { 
-	color: #fff; 
-}
-
 .framed .name {
     font-weight: bold;
     font-size: 110%;
     color: #fff;
     margin: 2px 0px;
     text-shadow: 0px 0px 2px rgba(255,255,255,0.3);
-}
-
-.framed .small { 
-	border: 2px solid transparent; 
-	border-image: url(images/frameBorder.png) 3 round; 
-	margin: 3px; 
 }
 
 .bar {
@@ -342,16 +313,6 @@ input[type="text"] {
 	margin: 4px; 
 	text-align: center; 
 	box-shadow: 8px 0px 8px rgba(0, 0, 0, 0.5); 
-}
-
-#xDim { 
-	width: 45%; 
-	margin-left: 4px; 
-}
-
-#yDim { 
-	width: 45%; 
-	margin-left: 4px; 
 }
 
 #stats {
