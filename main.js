@@ -479,6 +479,8 @@ function init() {
 	});
 	
 	updateStats();
+
+	loadTheMod();
 }
 
 //mod stuff below
