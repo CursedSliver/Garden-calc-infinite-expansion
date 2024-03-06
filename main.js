@@ -46,10 +46,11 @@ let plants = [];
 let plantsById = {};
 
 class Plant {
-	constructor(name, strId, icon) {
+	constructor(name, strId, icon, fungi) {
 		this.name = name;
 		this.strId = strId;
 		this.icon = icon;
+		this.fungi = fungi;
 		
 		this.id = plants.push(this) - 1;
 		plantsById[strId] = this;
@@ -95,40 +96,40 @@ class Plant {
 	}
 }
 
-new Plant("Baker's wheat", "bakerWheat", 0);
-new Plant("Thumbcorn", "thumbcorn", 1);
-new Plant("Cronerice", "cronerice", 2);
-new Plant("Gildmillet", "gildmillet", 3);
-new Plant("Ordinary clover", "clover", 4);
-new Plant("Golden clover", "goldenClover", 5);
-new Plant("Shimmerlily", "shimmerlily", 6);
-new Plant("Elderwort", "elderwort", 7);
-new Plant("Bakeberry", "bakeberry", 8);
-new Plant("Chocoroot", "chocoroot", 9);
-new Plant("White chocoroot", "whiteChocoroot", 10);
-new Plant("White mildew", "whiteMildew", 26);
-new Plant("Brown mold", "brownMold", 27);
-new Plant("Meddleweed", "meddleweed", 29);
-new Plant("Whiskerbloom", "whiskerbloom", 11);
-new Plant("Chimerose", "chimerose", 12);
-new Plant("Nursetulip", "nursetulip", 13);
-new Plant("Drowsyfern", "drowsyfern", 14);
-new Plant("Wardlichen", "wardlichen", 15);
-new Plant("Keenmoss", "keenmoss", 16);
-new Plant("Queenbeet", "queenbeet", 17);
-new Plant("Juicy queenbeet", "queenbeetLump", 18);
-new Plant("Duketater", "duketater", 19);
-new Plant("Crumbspore", "crumbspore", 20);
-new Plant("Doughshroom", "doughshroom", 24);
-new Plant("Glovemorel", "glovemorel", 21);
-new Plant("Cheapcap", "cheapcap", 22);
-new Plant("Fool's bolete", "foolBolete", 23);
-new Plant("Wrinklegill", "wrinklegill", 25);
-new Plant("Green rot", "greenRot", 28);
-new Plant("Shriekbulb", "shriekbulb", 30);
-new Plant("Tidygrass", "tidygrass", 31);
-new Plant("Everdaisy", "everdaisy", 32);
-new Plant("Ichorpuff", "ichorpuff", 33);
+new Plant("Baker's wheat", "bakerWheat", 0, false);
+new Plant("Thumbcorn", "thumbcorn", 1, false);
+new Plant("Cronerice", "cronerice", 2, false);
+new Plant("Gildmillet", "gildmillet", 3, false);
+new Plant("Ordinary clover", "clover", 4, false);
+new Plant("Golden clover", "goldenClover", 5, false);
+new Plant("Shimmerlily", "shimmerlily", 6, false);
+new Plant("Elderwort", "elderwort", 7, false);
+new Plant("Bakeberry", "bakeberry", 8, false);
+new Plant("Chocoroot", "chocoroot", 9, false);
+new Plant("White chocoroot", "whiteChocoroot", 10, false);
+new Plant("White mildew", "whiteMildew", 26, true);
+new Plant("Brown mold", "brownMold", 27, true);
+new Plant("Meddleweed", "meddleweed", 29, true);
+new Plant("Whiskerbloom", "whiskerbloom", 11, false);
+new Plant("Chimerose", "chimerose", 12, false);
+new Plant("Nursetulip", "nursetulip", 13, false);
+new Plant("Drowsyfern", "drowsyfern", 14, false);
+new Plant("Wardlichen", "wardlichen", 15, false);
+new Plant("Keenmoss", "keenmoss", 16, false);
+new Plant("Queenbeet", "queenbeet", 17, false);
+new Plant("Juicy queenbeet", "queenbeetLump", 18, false);
+new Plant("Duketater", "duketater", 19, false);
+new Plant("Crumbspore", "crumbspore", 20, true);
+new Plant("Doughshroom", "doughshroom", 24, true);
+new Plant("Glovemorel", "glovemorel", 21, true);
+new Plant("Cheapcap", "cheapcap", 22, true);
+new Plant("Fool's bolete", "foolBolete", 23, true);
+new Plant("Wrinklegill", "wrinklegill", 25, true);
+new Plant("Green rot", "greenRot", 28, true);
+new Plant("Shriekbulb", "shriekbulb", 30, false);
+new Plant("Tidygrass", "tidygrass", 31, false);
+new Plant("Everdaisy", "everdaisy", 32, false);
+new Plant("Ichorpuff", "ichorpuff", 33, true);
 
 
 let mutations = [
@@ -548,7 +549,6 @@ function promptToDownload(canvas) { let dataUrl = canvas.toDataURL(); let downlo
 
 function loadTheMod() {
 	//why did I do this to myself
-	/*
     eval('generatePlot='+generatePlot.toString().replace('y<6','y<Math.max(maxY,6)').replace('x<6','x<Math.max(maxX,6)')); 
 	eval('getTile='+getTile.toString().replace('x >= 6','x >= maxX').replace('y >= 6','y >= maxY').replace('y * 6','y * maxX'));
 	eval('updateLevel='+updateLevel.toString().replace('level + 1;','level+1;uplim();for (let i in plot) {plot[i].setDisabled(true);}').replace('y<6','y<Math.max(6,gmfl(level)[1])').replace('x<6','x<Math.max(6,gmfl(level)[0])').replace('y * 6','y*Math.max(6,gmfl(level)[0])').replace('+ x];','+ x]; if (level>=9&&useLev) {setP(tile,x,y);continue;} else if (!useLev) { setPAlt(tile,x,y); continue;  }'));
@@ -556,9 +556,10 @@ function loadTheMod() {
 	eval('updateStats='+updateStats.toString().replace('.toFixed(2)','.toFixed(7)')); crT(); updateLevel();  
 	eval('updateStats='+updateStats.toString().replace('let neigh = {};','let neigh = {}; let neighAges = {};').replace('].strId] = 0;','].strId]=0; neighAges[plants[i].strId]=[];').replace('alone = false;', 'alone=false; neighAges[plants[tile].strId].push(getAge(x+xx,y+yy));').replace('if (alone)', 'if (alone && (!checkSup(x,y)))').replace('probs = [];','probs = []; let cs = !checkSup(x,y);').replace(updateStats.toString().slice(updateStats.toString().indexOf('loop:'),updateStats.toString().indexOf('if (probs.length === 0) continue;')), 'loop:\n\t\t\tfor (let i=0; i<mutations.length; i++) { for (let j in mutations[i][0]) { if ( (neigh[j]-(mutations[i][0][j][2]?mode(neighAges[j],imt):0))<mutations[i][0][j][0] || neigh[j]>mutations[i][0][j][1] ) { continue loop; } } for (let j in mutations[i][1]) { if ((!plants[strIdToIndex[j]].fungi) || cs) { probs.push(mutations[i][1][j]); muts.push(j); }}}')); 
 	eval('var updateStatsA='+updateStats.toString().replace('function updateStats()','function()').replace('x < plotLimits[level][0] ||','(!inR(x,y))').replace('y < plotLimits[level][1] ||','').replace('x >= plotLimits[level][2] ||','').replace('y >= plotLimits[level] [3]','')); eval('updateStats='+updateStats.toString().replace('TML = "";','TML = "";if(level>=9||(!useLev)){updateStatsA();return false;}'));
-	for (let i = 0; i < 5; i++) { let target = document.getElementById('stage'+i); target.addEventListener('click', function() { if (ageSelected != i) { document.getElementById('stage'+ageSelected).classList.remove('selected'); ageSelected = i; target.classList.add('selected')} }); } var alltheseeds = document.getElementById('gardenSeeds').childNodes; try {for (let i in alltheseeds) { alltheseeds[i].addEventListener('click', function() { updatestages(selected);}); }} catch(err) { } updatestages((selected === null)?0:selected); 
+	/*
+ 	for (let i = 0; i < 5; i++) { let target = document.getElementById('stage'+i); target.addEventListener('click', function() { if (ageSelected != i) { document.getElementById('stage'+ageSelected).classList.remove('selected'); ageSelected = i; target.classList.add('selected')} }); } var alltheseeds = document.getElementById('gardenSeeds').childNodes; try {for (let i in alltheseeds) { alltheseeds[i].addEventListener('click', function() { updatestages(selected);}); }} catch(err) { } updatestages((selected === null)?0:selected); 
 	eval('Tile.prototype.setPlant='+Tile.prototype.setPlant.toString().replace('setPlant','function').replace('nt = id;','nt = id; this.age = ageSelected; updateEffects();').replace('"-192px -"','sts(this.age)+"px -"').replace('"";','"";this.icon.style.opacity = decay(this.age);')); 
-	for (let i in mutations) { for (let key in mutations[i][0]) { eval('mutations['+i+'][0].'+key+'.push('+checkNonmature(mutations[i][0],key)+')') } } for (let i in plants) { let id = plants[i].id; if (id==11||id==12||id==13||id==23||id==24||id==25||id==26||id==27||id==28||id==29||id==33) { plants[i].fungi = true; } else { plants[i].fungi = false; }} for (let i in plants) { strIdToIndex[plants[i].strId] = plants[i].id; } 
+	for (let i in mutations) { for (let key in mutations[i][0]) { eval('mutations['+i+'][0].'+key+'.push('+checkNonmature(mutations[i][0],key)+')') } } for (let i in plants) { strIdToIndex[plants[i].strId] = plants[i].id; } 
 	*/
 }
 		
