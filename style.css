@@ -270,7 +270,7 @@ button:focus {
 
 #clear {
 	float: right;
-	background: url(clear.png);
+	background: url(images/clear.png);
 }
 
 #level-select {
