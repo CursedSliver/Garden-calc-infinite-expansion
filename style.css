@@ -33,7 +33,7 @@
 
 body {
 	margin: 0;
-	background-image: url(https://orteil.dashnet.org/cookieclicker/img/bgBlue.jpg);
+	background-image: url(images/bgBlue.jpg);
 	font-family: Tahoma,Arial,sans-serif;
 	font-size: 13px;
 }
@@ -47,11 +47,11 @@ button:focus {
 }
 
 .framed {
-	background-image: url(https://orteil.dashnet.org/cookieclicker/img/shadedBordersSoft.png), url(https://orteil.dashnet.org/cookieclicker/img/darkNoise.jpg);
+	background-image: url(images/shadedBordersSoft.png), url(images/darkNoise.jpg);
 	background-size: 100% 100%, auto;
 	
 	border: 3px solid transparent;
-	border-image: url(https://orteil.dashnet.org/cookieclicker/img/frameBorder.png) 3 round;
+	border-image: url(images/frameBorder.png) 3 round;
 	border-radius: 2px;
 	color: #ccc;
 }
@@ -66,7 +66,7 @@ button:focus {
 .bar {
 	width: 100%;
 	height: 16px;
-	background: url(https://orteil.dashnet.org/cookieclicker/img/panelGradientLeft.png) no-repeat top left, url(https://orteil.dashnet.org/cookieclicker/img/panelGradientRight.png) no-repeat top right, url(https://orteil.dashnet.org/cookieclicker/img/panelHorizontal.png) repeat-x;
+	background: url(images/panelGradientLeft.png) no-repeat top left, url(images/panelGradientRight.png) no-repeat top right, url(images/panelHorizontal.png) repeat-x;
 }
 
 .icon {
@@ -93,7 +93,7 @@ button:focus {
 	top: 50%;
 	transform: translateY(-50%);
 	box-shadow: 0px 0px 16px 2px;
-	background-image: url(https://orteil.dashnet.org/cookieclicker/img/shadedBorders.png), url(https://orteil.dashnet.org/cookieclicker/img/BGgarden.jpg);
+	background-image: url(images/shadedBorders.png), url(images/BGgarden.jpg);
 	background-size: 100% 100%, auto;
 	text-align: center;
 }
@@ -155,7 +155,7 @@ button:focus {
 	height: 48px;
 	top: -4px;
 	left: -4px;
-	background-image: url(https://orteil.dashnet.org/cookieclicker/img/gardenPlants.png);
+	background-image: url(images/gardenPlants.png);
 	
 	pointer-events: none;
 }
@@ -201,7 +201,7 @@ button:focus {
 	left: 0;
 	bottom: 0;
 	right: 0;
-	background-image: url(https://orteil.dashnet.org/cookieclicker/img/gardenPlots.png);
+	background-image: url(images/gardenPlots.png);
 	opacity: 0.65;
 	
 	pointer-events: none;
@@ -229,7 +229,7 @@ button:focus {
 	height: 48px;
 	top: -12px;
 	left: -4px;
-	background-image: url(https://orteil.dashnet.org/cookieclicker/img/gardenPlants.png);
+	background-image: url(images/gardenPlants.png);
 	
 	pointer-events: none;
 }
@@ -264,7 +264,7 @@ button:focus {
 	width: 48px;
 	height: 48px;
 	float: left;
-	background: url(https://orteil.dashnet.org/cookieclicker/img/gardenPlants.png);
+	background: url(images/gardenPlants.png);
 	background-position: -192px -1632px;
 }
 
@@ -286,7 +286,7 @@ button:focus {
 	background: transparent;
 	border: none;
 	color: #ccc;
-	border-image: url(https://orteil.dashnet.org/cookieclicker/img/frameBorder.png) 3 round;
+	border-image: url(images/frameBorder.png) 3 round;
 	box-sizing: content-box;
 	cursor: pointer;
 }
