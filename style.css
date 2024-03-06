@@ -302,10 +302,17 @@ button:focus {
 }
 
 #gardenStats {
-	width: 310px;
+	width: 174px;
 	margin: 4px;
 	text-align: center;
 	box-shadow: 8px 0px 8px rgba(0, 0, 0, 0.5);
+}
+
+#misc { 
+	width: 120px; 
+	margin: 4px; 
+	text-align: center; 
+	box-shadow: 8px 0px 8px rgba(0, 0, 0, 0.5); 
 }
 
 #stats {
