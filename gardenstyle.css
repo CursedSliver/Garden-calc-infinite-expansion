@@ -1,0 +1,313 @@
+@keyframes wobble {
+	0%   { transform: scale(0.5, 0.5); }
+	20%  { transform: scale(1.3, 0.7); }
+	30%  { transform: scale(0.7, 1.3); }
+	50%  { transform: scale(1.2, 0.8); }
+	70%  { transform: scale(0.9, 1.1); }
+	90%  { transform: scale(1.1, 0.9); }
+	100% { transform: scale(1.0, 1.0); }
+}
+
+@keyframes pucker {
+	0%   { transform: scale(1.00, 1.00); }
+	10%  { transform: scale(1.15, 0.85); }
+	20%  { transform: scale(1.20, 0.80); }
+	50%  { transform: scale(0.75, 1.25); }
+	70%  { transform: scale(1.05, 0.95); }
+	90%  { transform: scale(0.95, 1.05); }
+	100% { transform: scale(1.00, 1.00); }
+}
+
+@keyframes bounce {
+	0% 	 { transform-origin: 50% 100%; transform: scale(1.0,  1.0); }
+	10%  { transform-origin: 50% 100%; transform: scale(0.9,  1.2); }
+	20%  { transform-origin: 50% 100%; transform: scale(1.5,  0.5); }
+	25%  { transform-origin: 50% 100%; transform: scale(0.75, 1.5) translate(0px, -10px); }
+	30%  { transform-origin: 50% 100%; transform: scale(0.8,  1.2) translate(0px, -20px); }
+	60%  { transform-origin: 50% 100%; transform: scale(1.0,  1.0) translate(0px, -25px); }
+	70%  { transform-origin: 50% 100%; transform: scale(2.0,  0.5); }
+	80%  { transform-origin: 50% 100%; transform: scale(0.8,  1.2); }
+	90%  { transform-origin: 50% 100%; transform: scale(1.0,  1.0); }
+	100% { transform-origin: 50% 100%; transform: scale(1.0,  1.0); }
+}
+
+body {
+	margin: 0;
+	background-image: url(https://orteil.dashnet.org/cookieclicker/img/bgBlue.jpg);
+	font-family: Tahoma,Arial,sans-serif;
+	font-size: 13px;
+}
+
+small {
+	font-size: 80%;
+}
+
+button:focus {
+	outline: none;
+}
+
+.framed {
+	background-image: url(https://orteil.dashnet.org/cookieclicker/img/shadedBordersSoft.png), url(https://orteil.dashnet.org/cookieclicker/img/darkNoise.jpg);
+	background-size: 100% 100%, auto;
+	
+	border: 3px solid transparent;
+	border-image: url(https://orteil.dashnet.org/cookieclicker/img/frameBorder.png) 3 round;
+	border-radius: 2px;
+	color: #ccc;
+}
+.framed .name {
+    font-weight: bold;
+    font-size: 110%;
+    color: #fff;
+    margin: 2px 0px;
+    text-shadow: 0px 0px 2px rgba(255,255,255,0.3);
+}
+
+.bar {
+	width: 100%;
+	height: 16px;
+	background: url(https://orteil.dashnet.org/cookieclicker/img/panelGradientLeft.png) no-repeat top left, url(https://orteil.dashnet.org/cookieclicker/img/panelGradientRight.png) no-repeat top right, url(https://orteil.dashnet.org/cookieclicker/img/panelHorizontal.png) repeat-x;
+}
+
+.icon {
+	display: inline-block;
+	margin: 0px 4px;
+	width: 48px;
+	height: 48px;
+	filter: drop-shadow(0px 3px 2px #000);
+}
+
+.disabled {
+	filter: brightness(30%);
+}
+
+#tooltip {
+	position: absolute;
+	pointer-events: none;
+}
+
+
+#container {
+	position: absolute;
+	width: 100%;
+	top: 50%;
+	transform: translateY(-50%);
+	box-shadow: 0px 0px 16px 2px;
+	background-image: url(https://orteil.dashnet.org/cookieclicker/img/shadedBorders.png), url(https://orteil.dashnet.org/cookieclicker/img/BGgarden.jpg);
+	background-size: 100% 100%, auto;
+	text-align: center;
+}
+
+#garden {
+	display: inline-flex;
+}
+
+#gardenPanel {
+	width: 310px;
+	margin: 4px;
+	
+	text-align: center;
+	box-shadow: 8px 0px 8px rgba(0, 0, 0, 0.5);
+}
+
+.title {
+	font-size: 12px;
+	padding: 2px;
+	margin-top: 4px;
+	margin-bottom: -4px;
+	
+	color: #fff;
+	text-shadow: 0px 0px 4px #000;
+	font-family: 'Merriweather', Georgia,serif;
+}
+
+.line {
+	position: relative;
+	background: linear-gradient(to right, rgba(255,255,255,0), rgba(255,255,255,0.25), rgba(255,255,255,0));
+	height: 1px;
+	width: 90%;
+	margin: 6px auto;
+}
+.line:before, .line:after {
+	content: "";
+	position: absolute;
+	height: 1px;
+	width: 90%;
+	background: linear-gradient(to right, rgba(0,0,0,0), rgba(0,0,0,0.25), rgba(0,0,0,0));
+	left: 0px;
+	bottom: 1px;
+}
+.line:after {
+	bottom: -1px;
+}
+
+.seed {
+	position: relative;
+	display: inline-block;
+	width: 40px;
+	height: 40px;
+	
+	cursor: pointer;
+}
+.seed-icon {
+	position: absolute;
+	width: 48px;
+	height: 48px;
+	top: -4px;
+	left: -4px;
+	background-image: url(https://orteil.dashnet.org/cookieclicker/img/gardenPlants.png);
+	
+	pointer-events: none;
+}
+.seed:hover .seed-icon {
+	animation: bounce 0.8s;
+}
+
+.seed.selected:before {
+	content: "";
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    margin: -2px;
+    border-radius: 12px;
+    transform: rotate(45deg);
+    background: rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 0px 8px rgba(255, 255, 255, 0.75);
+    pointer-events: none;
+}
+
+#gardenPlot {
+	width: 240px;
+	height: 240px;
+}
+
+.tile {
+	position: relative;
+	display: inline-block;
+	width: 40px;
+	height: 40px;
+	vertical-align: top;
+}
+.tile.disabled {
+	visibility: hidden;
+}
+
+.tile::before {
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	background-image: url(https://orteil.dashnet.org/cookieclicker/img/gardenPlots.png);
+	opacity: 0.65;
+	
+	pointer-events: none;
+	transition: opacity 0.2s;
+}
+
+.tile:nth-child(4n+1)::before {
+	background-position:40px 0px;
+}
+.tile:nth-child(4n+2)::before {
+	background-position:80px 0px;
+}
+.tile:nth-child(4n+3)::before {
+	background-position:120px 0px;
+}
+
+.tile:hover::before {
+	opacity: 1;
+	animation: wobble 0.5s;
+}
+
+.tile-icon {
+	position: absolute;
+	width: 48px;
+	height: 48px;
+	top: -12px;
+	left: -4px;
+	background-image: url(https://orteil.dashnet.org/cookieclicker/img/gardenPlants.png);
+	
+	pointer-events: none;
+}
+
+.tile:hover .tile-icon {
+	animation: pucker 0.3s;
+}
+
+
+#mid {
+	padding: 32px;
+	padding-bottom: 0;
+}
+
+#settings {
+	height: 48px;
+	padding: 4px 0;
+}
+
+#woodchips, #clear {
+	width: 48px;
+	height: 48px;
+	border: none;
+	filter: drop-shadow(0px 3px 2px #000);
+	cursor: pointer;
+}
+#woodchips.disabled, #clear.disabled {
+	filter: brightness(30%) drop-shadow(0px 3px 2px #000);
+}
+
+#woodchips {
+	width: 48px;
+	height: 48px;
+	float: left;
+	background: url(https://orteil.dashnet.org/cookieclicker/img/gardenPlants.png);
+	background-position: -192px -1632px;
+}
+
+#clear {
+	float: right;
+	background: url(clear.png);
+}
+
+#level-select {
+	display: inline-flex;
+	width: 128px;
+	margin: 8px 0;
+	box-sizing: border-box;
+}
+#level-add, #level-sub {
+	width: 26px;
+	height: 26px;
+	padding: 0;
+	background: transparent;
+	border: none;
+	color: #ccc;
+	border-image: url(https://orteil.dashnet.org/cookieclicker/img/frameBorder.png) 3 round;
+	box-sizing: content-box;
+	cursor: pointer;
+}
+#level-add {
+	border-left: 3px solid #875526;
+}
+#level-sub {
+	border-right: 3px solid #dfbc9a;
+}
+#level-mid {
+	flex: 1;
+	line-height: 26px;
+}
+
+#gardenStats {
+	width: 310px;
+	margin: 4px;
+	text-align: center;
+	box-shadow: 8px 0px 8px rgba(0, 0, 0, 0.5);
+}
+
+#stats {
+	color: #fff;
+}
