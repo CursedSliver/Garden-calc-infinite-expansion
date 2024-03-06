@@ -548,6 +548,7 @@ function promptToDownload(canvas) { let dataUrl = canvas.toDataURL(); let downlo
 
 function loadTheMod() {
 	//why did I do this to myself
+	/*
     eval('generatePlot='+generatePlot.toString().replace('y<6','y<Math.max(maxY,6)').replace('x<6','x<Math.max(maxX,6)')); 
 	eval('getTile='+getTile.toString().replace('x >= 6','x >= maxX').replace('y >= 6','y >= maxY').replace('y * 6','y * maxX'));
 	eval('updateLevel='+updateLevel.toString().replace('level + 1;','level+1;uplim();for (let i in plot) {plot[i].setDisabled(true);}').replace('y<6','y<Math.max(6,gmfl(level)[1])').replace('x<6','x<Math.max(6,gmfl(level)[0])').replace('y * 6','y*Math.max(6,gmfl(level)[0])').replace('+ x];','+ x]; if (level>=9&&useLev) {setP(tile,x,y);continue;} else if (!useLev) { setPAlt(tile,x,y); continue;  }'));
@@ -558,6 +559,7 @@ function loadTheMod() {
 	for (let i = 0; i < 5; i++) { let target = document.getElementById('stage'+i); target.addEventListener('click', function() { if (ageSelected != i) { document.getElementById('stage'+ageSelected).classList.remove('selected'); ageSelected = i; target.classList.add('selected')} }); } var alltheseeds = document.getElementById('gardenSeeds').childNodes; try {for (let i in alltheseeds) { alltheseeds[i].addEventListener('click', function() { updatestages(selected);}); }} catch(err) { } updatestages((selected === null)?0:selected); 
 	eval('Tile.prototype.setPlant='+Tile.prototype.setPlant.toString().replace('setPlant','function').replace('nt = id;','nt = id; this.age = ageSelected; updateEffects();').replace('"-192px -"','sts(this.age)+"px -"').replace('"";','"";this.icon.style.opacity = decay(this.age);')); 
 	for (let i in mutations) { for (let key in mutations[i][0]) { eval('mutations['+i+'][0].'+key+'.push('+checkNonmature(mutations[i][0],key)+')') } } for (let i in plants) { let id = plants[i].id; if (id==11||id==12||id==13||id==23||id==24||id==25||id==26||id==27||id==28||id==29||id==33) { plants[i].fungi = true; } else { plants[i].fungi = false; }} for (let i in plants) { strIdToIndex[plants[i].strId] = plants[i].id; } 
+	*/
 }
 		
 window.addEventListener("DOMContentLoaded", init);
