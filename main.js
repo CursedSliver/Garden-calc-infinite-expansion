@@ -524,7 +524,7 @@ function init() {
 		document.body.removeChild(str);
 	});
 	document.getElementById('resize').addEventListener('click', function() { 
-		cdim = [Math.max(parseP(document.getElementById('xDim').value),1), Math.max(parseP(document.getElementById('yDim').value),1)]; 
+		cdim = [Math.round(Math.max(parseP(document.getElementById('xDim').value),1)), Math.round(Math.max(parseP(document.getElementById('yDim').value),1))]; 
 		resize(); 
 	});
 	document.getElementById('captureButton').addEventListener('click', function() {
