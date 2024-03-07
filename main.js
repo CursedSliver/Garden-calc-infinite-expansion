@@ -549,6 +549,10 @@ function init() {
 		toggleDarkMode(true);
 		document.getElementById('info').classList.remove('inactive');
 	});
+	document.getElementById('xCancel').addEventListener('click', function() {
+		toggleDarkMode(false);
+		document.getElementById('info').classList.add('inactive');
+	});
 	for (let i = 0; i < 5; i++) { 
 		let target = document.getElementById('stage'+i); 
 		target.addEventListener('click', function() { 
