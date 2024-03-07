@@ -594,9 +594,9 @@ function download() { let g = document.getElementById('gardenPlot'); g.classList
 function promptToDownload(canvas) { let dataUrl = canvas.toDataURL(); let downloadLink = document.createElement('a'); downloadLink.href = dataUrl; downloadLink.download = 'garden.png'; document.body.appendChild(downloadLink); downloadLink.click(); document.body.removeChild(downloadLink); }
 function toggleDarkMode(t) { 
 	if (t) {
-		document.documentElement.style.setProperty('--darken', 60%);
+		document.documentElement.style.setProperty('--darken', 0.6);
 	} else {
-		document.documentElement.style.setProperty('--darken', 100%);
+		document.documentElement.style.setProperty('--darken', 1);
 	}
 }
 
