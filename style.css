@@ -1,6 +1,7 @@
 :root {
 	--gardenWidth: '240px';
 	--gardenHeight: '240px';
+	--darken: 100%;
 }
 
 @keyframes wobble {
@@ -143,6 +144,7 @@ input[type="text"] {
 	background-image: url(images/shadedBorders.png), url(images/BGgarden.jpg);
 	background-size: 100% 100%, auto;
 	text-align: center;
+	filter: brightness(var(--darken));
 }
 
 #garden {
@@ -369,6 +371,11 @@ input[type="text"] {
     width: 150px;
     left: 50%;
     transform: translate(-52%, -10%);
+}
+#info {
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
 }
 
 #misc { 
