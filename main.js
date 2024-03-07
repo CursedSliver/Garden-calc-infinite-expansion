@@ -215,11 +215,11 @@ function randomListProb(list) {
 let plot = [];
 
 function getTile(x, y) {
-	if (x < 0 || y < 0 || x >= 6 || y >= 6) {
+	if (x < 0 || y < 0 || x >= maxX || y >= maxY) {
 		return null;
 	}
 	
-	return plot[y * 6 + x].plant;
+	return plot[y * maxX + x].plant;
 }
 
 function updateStats() {
@@ -393,8 +393,8 @@ class Tile {
 }
 
 function generatePlot() {
-	for (let y=0; y<6; y++) {
-		for (let x=0; x<6; x++) {
+	for (let y=0; y<Math.max(maxY,6); y++) {
+		for (let x=0; x<Math.max(maxX,6); x++) {
 			let tile = new Tile(x, y);
 			document.getElementById("gardenPlot").appendChild(tile.element);
 			plot.push(tile);
@@ -564,8 +564,6 @@ function promptToDownload(canvas) { let dataUrl = canvas.toDataURL(); let downlo
 function loadTheMod() {
 	//why did I do this to myself
 	/*
-    eval('generatePlot='+generatePlot.toString().replace('y<6','y<Math.max(maxY,6)').replace('x<6','x<Math.max(maxX,6)')); 
-	eval('getTile='+getTile.toString().replace('x >= 6','x >= maxX').replace('y >= 6','y >= maxY').replace('y * 6','y * maxX'));
 	eval('updateLevel='+updateLevel.toString().replace('level + 1;','level+1;uplim();for (let i in plot) {plot[i].setDisabled(true);}').replace('y<6','y<Math.max(6,gmfl(level)[1])').replace('x<6','x<Math.max(6,gmfl(level)[0])').replace('y * 6','y*Math.max(6,gmfl(level)[0])').replace('+ x];','+ x]; if (level>=9&&useLev) {setP(tile,x,y);continue;} else if (!useLev) { setPAlt(tile,x,y); continue;  }'));
 	eval('updateStats='+updateStats.toString().replace('y<6','y<maxY').replace('x<6','x<maxX')); document.getElementById('level-add').remove();
 	eval('updateStats='+updateStats.toString().replace('.toFixed(2)','.toFixed(7)')); crT(); updateLevel();  
