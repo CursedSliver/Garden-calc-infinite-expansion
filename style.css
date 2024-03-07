@@ -63,10 +63,10 @@ label {
 p {
 	display: inline-block; 
 	color: #fff; 
-	margin-top: -4px; 
+	margin-top: -6px; 
 	padding: 2px; 
 	font-size: 12px; 
-	margin-bottom: 4px; 
+	margin-bottom: 6px; 
 }
 
 input[type="text"] { 
