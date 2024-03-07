@@ -1,10 +1,3 @@
-/*
-TODO:
-* Implement Everdaisy & Tidygrass weed effects
-* Implement all soil types
-*/
-
-
 let tooltip = document.createElement("div");
 tooltip.id = "tooltip";
 tooltip.className = "framed";
@@ -404,10 +397,19 @@ function generatePlot() {
 
 function updateLevel() {
 	document.getElementById("level").textContent = level + 1;
+	uplim(); 
+	for (let i in plot) {
+		plot[i].setDisabled(true);
+	}
 	
-	for (let y=0; y<6; y++) {
-		for (let x=0; x<6; x++) {
-			let tile = plot[y * 6 + x];
+	for (let y=0; y<Math.max(6,gmfl(level)[1]); y++) {
+		for (let x=0; x<Math.max(6,gmfl(level)[0]); x++) {
+			let tile = plot[y * Math.max(6,gmfl(level)[0]) + x]; 
+			if (level>=9 && useLev) { 
+				setP(tile,x,y); continue;
+			} else if (!useLev) { 
+				setPAlt(tile,x,y); continue;  
+			}
 			if (
 				x < plotLimits[level][0] ||
 				y < plotLimits[level][1] ||
@@ -423,6 +425,10 @@ function updateLevel() {
 	
 	updateStats();
 }
+
+for (let i in plants) { 
+	strIdToIndex[plants[i].strId] = plants[i].id; 
+} 
 
 function init() {
 	document.body.appendChild(tooltip);
@@ -564,14 +570,13 @@ function promptToDownload(canvas) { let dataUrl = canvas.toDataURL(); let downlo
 function loadTheMod() {
 	//why did I do this to myself
 	/*
-	eval('updateLevel='+updateLevel.toString().replace('level + 1;','level+1;uplim();for (let i in plot) {plot[i].setDisabled(true);}').replace('y<6','y<Math.max(6,gmfl(level)[1])').replace('x<6','x<Math.max(6,gmfl(level)[0])').replace('y * 6','y*Math.max(6,gmfl(level)[0])').replace('+ x];','+ x]; if (level>=9&&useLev) {setP(tile,x,y);continue;} else if (!useLev) { setPAlt(tile,x,y); continue;  }'));
 	eval('updateStats='+updateStats.toString().replace('y<6','y<maxY').replace('x<6','x<maxX')); document.getElementById('level-add').remove();
 	eval('updateStats='+updateStats.toString().replace('.toFixed(2)','.toFixed(7)')); crT(); updateLevel();  
 	eval('updateStats='+updateStats.toString().replace('let neigh = {};','let neigh = {}; let neighAges = {};').replace('].strId] = 0;','].strId]=0; neighAges[plants[i].strId]=[];').replace('alone = false;', 'alone=false; neighAges[plants[tile].strId].push(getAge(x+xx,y+yy));').replace('if (alone)', 'if (alone && (!checkSup(x,y)))').replace('probs = [];','probs = []; let cs = !checkSup(x,y);').replace(updateStats.toString().slice(updateStats.toString().indexOf('loop:'),updateStats.toString().indexOf('if (probs.length === 0) continue;')), 'loop:\n\t\t\tfor (let i=0; i<mutations.length; i++) { for (let j in mutations[i][0]) { if ( (neigh[j]-(mutations[i][0][j][2]?mode(neighAges[j],imt):0))<mutations[i][0][j][0] || neigh[j]>mutations[i][0][j][1] ) { continue loop; } } for (let j in mutations[i][1]) { if ((!plants[strIdToIndex[j]].fungi) || cs) { probs.push(mutations[i][1][j]); muts.push(j); }}}')); 
 	eval('var updateStatsA='+updateStats.toString().replace('function updateStats()','function()').replace('x < plotLimits[level][0] ||','(!inR(x,y))').replace('y < plotLimits[level][1] ||','').replace('x >= plotLimits[level][2] ||','').replace('y >= plotLimits[level] [3]','')); eval('updateStats='+updateStats.toString().replace('TML = "";','TML = "";if(level>=9||(!useLev)){updateStatsA();return false;}'));
  */
 	 
-	for (let i in mutations) { for (let key in mutations[i][0]) { eval('mutations['+i+'][0].'+key+'.push('+checkNonmature(mutations[i][0],key)+')') } } for (let i in plants) { strIdToIndex[plants[i].strId] = plants[i].id; } 
+	for (let i in mutations) { for (let key in mutations[i][0]) { eval('mutations['+i+'][0].'+key+'.push('+checkNonmature(mutations[i][0],key)+')') } } 
 	
 }
 		
