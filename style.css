@@ -439,7 +439,7 @@ input[type="text"] {
 #xCancel {
 	background-image: url(images/xbutton.png);
 	position: absolute;
-	height: 16px;
-	width: 16px;
-	
+	height: 48px;
+	width: 48px;
+	left: 90%;
 }
