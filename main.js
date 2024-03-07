@@ -231,8 +231,8 @@ function updateStats() {
 		chances[plants[i].strId] = [];
 	}
 	
-	for (let y=0; y<6; y++) {
-		for (let x=0; x<6; x++) {
+	for (let y=0; y<maxY; y++) {
+		for (let x=0; x<maxX; x++) {
 			if (getTile(x, y) !== null) {
 				continue;
 			}
@@ -576,7 +576,6 @@ function promptToDownload(canvas) { let dataUrl = canvas.toDataURL(); let downlo
 
 function loadTheMod() {
 	//why did I do this to myself
-	eval('updateStats='+updateStats.toString().replace('y<6','y<maxY').replace('x<6','x<maxX')); document.getElementById('level-add').remove();
 	eval('updateStats='+updateStats.toString().replace('let neigh = {};','let neigh = {}; let neighAges = {};').replace('].strId] = 0;','].strId]=0; neighAges[plants[i].strId]=[];').replace('alone = false;', 'alone=false; neighAges[plants[tile].strId].push(getAge(x+xx,y+yy));').replace('if (alone)', 'if (alone && (!checkSup(x,y)))').replace('probs = [];','probs = []; let cs = !checkSup(x,y);').replace(updateStats.toString().slice(updateStats.toString().indexOf('loop:'),updateStats.toString().indexOf('if (probs.length === 0) continue;')), 'loop:\n\t\t\tfor (let i=0; i<mutations.length; i++) { for (let j in mutations[i][0]) { if ( (neigh[j]-(mutations[i][0][j][2]?mode(neighAges[j],imt):0))<mutations[i][0][j][0] || neigh[j]>mutations[i][0][j][1] ) { continue loop; } } for (let j in mutations[i][1]) { if ((!plants[strIdToIndex[j]].fungi) || cs) { probs.push(mutations[i][1][j]); muts.push(j); }}}')); 
 	eval('var updateStatsA='+updateStats.toString().replace('function updateStats()','function()').replace('x < plotLimits[level][0] ||','(!inR(x,y))').replace('y < plotLimits[level][1] ||','').replace('x >= plotLimits[level][2] ||','').replace('y >= plotLimits[level] [3]','')); eval('updateStats='+updateStats.toString().replace('TML = "";','TML = "";if(level>=9||(!useLev)){updateStatsA();return false;}'));
 	 
