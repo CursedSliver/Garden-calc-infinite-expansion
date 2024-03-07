@@ -341,6 +341,7 @@ class Tile {
 	constructor(x, y) {
 		this.x = x;
 		this.y = y;
+		this.age = 3;
 		
 		this.plant = null;
 		
@@ -363,8 +364,9 @@ class Tile {
 		});
 	}
 	
-	setPlant(id, skipUpdate) {
+	setPlant(id, skipUpdate, age) {
 		this.plant = id;
+		this.age = age;
 		
 		if (!skipUpdate) {
 			updateStats();
