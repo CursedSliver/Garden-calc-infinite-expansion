@@ -435,3 +435,11 @@ input[type="text"] {
 	color: #fff;
 	margin-bottom: 36px;
 }
+
+#xCancel {
+	background-image: url(images/xbutton.png);
+	position: absolute;
+	height: 16px;
+	width: 16px;
+	
+}
