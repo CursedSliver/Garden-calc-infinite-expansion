@@ -545,6 +545,10 @@ function init() {
 	document.getElementById('captureButton').addEventListener('click', function() {
 		download();
 	});
+	document.getElementById('infoButton').addEventListener('click', function() {
+		toggleDarkMode(true);
+		document.getElementById('info').classList.remove('inactive');
+	});
 	for (let i = 0; i < 5; i++) { 
 		let target = document.getElementById('stage'+i); 
 		target.addEventListener('click', function() { 
@@ -588,6 +592,13 @@ function setPAlt(tile, x, y) { if (inRAlt(x,y)) { tile.setDisabled(false); } els
 function inRAlt(x,y) { x++; y++; if (x>Math.max(6,cdim[0])||y>Math.max(6,cdim[1])) {return false;} if (cdim[0]<=6) { if (x<altLims[cdim[0]][0]||x>altLims[cdim[0]][1]) {return false;} } if (cdim[1]<=6) { if (y<altLims[cdim[1]][0]||y>altLims[cdim[1]][1]) {return false;} } return true; }
 function download() { let g = document.getElementById('gardenPlot'); g.classList.add('gardenBG'); html2canvas(g).then(function(r) { promptToDownload(r); }); g.classList.remove('gardenBG'); } 
 function promptToDownload(canvas) { let dataUrl = canvas.toDataURL(); let downloadLink = document.createElement('a'); downloadLink.href = dataUrl; downloadLink.download = 'garden.png'; document.body.appendChild(downloadLink); downloadLink.click(); document.body.removeChild(downloadLink); }
+function toggleDarkMode(t) { 
+	if (t) {
+		document.documentElement.style.setProperty('--darken', 60%);
+	} else {
+		document.documentElement.style.setProperty('--darken', 100%);
+	}
+}
 
 //gonna do this otherwise somehow it doesnt work???
 uplim();
