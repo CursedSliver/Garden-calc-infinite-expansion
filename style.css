@@ -354,8 +354,7 @@ input[type="text"] {
 	box-shadow: 8px 0px 8px rgba(0, 0, 0, 0.5);
 }
 #infoButton {
-	position: relative;
-	bottom: 8px;
+	vertical-align: bottom;
 }
 
 #misc { 
