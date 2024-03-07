@@ -567,7 +567,7 @@ function dd() { return document.createElement('div'); }
 function resize() { useLev = false; crT(); maxX = Math.max(6,cdim[0]); maxY = Math.max(6,cdim[1]); uplim(); updateLevel(); updateEffects(); updateStats(); } 
 function setPAlt(tile, x, y) { if (inRAlt(x,y)) { tile.setDisabled(false); } else { tile.setDisabled(true); } } 
 function inRAlt(x,y) { x++; y++; if (x>Math.max(6,cdim[0])||y>Math.max(6,cdim[1])) {return false;} if (cdim[0]<=6) { if (x<altLims[cdim[0]][0]||x>altLims[cdim[0]][1]) {return false;} } if (cdim[1]<=6) { if (y<altLims[cdim[1]][0]||y>altLims[cdim[1]][1]) {return false;} } return true; }
-function download() { let g = document.getElementById('garden'); html2canvas(g).then(function(r) { promptToDownload(r); }) } 
+function download() { let g = document.getElementById('gardenPlot'); g.classList.add('gardenBG'); html2canvas(g).then(function(r) { promptToDownload(r); }); g.classList.remove('gardenBG'); } 
 function promptToDownload(canvas) { let dataUrl = canvas.toDataURL(); let downloadLink = document.createElement('a'); downloadLink.href = dataUrl; downloadLink.download = 'garden.png'; document.body.appendChild(downloadLink); downloadLink.click(); document.body.removeChild(downloadLink); }
 
 function loadTheMod() {
