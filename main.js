@@ -43,7 +43,8 @@ let plantsById = {};
 var maxX = 6; var maxY = 6; var cdim = [6, 6]; var useLev = true; var ageSelected = 3; var importStr = '';
 var tl = {0:'=',1:'a',2:'b',3:'c',4:'d',5:'e',6:'f',7:'g',8:'h',9:'i',10:'j',11:'k',12:'l',13:'m',14:'n',15:'o',16:'p',17:'q',18:'r',19:'s',20:'t',21:'u',22:'v',23:'w',24:'x',25:'y',26:'z',27:'!',28:'@',29:'#',30:'$',31:'%',32:'^',33:'&',34:'*',undefined:';',null:';'}; 
 var rtl = Object.fromEntries(Object.entries(tl).map(([key, value]) => [value, key])); var ag = {undefined:'3',0:'0',1:'1',2:'2',3:'3',4:'4'}; 
-var strIdToIndex = {}; var altLims = [0,[3,3],[3,4],[2,4],[2,5],[1,5],[1,6]]; 
+var strIdToIndex = {}; var altLims = [0,[3,3],[3,4],[2,4],[2,5],[1,5],[1,6]]; var plotCSS = 28; 
+for (let i in document.styleSheets[1].cssRules) { if (document.styleSheets[1].cssRules[i].selectorText == '#gardenPlot') { plotCSS = i; } }
 
 class Plant {
 	constructor(name, strId, icon, fungi) {
@@ -551,7 +552,7 @@ function glfm(x,y) { return x + y - 4; }
 function gmfl(l) { if (useLev) { l++; return [Math.floor(l/2)+2,Math.ceil(l/2)+1]; } else { return cdim; } }
 function ggbx(l) { if (useLev) { return 240+40*Math.ceil((Math.max(l,8)-8)/2) } else { return Math.max(40*cdim[0], 240); } }
 function ggby(l) { if (useLev) { return 240+40*Math.floor((Math.max(l,8)-8)/2) } else { return Math.max(40*cdim[1], 240); } }
-function uplim() { document.styleSheets[1].cssRules[27].style.cssText = 'width: '+ggbx(level).toString()+'px; height: '+ggby(level).toString()+'px;'; } 
+function uplim() { document.styleSheets[1].cssRules[plotCSS].style.cssText = 'width: '+ggbx(level).toString()+'px; height: '+ggby(level).toString()+'px;'; } 
 function setP(tile,x,y) { if (x>=gmfl(level)[0]||y>=gmfl(level)[1]) {tile.setDisabled(true);} else {tile.setDisabled(false);}} 
 function crT() {plot = []; document.getElementById('gardenPlot').innerHTML=''; maxX = gmfl(level)[0]; maxY = gmfl(level)[1]; generatePlot();}
 function inR(x,y) { if (!useLev) { return inRAlt(x,y); } if (level<9||x>=gmfl(level)[0]||y>=gmfl(level)[1]) { return false; } return true; }
