@@ -348,13 +348,18 @@ input[type="text"] {
 }
 
 #gardenStats {
+	position: relative;
 	width: 174px;
 	margin: 4px;
 	text-align: center;
 	box-shadow: 8px 0px 8px rgba(0, 0, 0, 0.5);
 }
 #infoButton {
-	align-self: flex-end;
+	position: absolute;
+    bottom: 0;
+    width: 150px;
+    left: 50%;
+    transform: translate(-52%, -10%);
 }
 
 #misc { 
