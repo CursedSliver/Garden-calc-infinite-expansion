@@ -189,7 +189,7 @@ input[type="text"] {
 }
 
 .inactive {
-	visibility: hidden;
+	display: none;
 }
 
 .seed {
