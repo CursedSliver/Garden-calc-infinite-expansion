@@ -273,8 +273,12 @@ input[type="text"] {
 
 
 #mid {
-	padding: 32px;
+	padding: 24px;
 	padding-bottom: 0;
+}
+
+#gardenPlot {
+	padding: 8px;
 }
 
 #settings {
