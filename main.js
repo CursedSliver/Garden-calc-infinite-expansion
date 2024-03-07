@@ -524,7 +524,16 @@ function init() {
 		document.body.removeChild(str);
 	});
 	document.getElementById('resize').addEventListener('click', function() { 
-		cdim = [Math.round(Math.max(parseP(document.getElementById('xDim').value),1)), Math.round(Math.max(parseP(document.getElementById('yDim').value),1))]; 
+		let r = function(input, def) { 
+			if (input == '' || input == null || typeof input === 'undefined') {
+				input = def;
+			} 
+			return parseP(input);
+		}
+		cdim = [
+			Math.round(Math.max(r(document.getElementById('xDim').value, gmfl(level)[0]),1)), 
+			Math.round(Math.max(r(document.getElementById('yDim').value, gmfl(level)[1]),1))
+		]; 
 		resize(); 
 	});
 	document.getElementById('captureButton').addEventListener('click', function() {
