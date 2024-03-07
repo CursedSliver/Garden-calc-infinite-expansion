@@ -407,7 +407,7 @@ input[type="text"] {
     transform: translate(-52%, -10%);
 }
 #info {
-	position: absolute;
+	position: fixed;
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
