@@ -110,6 +110,10 @@ input[type="text"] {
 	filter: brightness(30%);
 }
 
+.gardenBG {
+	background-image: url(images/BGgarden.jpg);
+}
+
 #tooltip {
 	position: absolute;
 	pointer-events: none;
