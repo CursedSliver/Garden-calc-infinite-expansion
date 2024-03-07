@@ -60,6 +60,15 @@ label {
 	margin-bottom: 2px; 
 }
 
+p {
+	display: inline-block; 
+	color: #fff; 
+	margin-top: -4px; 
+	padding: 2px; 
+	font-size: 12px; 
+	margin-bottom: 4px; 
+}
+
 input[type="text"] { 
 	background-image: url(images/shadedBordersSoft.png), url(images/darkNoise.jpg); 
 	border-image: url(images/frameBorder.png) 3 round; 
