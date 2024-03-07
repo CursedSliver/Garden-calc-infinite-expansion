@@ -480,8 +480,8 @@ function init() {
 			updateLevel();
 			updateEffects(); 
 		} 
-		if (level <= 8) {
-			document.getElementById('warning').classList.remove('inactive');
+		if (level <= 8 && document.getElementById('warning').classList[0] != 'inactive') {
+			document.getElementById('warning').classList.add('inactive');
 		}
 	});
 	document.getElementById("level-add").addEventListener("click", function() {
@@ -490,8 +490,8 @@ function init() {
 		if (glfm(maxX,maxY)<level) {
 			crT();
 		} 
-		if (level > 8 && document.getElementById('warning').classList[0] != 'inactive') {
-			document.getElementById('warning').classList.add('inactive');
+		if (level > 8) {
+			document.getElementById('warning').classList.remove('inactive');
 		}
 		updateLevel();
 		updateEffects(); 
@@ -540,9 +540,7 @@ function init() {
 			Math.round(Math.max(r(document.getElementById('xDim').value, gmfl(level)[0]),1)), 
 			Math.round(Math.max(r(document.getElementById('yDim').value, gmfl(level)[1]),1))
 		]; 
-		if (document.getElementById('warning').classList[0] != 'inactive') { 
-			document.getElementById('warning').classList.add('inactive'); 
-		}
+		document.getElementById('warning').classList.remove('inactive'); 
 		resize(); 
 	});
 	document.getElementById('captureButton').addEventListener('click', function() {
