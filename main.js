@@ -552,7 +552,7 @@ function glfm(x,y) { return x + y - 4; }
 function gmfl(l) { if (useLev) { l++; return [Math.floor(l/2)+2,Math.ceil(l/2)+1]; } else { return cdim; } }
 function ggbx(l) { if (useLev) { return 240+40*Math.ceil((Math.max(l,8)-8)/2) } else { return Math.max(40*cdim[0], 240); } }
 function ggby(l) { if (useLev) { return 240+40*Math.floor((Math.max(l,8)-8)/2) } else { return Math.max(40*cdim[1], 240); } }
-function uplim() { document.styleSheets[1].cssRules[plotCSS].style.cssText = 'width: '+ggbx(level).toString()+'px; height: '+ggby(level).toString()+'px;'; } 
+function uplim() { document.documentElement.style.setProperty('--gardenWidth', ggbx(level).toString()+'px'); document.documentElement.style.setProperty('--gardenHeight', ggby(level).toString()+'px'); } 
 function setP(tile,x,y) { if (x>=gmfl(level)[0]||y>=gmfl(level)[1]) {tile.setDisabled(true);} else {tile.setDisabled(false);}} 
 function crT() {plot = []; document.getElementById('gardenPlot').innerHTML=''; maxX = gmfl(level)[0]; maxY = gmfl(level)[1]; generatePlot();}
 function inR(x,y) { if (!useLev) { return inRAlt(x,y); } if (level<9||x>=gmfl(level)[0]||y>=gmfl(level)[1]) { return false; } return true; }
