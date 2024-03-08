@@ -595,7 +595,44 @@ function updateEffects() { for (let i in plot) { plot[i].suppress = checkSup(plo
 function checkSup(x,y) { for (let yy = -2; yy <= 2; yy++) { for (let xx = -2; xx <= 2; xx++) { let t = getTile(x+xx,y+yy);if (xx==0&&yy==0) { continue; } if (t===31) { return 1; } if (t==32) { if (xx != 2 && xx != -2 && yy != 2 && yy != -2) { return 1; } } } } return 0; }
 function parseP(input) { if (input === 'null') { return null; } return parseInt(input); } 
 function save() { var strr = ''; if (useLev) { strr = level+'/'; } else { strr = cdim[0]+'/'+cdim[1]+'/'; } for (let i in plot) { strr+=tl[plot[i].plant]+ag[plot[i].age];} return strr; } 
-function load(str) { if (str.includes('/')) { str = str.split('/'); } else { return false; } if (str.length == 2) { level = parseP(str[0]); useLev = true; crT(); } else { cdim = [str[0],str[1]]; useLev = false; crT(); maxX = Math.max(6,cdim[0]); maxY = Math.max(6,cdim[1]); } updateLevel(); uplim(); str = str[str.length-1]; for (let i = 0; i < str.length; i+=2) { plot[i/2].setPlant(parseP(rtl[str[i]]), true, parseP(str[i+1]));} updateStats(); } 
+function load(str) {
+	let skip = false;
+	if (str.includes('/')) { 
+		str = str.split('/'); 
+	} else if (str.includes('END%21')) {
+		skip = true;
+		str = b64_to_utf8(str);
+		str = str.split('|')[5]; str = str.split(';')[2]; str = str.split(',')[4]; console.log(str);
+	} else {
+		return false
+	}
+	if (str.length == 2) { 
+		level = parseP(str[0]); 
+		useLev = true; crT(); 
+	} else { 
+		if (!skip) {
+			cdim = [str[0],str[1]]; 
+			useLev = false; 
+			crT(); 
+			maxX = Math.max(6,cdim[0]); 
+			maxY = Math.max(6,cdim[1]); 
+		}
+	} 
+	updateLevel(); 
+	uplim(); 
+	if (!skip) { str = str[str.length-1]; }
+	for (let i = 0; i < str.length; i+=2) { 
+		plot[i/2].setPlant(parseP(rtl[str[i]]), true, parseP(str[i+1]));
+	} 
+	updateStats(); 
+} 
+function b64_to_utf8(str) {
+	try{return decodeURIComponent(Array.prototype.map.call(atob(str), function(c) {
+		return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2)
+	}).join(''));}
+	catch(err)
+	{return '';}
+}
 function dd() { return document.createElement('div'); }
 function resize() { document.getElementById('warning').classList.remove('inactive'); if(cdim[0]>12||cdim[1]>12) { document.getElementById('captureWarning').classList.remove('inactive'); } useLev = false; crT(); maxX = Math.max(6,cdim[0]); maxY = Math.max(6,cdim[1]); uplim(); updateLevel(); updateEffects(); updateStats(); } 
 function setPAlt(tile, x, y) { if (inRAlt(x,y)) { tile.setDisabled(false); } else { tile.setDisabled(true); } } 
