@@ -625,8 +625,9 @@ function load(str) {
 		str = str.split('|')[5]; str = str.split(';')[2]; level = Math.min(parseP(str.split(',')[3]) - 1, 8); str = str.split(',')[4]; str = str.split(' ')[2]; str = str.slice(0, str.length-1); crT(); console.log(str);
 		st2 = str.split(':'); str = '';
 		for (let i = 0; i < st2.length; i += 2) {
-			str += tl[st2[i]-1]; 
-			str += plants[parseP(st2[i])-1].getStage(parseP(st2[i+1])).toString();
+			let temp = st2[i]; if (temp == '0') { temp = null; } else { temp = parseP(temp)-1; }
+			str += tl[temp]; 
+			str += plants[temp].getStage(parseP(st2[i+1])).toString();
 		}
 		console.log(str);
 	} else {
