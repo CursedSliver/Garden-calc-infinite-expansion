@@ -179,7 +179,7 @@ let mutations = [
 	[{"whiskerbloom": [2, 8, 1]}, {"nursetulip": 0.05}],
 	[{"chocoroot": [1, 8, 1], "keenmoss": [1, 8, 1]}, {"drowsyfern": 0.005}],
 	[{"cronerice": [1, 8, 1], "keenmoss": [1, 8, 1]}, {"wardlichen": 0.005}],
-	[{"cronerice": [1, 8], 1, "whiteMildew": [1, 8, 1]}, {"wardlichen": 0.005}],
+	[{"cronerice": [1, 8, 1], "whiteMildew": [1, 8, 1]}, {"wardlichen": 0.005}],
 	[{"wardlichen": [1, 1, 1]}, {"wardlichen": 0.05}],
 	[{"greenRot": [1, 8, 1], "brownMold": [1, 8, 1]}, {"keenmoss": 0.1}],
 	[{"keenmoss": [1, 1, 1]}, {"keenmoss": 0.05}],
