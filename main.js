@@ -729,6 +729,8 @@ function reapply() {
 			plot[i].setPlant(backupPlot[i].plant, true, backupPlot[i].age);
 		}
 	}
+	updateEffects();
+	updateStats();
 }
 
 //gonna do this otherwise somehow it doesnt work???
