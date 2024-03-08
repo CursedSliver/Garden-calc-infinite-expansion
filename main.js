@@ -602,7 +602,10 @@ function glfm(x,y) { return x + y - 4; }
 function gmfl(l) { if (useLev) { l++; return [Math.floor(l/2)+2,Math.ceil(l/2)+1]; } else { return cdim; } }
 function ggbx(l) { if (useLev) { return 240+40*Math.ceil((Math.max(l,8)-8)/2) } else { return Math.max(40*cdim[0], 240); } }
 function ggby(l) { if (useLev) { return 240+40*Math.floor((Math.max(l,8)-8)/2) } else { return Math.max(40*cdim[1], 240); } }
-function uplim() { document.documentElement.style.setProperty('--gardenWidth', ggbx(level).toString()+'px'); document.documentElement.style.setProperty('--gardenHeight', ggby(level).toString()+'px'); } 
+function uplim() { 
+	document.documentElement.style.setProperty('--gardenWidth', ggbx(level).toString()+'px'); 
+	document.documentElement.style.setProperty('--gardenHeight', ggby(level).toString()+'px'); 
+} 
 function setP(tile,x,y) { if (x>=gmfl(level)[0]||y>=gmfl(level)[1]) {tile.setDisabled(true);} else {tile.setDisabled(false);}} 
 function crT() {plot = []; document.getElementById('gardenPlot').innerHTML=''; maxX = gmfl(level)[0]; maxY = gmfl(level)[1]; generatePlot();}
 function inR(x,y) { if (!useLev) { return inRAlt(x,y); } if (level<9||x>=gmfl(level)[0]||y>=gmfl(level)[1]) { return false; } return true; }
@@ -672,6 +675,27 @@ function toggleDarkMode(t) {
 	} else {
 		document.documentElement.style.setProperty('--darken', 1);
 	}
+}
+var backupPlot = [];
+function forceResize() {
+	for (let i in plot) {
+		backupPlot.push(plot[i]);
+	}
+	let realX = gmfl(level)[0];
+	let realY = gmfl(level)[1];
+	plot = [];
+	for (let y=0; y<realY; y++) {
+		for (let x=0; x<realX; x++) {
+			let tile = new Tile(x, y);
+			document.getElementById("gardenPlot").appendChild(tile.element);
+			plot.push(tile);
+		}
+	}
+	for (let i in plot) {
+		plot[i].setDisabled(true);
+	}
+	document.documentElement.style.setProperty('--gardenWidth', (realX * 40).toString()+'px'); 
+	document.documentElement.style.setProperty('--gardenHeight', (realY * 40).toString()+'px'); 
 }
 
 //gonna do this otherwise somehow it doesnt work???
