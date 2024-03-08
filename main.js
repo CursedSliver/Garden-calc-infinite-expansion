@@ -47,11 +47,14 @@ var strIdToIndex = {}; var altLims = [0,[3,3],[3,4],[2,4],[2,5],[1,5],[1,6]]; va
 for (let i in document.styleSheets[1].cssRules) { if (document.styleSheets[1].cssRules[i].selectorText == '#gardenPlot') { plotCSS = i; } }
 
 class Plant {
-	constructor(name, strId, icon, fungi) {
+	constructor(name, strId, icon, fungi, mature, ageTick, ageTickR) {
 		this.name = name;
 		this.strId = strId;
 		this.icon = icon;
 		this.fungi = fungi;
+		this.mature = mature;
+		this.ageTick = ageTick;
+		this.ageTickR = ageTickR;
 		
 		this.id = plants.push(this) - 1;
 		plantsById[strId] = this;
@@ -98,40 +101,40 @@ class Plant {
 	}
 }
 
-new Plant("Baker's wheat", "bakerWheat", 0, false);
-new Plant("Thumbcorn", "thumbcorn", 1, false);
-new Plant("Cronerice", "cronerice", 2, false);
-new Plant("Gildmillet", "gildmillet", 3, false);
-new Plant("Ordinary clover", "clover", 4, false);
-new Plant("Golden clover", "goldenClover", 5, false);
-new Plant("Shimmerlily", "shimmerlily", 6, false);
-new Plant("Elderwort", "elderwort", 7, false);
-new Plant("Bakeberry", "bakeberry", 8, false);
-new Plant("Chocoroot", "chocoroot", 9, false);
-new Plant("White chocoroot", "whiteChocoroot", 10, false);
-new Plant("White mildew", "whiteMildew", 26, true);
-new Plant("Brown mold", "brownMold", 27, true);
-new Plant("Meddleweed", "meddleweed", 29, true);
-new Plant("Whiskerbloom", "whiskerbloom", 11, false);
-new Plant("Chimerose", "chimerose", 12, false);
-new Plant("Nursetulip", "nursetulip", 13, false);
-new Plant("Drowsyfern", "drowsyfern", 14, false);
-new Plant("Wardlichen", "wardlichen", 15, false);
-new Plant("Keenmoss", "keenmoss", 16, false);
-new Plant("Queenbeet", "queenbeet", 17, false);
-new Plant("Juicy queenbeet", "queenbeetLump", 18, false);
-new Plant("Duketater", "duketater", 19, false);
-new Plant("Crumbspore", "crumbspore", 20, true);
-new Plant("Doughshroom", "doughshroom", 24, true);
-new Plant("Glovemorel", "glovemorel", 21, true);
-new Plant("Cheapcap", "cheapcap", 22, true);
-new Plant("Fool's bolete", "foolBolete", 23, true);
-new Plant("Wrinklegill", "wrinklegill", 25, true);
-new Plant("Green rot", "greenRot", 28, true);
-new Plant("Shriekbulb", "shriekbulb", 30, false);
-new Plant("Tidygrass", "tidygrass", 31, false);
-new Plant("Everdaisy", "everdaisy", 32, false);
-new Plant("Ichorpuff", "ichorpuff", 33, true);
+new Plant("Baker's wheat", "bakerWheat", 0, false, 35, 7, 2);
+new Plant("Thumbcorn", "thumbcorn", 1, false, 20, 6, 2);
+new Plant("Cronerice", "cronerice", 2, false, 55, 0.4, 0.7);
+new Plant("Gildmillet", "gildmillet", 3, false, 40, 2, 1.5);
+new Plant("Ordinary clover", "clover", 4, false, 35, 1, 1.5);
+new Plant("Golden clover", "goldenClover", 5, false, 50, 4, 12);
+new Plant("Shimmerlily", "shimmerlily", 6, false, 70, 5, 6);
+new Plant("Elderwort", "elderwort", 7, false, 90, 0.3, 0.5);
+new Plant("Bakeberry", "bakeberry", 8, false, 50, 1, 1);
+new Plant("Chocoroot", "chocoroot", 9, false, 25, 4, 0);
+new Plant("White chocoroot", "whiteChocoroot", 10, false, 25, 4, 0);
+new Plant("White mildew", "whiteMildew", 26, true, 70, 8, 12);
+new Plant("Brown mold", "brownMold", 27, true, 70, 8, 12);
+new Plant("Meddleweed", "meddleweed", 29, true, 50, 10, 6);
+new Plant("Whiskerbloom", "whiskerbloom", 11, false, 60, 2, 2);
+new Plant("Chimerose", "chimerose", 12, false, 30, 1, 1.5);
+new Plant("Nursetulip", "nursetulip", 13, false, 60, 0.5, 2);
+new Plant("Drowsyfern", "drowsyfern", 14, false, 30, 0.05, 0.1);
+new Plant("Wardlichen", "wardlichen", 15, false, 65, 5, 4);
+new Plant("Keenmoss", "keenmoss", 16, false, 65, 4, 5);
+new Plant("Queenbeet", "queenbeet", 17, false, 80, 1, 0.4);
+new Plant("Juicy queenbeet", "queenbeetLump", 18, false, 85, 0.04, 0.08);
+new Plant("Duketater", "duketater", 19, false, 95, 0.4, 0.1);
+new Plant("Crumbspore", "crumbspore", 20, true, 65, 3, 3);
+new Plant("Doughshroom", "doughshroom", 24, true, 85, 1, 2);
+new Plant("Glovemorel", "glovemorel", 21, true, 80, 3, 18);
+new Plant("Cheapcap", "cheapcap", 22, true, 40, 6, 16);
+new Plant("Fool's bolete", "foolBolete", 23, true, 50, 5, 25);
+new Plant("Wrinklegill", "wrinklegill", 25, true, 65, 1, 3);
+new Plant("Green rot", "greenRot", 28, true, 65, 12, 13);
+new Plant("Shriekbulb", "shriekbulb", 30, false, 60, 3, 1);
+new Plant("Tidygrass", "tidygrass", 31, false, 40, 0.5, 0);
+new Plant("Everdaisy", "everdaisy", 32, false, 75, 0.3, 0);
+new Plant("Ichorpuff", "ichorpuff", 33, true, 35, 1, 1.5);
 
 
 let mutations = [
@@ -639,7 +642,7 @@ function b64_to_utf8(str) {
 	{return '';}
 }
 function dd() { return document.createElement('div'); }
-function resize() { document.getElementById('warning').classList.remove('inactive'); if(cdim[0]>12||cdim[1]>12) { document.getElementById('captureWarning').classList.remove('inactive'); } useLev = false; crT(); maxX = Math.max(6,cdim[0]); maxY = Math.max(6,cdim[1]); uplim(); updateLevel(); updateEffects(); updateStats(); } 
+function resize() { document.getElementById('warning').classList.remove('inactive'); if(cdim[0]>12||cdim[1]>12) { document.getElementById('captureWarning').classList.remove('inactive'); } else if (document.getElementById('captureWarning').classList[0] != 'inactive') { document.getElementById('captureWarning').classList.add('inactive'); } useLev = false; crT(); maxX = Math.max(6,cdim[0]); maxY = Math.max(6,cdim[1]); uplim(); updateLevel(); updateEffects(); updateStats(); } 
 function setPAlt(tile, x, y) { if (inRAlt(x,y)) { tile.setDisabled(false); } else { tile.setDisabled(true); } } 
 function inRAlt(x,y) { x++; y++; if (x>Math.max(6,cdim[0])||y>Math.max(6,cdim[1])) {return false;} if (cdim[0]<=6) { if (x<altLims[cdim[0]][0]||x>altLims[cdim[0]][1]) {return false;} } if (cdim[1]<=6) { if (y<altLims[cdim[1]][0]||y>altLims[cdim[1]][1]) {return false;} } return true; }
 function download() { let g = document.getElementById('gardenPlot'); g.classList.add('gardenBG'); html2canvas(g).then(function(r) { promptToDownload(r); }); g.classList.remove('gardenBG'); } 
