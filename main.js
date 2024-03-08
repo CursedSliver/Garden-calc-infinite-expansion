@@ -117,13 +117,6 @@ class Plant {
 			return 3;
 		}
 	}
-
-	activeStatus() {
-		if (this.element.classList.value.includes('disabled')) {
-			return false;
-		}
-		return true;
-	}
 }
 
 new Plant("Baker's wheat", "bakerWheat", 0, false, 35, 7, 2);
@@ -419,6 +412,13 @@ class Tile {
 			this.element.classList.remove("disabled");
 		}
 	}
+
+	activeStatus() {
+		if (this.element.classList.value.includes('disabled')) {
+			return false;
+		}
+		return true;
+	}
 }
 
 function generatePlot() {
@@ -709,6 +709,13 @@ function forceResize() {
 	}
 	document.documentElement.style.setProperty('--gardenWidth', (realX * 40).toString()+'px'); 
 	document.documentElement.style.setProperty('--gardenHeight', (realY * 40).toString()+'px'); 
+	let c = 0;
+	for (let i in backupPlot) {
+		if (backupPlot[i].activeStatus()) {
+			plot[c].setPlant(backupPlot[i].plant, true, backupPlot[i].age);
+			c++;
+		}
+	}
 }
 
 //gonna do this otherwise somehow it doesnt work???
