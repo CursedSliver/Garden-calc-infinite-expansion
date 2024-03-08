@@ -695,6 +695,7 @@ function toggleDarkMode(t) {
 }
 var backupPlot = [];
 function forceResize() {
+	backupPlot = [];
 	for (let i in plot) {
 		backupPlot.push(plot[i]);
 	}
