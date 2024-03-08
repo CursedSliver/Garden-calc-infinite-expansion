@@ -601,7 +601,7 @@ function load(str) {
 		str = str.split('/'); 
 	} else if (str.includes('END%21')) {
 		skip = true;
-		str = unescape(str); str = b64_to_utf8(str);
+		str = unescape(str); str = str.replace('!END!',''); str = b64_to_utf8(str);
 		str = str.split('|')[5]; str = str.split(';')[2]; str = str.split(',')[4]; str = str.split(' ')[2]; console.log(str);
 	} else {
 		return false
