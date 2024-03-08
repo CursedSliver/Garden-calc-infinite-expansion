@@ -483,6 +483,9 @@ function init() {
 		if (level <= 8 && document.getElementById('warning').classList[0] != 'inactive') {
 			document.getElementById('warning').classList.add('inactive');
 		}
+		if (level <= 20 && document.getElementById('captureWarning').classList[0] != 'inactive') {
+			document.getElementById('captureWarning').classList.add('inactive');
+		}
 	});
 	document.getElementById("level-add").addEventListener("click", function() {
 		level++; 
@@ -492,6 +495,9 @@ function init() {
 		} 
 		if (level > 8) {
 			document.getElementById('warning').classList.remove('inactive');
+		}
+		if (level > 20) {
+			document.getElementById('captureWarning').classList.remove('inactive');
 		}
 		updateLevel();
 		updateEffects(); 
@@ -591,7 +597,7 @@ function parseP(input) { if (input === 'null') { return null; } return parseInt(
 function save() { var strr = ''; if (useLev) { strr = level+'/'; } else { strr = cdim[0]+'/'+cdim[1]+'/'; } for (let i in plot) { strr+=tl[plot[i].plant]+ag[plot[i].age];} return strr; } 
 function load(str) { if (str.includes('/')) { str = str.split('/'); } else { return false; } if (str.length == 2) { level = parseP(str[0]); useLev = true; crT(); } else { cdim = [str[0],str[1]]; useLev = false; crT(); maxX = Math.max(6,cdim[0]); maxY = Math.max(6,cdim[1]); } updateLevel(); uplim(); str = str[str.length-1]; for (let i = 0; i < str.length; i+=2) { plot[i/2].setPlant(parseP(rtl[str[i]]), true, parseP(str[i+1]));} updateStats(); } 
 function dd() { return document.createElement('div'); }
-function resize() { document.getElementById('warning').classList.remove('inactive'); useLev = false; crT(); maxX = Math.max(6,cdim[0]); maxY = Math.max(6,cdim[1]); uplim(); updateLevel(); updateEffects(); updateStats(); } 
+function resize() { document.getElementById('warning').classList.remove('inactive'); if(cdim[0]>12||cdim[1]>12) { document.getElementById('captureWarning').classList.remove('inactive'); } useLev = false; crT(); maxX = Math.max(6,cdim[0]); maxY = Math.max(6,cdim[1]); uplim(); updateLevel(); updateEffects(); updateStats(); } 
 function setPAlt(tile, x, y) { if (inRAlt(x,y)) { tile.setDisabled(false); } else { tile.setDisabled(true); } } 
 function inRAlt(x,y) { x++; y++; if (x>Math.max(6,cdim[0])||y>Math.max(6,cdim[1])) {return false;} if (cdim[0]<=6) { if (x<altLims[cdim[0]][0]||x>altLims[cdim[0]][1]) {return false;} } if (cdim[1]<=6) { if (y<altLims[cdim[1]][0]||y>altLims[cdim[1]][1]) {return false;} } return true; }
 function download() { let g = document.getElementById('gardenPlot'); g.classList.add('gardenBG'); html2canvas(g).then(function(r) { promptToDownload(r); }); g.classList.remove('gardenBG'); } 
