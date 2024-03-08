@@ -605,7 +605,7 @@ function load(str) {
 		str = str.split('|')[5]; str = str.split(';')[2]; level = parseP(str.split(',')[3]) - 1; str = str.split(',')[4]; str = str.split(' ')[2]; console.log(str); crT(); 
 		st2 = str.split(':'); 
 		for (let i = 0; i < st2.length; i += 2) {
-			str += tl(st2[i]); str += '3';
+			str += tl[st2[i]]; str += '3';
 		}
 	} else {
 		return false;
