@@ -117,6 +117,13 @@ class Plant {
 			return 3;
 		}
 	}
+
+	activeStatus() {
+		if (this.element.classList.value.includes('disabled')) {
+			return false;
+		}
+		return true;
+	}
 }
 
 new Plant("Baker's wheat", "bakerWheat", 0, false, 35, 7, 2);
@@ -607,7 +614,13 @@ function uplim() {
 	document.documentElement.style.setProperty('--gardenHeight', ggby(level).toString()+'px'); 
 } 
 function setP(tile,x,y) { if (x>=gmfl(level)[0]||y>=gmfl(level)[1]) {tile.setDisabled(true);} else {tile.setDisabled(false);}} 
-function crT() {plot = []; document.getElementById('gardenPlot').innerHTML=''; maxX = gmfl(level)[0]; maxY = gmfl(level)[1]; generatePlot();}
+function crT() {
+	plot = []; 
+	document.getElementById('gardenPlot').innerHTML=''; 
+	maxX = gmfl(level)[0]; 
+	maxY = gmfl(level)[1]; 
+	generatePlot();
+}
 function inR(x,y) { if (!useLev) { return inRAlt(x,y); } if (level<9||x>=gmfl(level)[0]||y>=gmfl(level)[1]) { return false; } return true; }
 function sts(stage) { return -48*Math.min(stage,3)-48; } 
 function decay(stage) { return (Math.max(stage-3,0))?0.5:1; }
@@ -683,7 +696,7 @@ function forceResize() {
 	}
 	let realX = gmfl(level)[0];
 	let realY = gmfl(level)[1];
-	plot = [];
+	plot = []; document.getElementById('gardenPlot').innerHTML=''; 
 	for (let y=0; y<realY; y++) {
 		for (let x=0; x<realX; x++) {
 			let tile = new Tile(x, y);
@@ -692,7 +705,7 @@ function forceResize() {
 		}
 	}
 	for (let i in plot) {
-		plot[i].setDisabled(true);
+		plot[i].setDisabled(false);
 	}
 	document.documentElement.style.setProperty('--gardenWidth', (realX * 40).toString()+'px'); 
 	document.documentElement.style.setProperty('--gardenHeight', (realY * 40).toString()+'px'); 
