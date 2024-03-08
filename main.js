@@ -602,7 +602,7 @@ function load(str) {
 	} else if (str.includes('END%21')) {
 		skip = true;
 		str = b64_to_utf8(str);
-		str = str.split('|')[5]; str = str.split(';')[2]; str = str.split(',')[4]; console.log(str);
+		str = str.split('|')[5]; str = str.split(';')[2]; str = str.split(',')[4]; str = str.split(' ')[2]; console.log(str);
 	} else {
 		return false
 	}
