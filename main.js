@@ -111,7 +111,7 @@ class Plant {
 			}
 			return 0;
 		} else {
-			if (age + this.ageTick + this.ageTickR > 99) {
+			if (age + Math.ceil(this.ageTick + this.ageTickR) > 99) {
 				return 4;
 			}
 			return 3;
@@ -626,7 +626,7 @@ function load(str) {
 		st2 = str.split(':'); str = '';
 		for (let i = 0; i < st2.length; i += 2) {
 			str += tl[st2[i]-1]; 
-			str += plants[parseP(st2[i])-1].getStage(st2[i+1]).toString();
+			str += plants[parseP(st2[i])-1].getStage(parseP(st2[i+1])).toString();
 		}
 		console.log(str);
 	} else {
