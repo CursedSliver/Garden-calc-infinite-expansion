@@ -627,7 +627,7 @@ function load(str) {
 		for (let i = 0; i < st2.length; i += 2) {
 			let temp = st2[i]; if (temp == '0') { temp = null; } else { temp = parseP(temp)-1; }
 			str += tl[temp]; 
-			str += plants[temp].getStage(parseP(st2[i+1])).toString();
+			if (temp != null) { str += plants[temp].getStage(parseP(st2[i+1])).toString(); } else { str += '3'; }
 		}
 		console.log(str);
 	} else {
