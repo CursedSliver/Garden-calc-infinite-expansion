@@ -99,6 +99,24 @@ class Plant {
 	select() {
 		this.element.classList.add("selected");
 	}
+
+	//this 'age' parameter is for the in-game age, which is 0-99
+	getStage(age) {
+		if (age < this.mature) {
+			if (age >= this.mature*0.666) {
+				return 2;
+			} 
+			if (age >= this.mature*0.333) {
+				return 1;
+			}
+			return 0;
+		} else {
+			if (age + this.ageTick + this.ageTickR > 99) {
+				return 4;
+			}
+			return 3;
+		}
+	}
 }
 
 new Plant("Baker's wheat", "bakerWheat", 0, false, 35, 7, 2);
@@ -138,57 +156,57 @@ new Plant("Ichorpuff", "ichorpuff", 33, true, 35, 1, 1.5);
 
 
 let mutations = [
-	[{"bakerWheat": [2, 8]}, {"bakerWheat": 0.2, "thumbcorn": 0.05, "bakeberry": 0.001}],
-	[{"bakerWheat": [1, 8], "thumbcorn": [1, 8]}, {"cronerice": 0.01}],
-	[{"thumbcorn": [2, 8]}, {"thumbcorn": 0.1, "bakerWheat": 0.05}],
-	[{"cronerice": [1, 8], "thumbcorn": [1, 8]}, {"gildmillet": 0.03}],
-	[{"cronerice": [2, 8]}, {"thumbcorn": 0.02}],
-	[{"bakerWheat": [1, 8], "gildmillet": [1, 8]}, {"clover": 0.03, "goldenClover": 0.0007}],
-	[{"clover": [1, 8], "gildmillet": [1, 8]}, {"shimmerlily": 0.02}],
-	[{"clover": [2, 4]}, {"clover": 0.007, "goldenClover": 0.0001}],
-	[{"clover": [4, 8]}, {"goldenClover": 0.0007}],
-	[{"shimmerlily": [1, 8], "cronerice": [1, 8]}, {"elderwort": 0.01}],
-	[{"wrinklegill": [1, 8], "cronerice": [1, 8]}, {"elderwort": 0.002}],
-	[{"bakerWheat": [1, 8], "brownMold": [1, 8]}, {"chocoroot": 0.1}],
-	[{"chocoroot": [1, 8], "whiteMildew": [1, 8]}, {"whiteChocoroot": 0.1}],
-	[{"whiteMildew": [1, 8], "brownMold": [0, 1]}, {"brownMold": 0.5}],
-	[{"brownMold": [1, 8], "whiteMildew": [0, 1]}, {"whiteMildew": 0.5}],
-	[{"meddleweed": [1, 3]}, {"meddleweed": 0.15}],
+	[{"bakerWheat": [2, 8, 1]}, {"bakerWheat": 0.2, "thumbcorn": 0.05, "bakeberry": 0.001}],
+	[{"bakerWheat": [1, 8, 1], "thumbcorn": [1, 8, 1]}, {"cronerice": 0.01}],
+	[{"thumbcorn": [2, 8, 1]}, {"thumbcorn": 0.1, "bakerWheat": 0.05}],
+	[{"cronerice": [1, 8, 1], "thumbcorn": [1, 8, 1]}, {"gildmillet": 0.03}],
+	[{"cronerice": [2, 8, 1]}, {"thumbcorn": 0.02}],
+	[{"bakerWheat": [1, 8, 1], "gildmillet": [1, 8, 1]}, {"clover": 0.03, "goldenClover": 0.0007}],
+	[{"clover": [1, 8, 1], "gildmillet": [1, 8, 1]}, {"shimmerlily": 0.02}],
+	[{"clover": [2, 4, 1]}, {"clover": 0.007, "goldenClover": 0.0001}],
+	[{"clover": [4, 8, 1]}, {"goldenClover": 0.0007}],
+	[{"shimmerlily": [1, 8, 1], "cronerice": [1, 8, 1]}, {"elderwort": 0.01}],
+	[{"wrinklegill": [1, 8, 1], "cronerice": [1, 8, 1]}, {"elderwort": 0.002}],
+	[{"bakerWheat": [1, 8, 1], "brownMold": [1, 8, 0]}, {"chocoroot": 0.1}],
+	[{"chocoroot": [1, 8, 1], "whiteMildew": [1, 8, 0]}, {"whiteChocoroot": 0.1}],
+	[{"whiteMildew": [1, 8, 1], "brownMold": [0, 1, 0]}, {"brownMold": 0.5}],
+	[{"brownMold": [1, 8, 1], "whiteMildew": [0, 1, 0]}, {"whiteMildew": 0.5}],
+	[{"meddleweed": [1, 3, 1]}, {"meddleweed": 0.15}],
 	
-	[{"shimmerlily": [1, 8], "whiteChocoroot": [1, 8]}, {"whiskerbloom": 0.01}],
-	[{"shimmerlily": [1, 8], "whiskerbloom": [1, 8]}, {"chimerose": 0.05}],
-	[{"chimerose": [2, 8]}, {"chimerose": 0.005}],
-	[{"whiskerbloom": [2, 8]}, {"nursetulip": 0.05}],
-	[{"chocoroot": [1, 8], "keenmoss": [1, 8]}, {"drowsyfern": 0.005}],
-	[{"cronerice": [1, 8], "keenmoss": [1, 8]}, {"wardlichen": 0.005}],
-	[{"cronerice": [1, 8], "whiteMildew": [1, 8]}, {"wardlichen": 0.005}],
-	[{"wardlichen": [1, 1]}, {"wardlichen": 0.05}],
-	[{"greenRot": [1, 8], "brownMold": [1, 8]}, {"keenmoss": 0.1}],
-	[{"keenmoss": [1, 1]}, {"keenmoss": 0.05}],
-	[{"chocoroot": [1, 8], "bakeberry": [1, 8]}, {"queenbeet": 0.01}],
-	[{"queenbeet": [8, 8]}, {"queenbeetLump": 0.001}],
-	[{"queenbeet": [2, 8]}, {"duketater": 0.001}],
+	[{"shimmerlily": [1, 8, 1], "whiteChocoroot": [1, 8, 1]}, {"whiskerbloom": 0.01}],
+	[{"shimmerlily": [1, 8, 1], "whiskerbloom": [1, 8, 1]}, {"chimerose": 0.05}],
+	[{"chimerose": [2, 8, 1]}, {"chimerose": 0.005}],
+	[{"whiskerbloom": [2, 8, 1]}, {"nursetulip": 0.05}],
+	[{"chocoroot": [1, 8, 1], "keenmoss": [1, 8, 1]}, {"drowsyfern": 0.005}],
+	[{"cronerice": [1, 8, 1], "keenmoss": [1, 8, 1]}, {"wardlichen": 0.005}],
+	[{"cronerice": [1, 8], 1, "whiteMildew": [1, 8, 1]}, {"wardlichen": 0.005}],
+	[{"wardlichen": [1, 1, 1]}, {"wardlichen": 0.05}],
+	[{"greenRot": [1, 8, 1], "brownMold": [1, 8, 1]}, {"keenmoss": 0.1}],
+	[{"keenmoss": [1, 1, 1]}, {"keenmoss": 0.05}],
+	[{"chocoroot": [1, 8, 1], "bakeberry": [1, 8, 1]}, {"queenbeet": 0.01}],
+	[{"queenbeet": [8, 8, 1]}, {"queenbeetLump": 0.001}],
+	[{"queenbeet": [2, 8, 1]}, {"duketater": 0.001}],
 	
-	[{"crumbspore": [1, 1]}, {"crumbspore": 0.07}],
-	[{"crumbspore": [1, 8], "thumbcorn": [1, 8]}, {"glovemorel": 0.02}],
-	[{"crumbspore": [1, 8], "shimmerlily": [1, 8]}, {"cheapcap": 0.04}],
-	[{"doughshroom": [1, 8], "greenRot": [1, 8]}, {"foolBolete": 0.04}],
-	[{"crumbspore": [2, 8]}, {"doughshroom": 0.005}],
-	[{"doughshroom": [1, 1]}, {"doughshroom": 0.07}],
-	[{"doughshroom": [2, 8]}, {"crumbspore": 0.005}],
-	[{"crumbspore": [1, 8], "brownMold": [1, 8]}, {"wrinklegill": 0.06}],
-	[{"whiteMildew": [1, 8], "clover": [1, 8]}, {"greenRot": 0.05}],
+	[{"crumbspore": [1, 1, 1]}, {"crumbspore": 0.07}],
+	[{"crumbspore": [1, 8, 1], "thumbcorn": [1, 8, 1]}, {"glovemorel": 0.02}],
+	[{"crumbspore": [1, 8, 1], "shimmerlily": [1, 8, 1]}, {"cheapcap": 0.04}],
+	[{"doughshroom": [1, 8, 1], "greenRot": [1, 8, 1]}, {"foolBolete": 0.04}],
+	[{"crumbspore": [2, 8, 1]}, {"doughshroom": 0.005}],
+	[{"doughshroom": [1, 1, 1]}, {"doughshroom": 0.07}],
+	[{"doughshroom": [2, 8, 1]}, {"crumbspore": 0.005}],
+	[{"crumbspore": [1, 8, 1], "brownMold": [1, 8, 1]}, {"wrinklegill": 0.06}],
+	[{"whiteMildew": [1, 8, 1], "clover": [1, 8, 1]}, {"greenRot": 0.05}],
 	
-	[{"wrinklegill": [1, 8], "elderwort": [1, 8]}, {"shriekbulb": 0.001}],
-	[{"elderwort": [5, 8]}, {"shriekbulb": 0.001}],
-	[{"duketater": [3, 8]}, {"shriekbulb": 0.005}],
-	[{"doughshroom": [4, 8]}, {"shriekbulb": 0.002}],
-	[{"queenbeet": [5, 8]}, {"shriekbulb": 0.001}],
-	[{"shriekbulb": [1, 1]}, {"shriekbulb": 0.005}],
+	[{"wrinklegill": [1, 8, 1], "elderwort": [1, 8, 1]}, {"shriekbulb": 0.001}],
+	[{"elderwort": [5, 8, 1]}, {"shriekbulb": 0.001}],
+	[{"duketater": [3, 8, 0]}, {"shriekbulb": 0.005}],
+	[{"doughshroom": [4, 8, 0]}, {"shriekbulb": 0.002}],
+	[{"queenbeet": [5, 8, 1]}, {"shriekbulb": 0.001}],
+	[{"shriekbulb": [1, 1, 0]}, {"shriekbulb": 0.005}],
 	
-	[{"bakerWheat": [1, 8], "whiteChocoroot": [1, 8]}, {"tidygrass": 0.002}],
-	[{"tidygrass": [3, 8], "elderwort": [3, 8]}, {"everdaisy": 0.002}],
-	[{"elderwort": [1, 8], "crumbspore": [1, 8]}, {"ichorpuff": 0.002}]
+	[{"bakerWheat": [1, 8, 1], "whiteChocoroot": [1, 8, 1]}, {"tidygrass": 0.002}],
+	[{"tidygrass": [3, 8, 1], "elderwort": [3, 8, 1]}, {"everdaisy": 0.002}],
+	[{"elderwort": [1, 8, 1], "crumbspore": [1, 8, 1]}, {"ichorpuff": 0.002}]
 ];
 
 function randomListProb(list) {
@@ -591,7 +609,6 @@ function inR(x,y) { if (!useLev) { return inRAlt(x,y); } if (level<9||x>=gmfl(le
 function sts(stage) { return -48*Math.min(stage,3)-48; } 
 function decay(stage) { return (Math.max(stage-3,0))?0.5:1; }
 function updatestages(holding) { if (holding !== null) { holding=plants[holding].icon; } else { return false; } for (let i = 0; i < 5; i++) { document.getElementById('stage'+i).getElementsByClassName('seed-icon')[0].style.backgroundPosition = sts(i)+"px -"+holding*48+"px"; document.getElementById('stage'+i).getElementsByClassName('seed-icon')[0].style.opacity = decay(i); }}
-function checkNonmature(obj,which) { let k = Object.keys(obj); which = k.indexOf(which);if (which==1&&k[0]=='bakerWheat'&&k[1]=='brownMold') {return 0;} if (which==1&&k[0]=='chocoroot'&&k[1]=='whiteMildew') {return 0;} if (which==0&&k.length==1) { if (k[0]=='shriekbulb'||k[0]=='doughshroom'||k[0]=='duketater') { return 0; } } return 1;}
 function mode(arr,items) { if (!Array.isArray(items)) { items = [items]; } let count = 0; for (let i in items) { for (let j in arr) { if (arr[j]==items[i]) { count++; } } } return count; } const mat = [3,4]; const imt = [0,1,2]; 
 function getAge(x,y) {if (x < 0 || y < 0 || x >= maxX || y >= maxY || (plot[y*maxX+x].plant == null)) { return null; } return plot[y*maxX+x].age;} 
 function updateEffects() { for (let i in plot) { plot[i].suppress = checkSup(plot[i].x,plot[i].y); } } 
@@ -608,7 +625,8 @@ function load(str) {
 		str = str.split('|')[5]; str = str.split(';')[2]; level = Math.min(parseP(str.split(',')[3]) - 1, 8); str = str.split(',')[4]; str = str.split(' ')[2]; str = str.slice(0, str.length-1); crT(); 
 		st2 = str.split(':'); str = '';
 		for (let i = 0; i < st2.length; i += 2) {
-			str += tl[st2[i]-1]; str += '3';
+			str += tl[st2[i]-1]; 
+			str += plants[tl[st2[i]-1]].getStage(st2[i+1]).toString();
 		}
 		console.log(str);
 	} else {
@@ -662,8 +680,6 @@ function loadTheMod() {
 	//why did I do this to myself
 	eval('updateStats='+updateStats.toString().replace('let neigh = {};','let neigh = {}; let neighAges = {};').replace('].strId] = 0;','].strId]=0; neighAges[plants[i].strId]=[];').replace('alone = false;', 'alone=false; neighAges[plants[tile].strId].push(getAge(x+xx,y+yy));').replace('if (alone)', 'if (alone && (!checkSup(x,y)))').replace('probs = [];','probs = []; let cs = !checkSup(x,y);').replace(updateStats.toString().slice(updateStats.toString().indexOf('loop:'),updateStats.toString().indexOf('if (probs.length === 0) continue;')), 'loop:\n\t\t\tfor (let i=0; i<mutations.length; i++) { for (let j in mutations[i][0]) { if ( (neigh[j]-(mutations[i][0][j][2]?mode(neighAges[j],imt):0))<mutations[i][0][j][0] || neigh[j]>mutations[i][0][j][1] ) { continue loop; } } for (let j in mutations[i][1]) { if ((!plants[strIdToIndex[j]].fungi) || cs) { probs.push(mutations[i][1][j]); muts.push(j); }}}')); 
 	eval('var updateStatsA='+updateStats.toString().replace('function updateStats()','function()').replace('x < plotLimits[level][0] ||','(!inR(x,y))').replace('y < plotLimits[level][1] ||','').replace('x >= plotLimits[level][2] ||','').replace('y >= plotLimits[level] [3]','')); eval('updateStats='+updateStats.toString().replace('TML = "";','TML = "";if(level>=9||(!useLev)){updateStatsA();return false;}'));
-	 
-	for (let i in mutations) { for (let key in mutations[i][0]) { eval('mutations['+i+'][0].'+key+'.push('+checkNonmature(mutations[i][0],key)+')') } } 
 }
 		
 window.addEventListener("DOMContentLoaded", init);
