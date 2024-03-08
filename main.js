@@ -602,10 +602,10 @@ function load(str) {
 	} else if (str.includes('END%21')) {
 		skip = true; useLev = true;
 		str = unescape(str); str = str.replace('!END!',''); str = b64_to_utf8(str);
-		str = str.split('|')[5]; str = str.split(';')[2]; level = Math.min(parseP(str.split(',')[3]) - 1, 8); str = str.split(',')[4]; str = str.split(' ')[2]; crT(); 
+		str = str.split('|')[5]; str = str.split(';')[2]; level = Math.min(parseP(str.split(',')[3]) - 1, 8); str = str.split(',')[4]; str = str.split(' ')[2]; str = str.slice(0, str.length-1); crT(); 
 		st2 = str.split(':'); str = '';
 		for (let i = 0; i < st2.length; i += 2) {
-			str += tl[st2[i]]; str += '3';
+			str += tl[st2[i]]-1; str += '3';
 		}
 		console.log(str);
 	} else {
