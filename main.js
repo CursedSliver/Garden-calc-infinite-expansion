@@ -40,7 +40,7 @@ let plantsById = {};
 
 //hoisting mod stuff up here
 
-var maxX = 6; var maxY = 6; var cdim = [6, 6]; var useLev = true; var ageSelected = 3; var importStr = ''; var target = 1; //target is for fonts dying, usually 1
+var maxX = 6; var maxY = 6; var cdim = [6, 6]; var useLev = true; var ageSelected = 3; var importStr = ''; var target = document.styleSheets.length - 1; //target is for fonts dying, usually 1
 var tl = {0:'=',1:'a',2:'b',3:'c',4:'d',5:'e',6:'f',7:'g',8:'h',9:'i',10:'j',11:'k',12:'l',13:'m',14:'n',15:'o',16:'p',17:'q',18:'r',19:'s',20:'t',21:'u',22:'v',23:'w',24:'x',25:'y',26:'z',27:'!',28:'@',29:'#',30:'$',31:'%',32:'^',33:'&',34:'*',undefined:';',null:';'}; 
 var rtl = Object.fromEntries(Object.entries(tl).map(([key, value]) => [value, key])); var ag = {undefined:'3',0:'0',1:'1',2:'2',3:'3',4:'4'}; 
 var strIdToIndex = {}; var altLims = [0,[3,3],[3,4],[2,4],[2,5],[1,5],[1,6]]; var plotCSS = 28; 
