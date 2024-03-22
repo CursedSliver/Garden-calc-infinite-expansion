@@ -501,7 +501,7 @@ function adjustHorizontal(newSize, original, bound, order) {
 			if (newBound[1] - newBound[0] >= newSize[0]) { bound = newBound; continue; } else { completionCounter++; }
 		}
 		else if (newSize[0] > original[0]) {
-			if (bound[1] + 1 <= newSize[0]) { bound[1]++: } else { completionCounter++; }
+			if (bound[1] + 1 <= newSize[0]) { bound[1]++; } else { completionCounter++; }
 		}
 		if (completionCounter >= 2) {
 			break;
@@ -521,7 +521,7 @@ function adjustVertical(newSize, original, bound, order) {
 			if (newBound[3] - newBound[2] >= newSize[1]) { bound = newBound; continue; } else { completionCounter++; }
 		}
 		else if (newSize[0] > original[0]) {
-			if (bound[3] + 1 <= newSize[1]) { bound[3]++: } else { completionCounter++; }
+			if (bound[3] + 1 <= newSize[1]) { bound[3]++; } else { completionCounter++; }
 		}
 		if (completionCounter >= 2) {
 			break;
