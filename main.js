@@ -466,6 +466,73 @@ for (let i in plants) {
 	strIdToIndex[plants[i].strId] = plants[i].id; 
 } 
 
+//not braining rn
+function getKeepBoundary(newSize, original, prevLev, postLev) {
+	//order: right first, then clockwise
+	//format: [left bound, right bound, up bound, down bound]
+	let order = 0; //0 is right, 1 is down, etc.
+	if (prevLev) {
+		order = level % 4; 
+	}
+	let bound = [0, original[0], 0, original[1]];
+	let complete = false;
+	while (!complete) {
+		if ((order == 0 && original[1] > newSize[1]) || (order == 1 && original[3] > newSize[3]) || (order == 2 && original[0] > newSize[0]) || (order == 3 && original[2] > newSize[2])) { 
+			let newBound = sliceSide(bound, order);
+			let count = 0;
+			if (order == 0) {
+				if (newBound[1] < newSize[1]) { count++; continue; }
+			} else if (order == 1) {
+				if (newBound[3] < newSize[3]) { count++; continue; }
+			} else if (order == 2) {
+				if (newBound[0] > newSize[0]) { count++; continue; }
+			} else if (order == 3) {
+				if (newBound[2] > newSize[2]) { count++; continue; }
+			}
+			if (count >= 4) {
+				complete = true;
+			}
+			bound = newBound;
+			order = cycleOrder(order);
+		} else {
+			
+		}
+	}
+}
+
+var orderToArr = {
+	0: 1,
+	1: 3,
+	2: 0,
+	3: 2
+}
+
+function sliceSide(arr, order) {
+	if (order == 0) {
+		arr[1] = Math.max(arr[1] - 1, arr[0] + 1);
+		return arr;
+	} else if (order == 1) {
+		arr[3] = Math.max(arr[3] - 1, arr[2] + 1);
+		return arr;
+	} else if (order == 2) {
+		arr[0] = Math.min(arr[0] + 1, arr[1] - 1);
+		return arr;
+	} else if (order == 3) {
+		arr[2] = Math.min(arr[2] + 1, arr[3] - 1);
+		return arr;
+	}
+	console.log('something went wrong in function sliceSide');
+	return false;
+}
+
+function cycleOrder(order) {
+	order++;
+	if (order >= 4) {
+		order = 0;
+	}
+	return order;
+}
+
 function init() {
 	document.body.appendChild(tooltip);
 	
