@@ -494,8 +494,9 @@ function getKeepBoundary(newSize, original, preLev) {
 
 function adjustHorizontal(newSize, original, bound, order) {
 	if (newSize[0] == original[0]) { return [bound, order]; }
-	while (true) {
-		let completionCounter = 0;
+	let completionCounter = 0;
+	for (let i = 0; i < 10000; i++) {
+		completionCounter = Math.max(completionCounter - order, 0);
 		if (newSize[0] < original[0]) {
 			let newBound = sliceSide(bound, order);
 			if (newBound[1] - newBound[0] >= newSize[0]) { bound = newBound; continue; } else { completionCounter++; }
@@ -504,7 +505,7 @@ function adjustHorizontal(newSize, original, bound, order) {
 			if (bound[1] + 1 <= newSize[0]) { bound[1]++; } else { completionCounter++; }
 		}
 		if (completionCounter >= 2) {
-			break;
+			return [bound, order];
 		}
 
 		order += 2; order = order % 4;
@@ -514,8 +515,9 @@ function adjustHorizontal(newSize, original, bound, order) {
 
 function adjustVertical(newSize, original, bound, order) {
 	if (newSize[1] == original[1]) { return [bound, order]; }
-	while (true) {
-		let completionCounter = 0;
+	let completionCounter = 0;
+	for (let i = 0; i < 10000; i++) {
+		completionCounter = Math.max(completionCounter - order + 1, 0);
 		if (newSize[1] < original[1]) {
 			let newBound = sliceSide(bound, order);
 			if (newBound[3] - newBound[2] >= newSize[1]) { bound = newBound; continue; } else { completionCounter++; }
@@ -524,7 +526,7 @@ function adjustVertical(newSize, original, bound, order) {
 			if (bound[3] + 1 <= newSize[1]) { bound[3]++; } else { completionCounter++; }
 		}
 		if (completionCounter >= 2) {
-			break;
+			return [bound, order];
 		}
 
 		order += 2; order = order % 4;
