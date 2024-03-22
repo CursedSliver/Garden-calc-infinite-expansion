@@ -466,38 +466,70 @@ for (let i in plants) {
 	strIdToIndex[plants[i].strId] = plants[i].id; 
 } 
 
+var cachedSave = '';
+
 //not braining rn
-function getKeepBoundary(newSize, original, prevLev, postLev) {
+function getKeepBoundary(newSize, original, preLev) {
 	//order: right first, then clockwise
 	//format: [left bound, right bound, up bound, down bound]
 	let order = 0; //0 is right, 1 is down, etc.
-	if (prevLev) {
-		order = level % 4; 
+	if (preLev) {
+		order = preLev % 4; 
 	}
 	let bound = [0, original[0], 0, original[1]];
-	let complete = false;
-	while (!complete) {
-		if ((order == 0 && original[1] > newSize[1]) || (order == 1 && original[3] > newSize[3]) || (order == 2 && original[0] > newSize[0]) || (order == 3 && original[2] > newSize[2])) { 
-			let newBound = sliceSide(bound, order);
-			let count = 0;
-			if (order == 0) {
-				if (newBound[1] < newSize[1]) { count++; continue; }
-			} else if (order == 1) {
-				if (newBound[3] < newSize[3]) { count++; continue; }
-			} else if (order == 2) {
-				if (newBound[0] > newSize[0]) { count++; continue; }
-			} else if (order == 3) {
-				if (newBound[2] > newSize[2]) { count++; continue; }
-			}
-			if (count >= 4) {
-				complete = true;
-			}
-			bound = newBound;
-			order = cycleOrder(order);
-		} else {
-			
-		}
+
+	if (order == 0 || order == 2) {
+		let temp = adjustHorizontal(newSize, original, bound, order);
+		bound = temp[0];
+		order = temp[1];
+		bound = adjustVertical(newSize, original, bound, order)[0];
+	} else {
+		let temp = adjustVertical(newSize, original, bound, order);
+		bound = temp[0];
+		order = temp[1];
+		bound = adjustHorizontal(newSize, original, bound, order)[0];
 	}
+	return bound;
+}
+
+function adjustHorizontal(newSize, original, bound, order) {
+	if (newSize[0] == original[0]) { return [bound, order]; }
+	while (true) {
+		let completionCounter = 0;
+		if (newSize[0] < original[0]) {
+			let newBound = sliceSide(bound, order);
+			if (newBound[1] - newBound[0] >= newSize[0]) { bound = newBound; continue; } else { completionCounter++; }
+		}
+		else if (newSize[0] > original[0]) {
+			if (bound[1] + 1 <= newSize[0]) { bound[1]++: } else { completionCounter++; }
+		}
+		if (completionCounter >= 2) {
+			break;
+		}
+
+		order += 2; order = order % 4;
+	}
+	return [bound, order];
+}
+
+function adjustVertical(newSize, original, bound, order) {
+	if (newSize[1] == original[1]) { return [bound, order]; }
+	while (true) {
+		let completionCounter = 0;
+		if (newSize[1] < original[1]) {
+			let newBound = sliceSide(bound, order);
+			if (newBound[3] - newBound[2] >= newSize[1]) { bound = newBound; continue; } else { completionCounter++; }
+		}
+		else if (newSize[0] > original[0]) {
+			if (bound[3] + 1 <= newSize[1]) { bound[3]++: } else { completionCounter++; }
+		}
+		if (completionCounter >= 2) {
+			break;
+		}
+
+		order += 2; order = order % 4;
+	}
+	return [bound, order];
 }
 
 var orderToArr = {
@@ -523,14 +555,6 @@ function sliceSide(arr, order) {
 	}
 	console.log('something went wrong in function sliceSide');
 	return false;
-}
-
-function cycleOrder(order) {
-	order++;
-	if (order >= 4) {
-		order = 0;
-	}
-	return order;
 }
 
 function init() {
@@ -562,6 +586,8 @@ function init() {
 	});
 	
 	document.getElementById("level-sub").addEventListener("click", function() {
+		cachedSave = save(); 
+		
 		level = Math.max(0, level - 1);
 
 		if (!useLev) { 
@@ -583,6 +609,8 @@ function init() {
 		}
 	});
 	document.getElementById("level-add").addEventListener("click", function() {
+		cachedSave = save();
+		
 		level++; 
 		useLev = true; 
 		if (glfm(maxX,maxY)<level) {
@@ -631,6 +659,8 @@ function init() {
 		document.body.removeChild(str);
 	});
 	document.getElementById('resize').addEventListener('click', function() { 
+		cachedSave = save();
+		
 		let r = function(input, def) { 
 			if (input == '' || input == null || typeof input === 'undefined') {
 				input = def;
@@ -698,7 +728,8 @@ function updateEffects() { for (let i in plot) { plot[i].suppress = checkSup(plo
 function checkSup(x,y) { for (let yy = -2; yy <= 2; yy++) { for (let xx = -2; xx <= 2; xx++) { let t = getTile(x+xx,y+yy);if (xx==0&&yy==0) { continue; } if (t===31) { return 1; } if (t==32) { if (xx != 2 && xx != -2 && yy != 2 && yy != -2) { return 1; } } } } return 0; }
 function parseP(input) { if (input === 'null') { return null; } return parseInt(input); } 
 function save() { var strr = ''; if (useLev) { strr = level+'/'; } else { strr = cdim[0]+'/'+cdim[1]+'/'; } for (let i in plot) { strr+=tl[plot[i].plant]+ag[plot[i].age];} return strr; } 
-function load(str) {
+function load(str, noResize) {
+	if (typeof noResize === 'undefined') { noResize = false; }
 	let skip = false;
 	if (str.includes('/')) { 
 		str = str.split('/'); 
