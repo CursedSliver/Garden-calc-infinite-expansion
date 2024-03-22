@@ -474,19 +474,21 @@ function getKeepBoundary(newSize, original, preLev) {
 	//format: [left bound, right bound, up bound, down bound]
 	let order = 0; //0 is right, 1 is down, etc.
 	if (preLev) {
-		order = preLev % 4; 
+		order = (preLev + 3) % 4; 
 	}
-	let bound = [0, original[0], 0, original[1]];
+	let bound = [0, original[0] - 1, 0, original[1] - 1];
 
 	if (order == 0 || order == 2) {
 		let temp = adjustHorizontal(newSize, original, bound, order);
 		bound = temp[0];
-		order = temp[1];
+		order = temp[1] + 3;
+		order = order % 4;
 		bound = adjustVertical(newSize, original, bound, order)[0];
 	} else {
 		let temp = adjustVertical(newSize, original, bound, order);
 		bound = temp[0];
-		order = temp[1];
+		order = temp[1] + 3;
+		order = order % 4;
 		bound = adjustHorizontal(newSize, original, bound, order)[0];
 	}
 	return bound;
@@ -494,17 +496,19 @@ function getKeepBoundary(newSize, original, preLev) {
 
 function adjustHorizontal(newSize, original, bound, order) {
 	if (newSize[0] == original[0]) { return [bound, order]; }
-	let completionCounter = 0;
+	let leftComplete = false;
+	let rightComplete = false;
 	for (let i = 0; i < 10000; i++) {
-		completionCounter = Math.max(completionCounter - order, 0);
 		if (newSize[0] < original[0]) {
 			let newBound = sliceSide(bound, order);
-			if (newBound[1] - newBound[0] >= newSize[0]) { bound = newBound; continue; } else { completionCounter++; }
+			if (newBound[1] - newBound[0] >= newSize[0]) { bound = newBound; continue; } else {
+				if (order == 0) { rightComplete = true; } else { leftComplete = true; }
+			}
 		}
 		else if (newSize[0] > original[0]) {
 			if (bound[1] + 1 <= newSize[0]) { bound[1]++; } else { completionCounter++; }
 		}
-		if (completionCounter >= 2) {
+		if (leftComplete && rightComplete) {
 			return [bound, order];
 		}
 
@@ -515,17 +519,19 @@ function adjustHorizontal(newSize, original, bound, order) {
 
 function adjustVertical(newSize, original, bound, order) {
 	if (newSize[1] == original[1]) { return [bound, order]; }
-	let completionCounter = 0;
+	let topComplete = false;
+	let bottomComplete = false;
 	for (let i = 0; i < 10000; i++) {
-		completionCounter = Math.max(completionCounter - order + 1, 0);
 		if (newSize[1] < original[1]) {
 			let newBound = sliceSide(bound, order);
-			if (newBound[3] - newBound[2] >= newSize[1]) { bound = newBound; continue; } else { completionCounter++; }
+			if (newBound[3] - newBound[2] >= newSize[1]) { bound = newBound; continue; } else {
+				if (order == 1) { bottomComplete = true; } else { topComplete = true; }
+			}
 		}
 		else if (newSize[0] > original[0]) {
 			if (bound[3] + 1 <= newSize[1]) { bound[3]++; } else { completionCounter++; }
 		}
-		if (completionCounter >= 2) {
+		if (bottomComplete && topComplete) {
 			return [bound, order];
 		}
 
