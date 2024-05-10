@@ -835,6 +835,9 @@ function reapply() {
 			plot[i].setPlant(backupPlot[i].plant, true, backupPlot[i].age);
 		}
 	}
+	maxX = Math.max(6, gmfl(level)[0]);
+	maxY = Math.max(6, gmfl(level)[1]);
+
 	updateEffects();
 	updateStats();
 }
