@@ -321,8 +321,8 @@ function updateStats() {
 			for (let i=0; i < probs.length; i++) {
 				if (repeats[muts[i]] >= 0) {
 					probs[repeats[muts[i]]] = 1 - (1 - probs[repeats[muts[i]]]) * (1 - probs[i]);
-					probs.splice(repeats[muts[i]], 1);
-					muts.splice(repeats[muts[i]], 1);
+					probs.splice(i, 1);
+					muts.splice(i, 1);
 				} else {
 					repeats[muts[i]] = i;
 				}
