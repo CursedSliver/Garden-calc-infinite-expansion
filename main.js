@@ -6,7 +6,6 @@ tooltip.style.display = "none";
 function tooltipHide() {
 	tooltip.style.display = "none";
 }
-
 function tooltipShow(element, content) {
 	tooltip.style.display = "";
 	tooltip.innerHTML = content;
