@@ -166,6 +166,14 @@ input[type="text"] {
 	background-size: 100% 100%, auto;
 	background-image: url(images/shadedBorders.png), url(images/BGgarden.jpg);
 }
+#gardenBGDiv {
+	position: absolute; 
+	top: 0; 
+	bottom: 0; 
+	left: 0; 
+	right: 0; 
+	z-index: -1;
+}
 
 #tooltip {
 	position: absolute;
