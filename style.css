@@ -38,13 +38,15 @@
 }
 
 html {
-	height: 100vh;
-	body: 100vh;
+	height: 100%;
+	body: 100%;
 }
 
 body {
 	height: 100%;
+	width: 100%;
 	margin: 0;
+	padding: 0;
 	background-image: url(images/bgBlue.jpg);
 	font-family: Tahoma,Arial,sans-serif;
 	font-size: 13px;
