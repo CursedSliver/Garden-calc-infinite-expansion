@@ -38,6 +38,7 @@
 }
 
 body {
+	height: 100%;
 	margin: 0;
 	background-image: url(images/bgBlue.jpg);
 	font-family: Tahoma,Arial,sans-serif;
@@ -170,10 +171,10 @@ input[type="text"] {
 
 
 #container {
-	position: absolute;
+	display: flex;
+	align-items: center;
 	width: 100%;
-	top: 50%;
-	transform: translateY(-50%);
+	height: 100%;
 	box-shadow: 0px 0px 16px 2px;
 	background-image: url(images/shadedBorders.png), url(images/BGgarden.jpg);
 	background-size: 100% 100%, auto;
@@ -183,6 +184,7 @@ input[type="text"] {
 
 #garden {
 	display: inline-flex;
+	width: 100%;
 }
 
 #gardenPanel {
