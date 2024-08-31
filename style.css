@@ -162,7 +162,8 @@ input[type="text"] {
 .gardenBG {
 	background-image: url(images/BGgarden.jpg);
 }
-.gardenBG .hasShadow {
+.gardenBG.hasShadow {
+	background-size: 100% 100%, auto;
 	background-image: url(images/shadedBorders.png), url(images/BGgarden.jpg);
 }
 
@@ -177,7 +178,6 @@ input[type="text"] {
 	width: 100%;
 	top: 50%;
 	box-shadow: 0px 0px 16px 2px;
-	background-size: 100% 100%, auto;
 	text-align: center;
 	filter: brightness(var(--darken));
 }
