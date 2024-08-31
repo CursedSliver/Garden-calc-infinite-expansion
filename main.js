@@ -730,6 +730,7 @@ function ggby(l) { if (useLev) { return 240+40*Math.floor((Math.max(l,8)-8)/2) }
 function uplim() { 
 	document.documentElement.style.setProperty('--gardenWidth', ggbx(level).toString()+'px'); 
 	document.documentElement.style.setProperty('--gardenHeight', ggby(level).toString()+'px'); 
+	if (ggby(level) > document.offsetHeight) { document.getElementById('container').style.transform = 'translateY(0%)'; } else { document.getElementById('container').style.transform = 'translateY(-50%)'; }
 } 
 function setP(tile,x,y) { if (x>=gmfl(level)[0]||y>=gmfl(level)[1]) {tile.setDisabled(true);} else {tile.setDisabled(false);}} 
 function crT() {
