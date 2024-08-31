@@ -37,6 +37,11 @@
 	100% { transform-origin: 50% 100%; transform: scale(1.0,  1.0); }
 }
 
+html {
+	height: 100vh;
+	body: 100vh;
+}
+
 body {
 	height: 100%;
 	margin: 0;
