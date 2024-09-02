@@ -732,7 +732,7 @@ function uplim() {
 	document.documentElement.style.setProperty('--gardenHeight', ggby(level).toString()+'px'); 
 	try { 
 		if (ggby(level) > window.innerHeight) { document.getElementById('container').style.transform = 'translateY(0%)'; document.getElementById('container').style.top = '0%'; } else { document.getElementById('container').style.transform = 'translateY(-50%)'; document.getElementById('container').style.top = '50%'; } 
-		document.getElementById('gardenBGDiv').style.width = document.getElementById('garden').offsetWidth + 'px';
+		document.getElementById('gardenBGDiv').style.width = (document.getElementById('garden').offsetWidth * 3) + 'px';
 	} catch { }
 } 
 function setP(tile,x,y) { if (x>=gmfl(level)[0]||y>=gmfl(level)[1]) {tile.setDisabled(true);} else {tile.setDisabled(false);}} 
