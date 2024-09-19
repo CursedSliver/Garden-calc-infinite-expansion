@@ -163,10 +163,12 @@ window.addEventListener('keydown',function(e){
 	if (e.keyCode==9)
 	{
 		var next;
-		selected = selected??-1;
 		//tab to shift through seeds
-		if (e.shiftKey) next = (selected + 33) % 34;
-		else next = (selected + 1) % 34;
+		if (selected != null) {
+			if (e.shiftKey) next = (selected + 33) % 34;
+			else next = (selected + 1) % 34;
+		}
+		else next = 0;
 		plants[selected].deselect();
 		selected = next;
 		plants[selected].select();
@@ -177,8 +179,7 @@ window.addEventListener('keydown',function(e){
 	{
 		var next;
 		if (!e.shiftKey) {
-			selected = selected??-1;
-			if (selected != -1) next = selected - (selected % 7) + (((selected % 7) + 6) % 7);
+			if (selected != null) next = selected - (selected % 7) + (((selected % 7) + 6) % 7);
 			else next = 0;
 			plants[selected].deselect();
 			selected = next;
@@ -195,8 +196,7 @@ window.addEventListener('keydown',function(e){
 	{
 		var next;
 		if (!e.shiftKey) {
-			selected = selected??-1;
-			if (selected != -1) next = selected - (selected % 7) + (((selected % 7) + 1) % 7);
+			if (selected != null) next = selected - (selected % 7) + (((selected % 7) + 1) % 7);
 			else next = 0;
 			plants[selected].deselect();
 			selected = next;
@@ -212,8 +212,7 @@ window.addEventListener('keydown',function(e){
 	else if (e.keyCode==38)
 	{
 		var next;
-		selected = selected??-1;
-		if (selected != -1) next = (selected % 7) + (((Math.floor(selected/7) % 5) + 4) % 5) * 7;
+		if (selected != null) next = (selected % 7) + (((Math.floor(selected/7) % 5) + 4) % 5) * 7;
 		else next = 0;
 		if (next == 34) next = 6;
 		plants[selected].deselect();
@@ -225,8 +224,7 @@ window.addEventListener('keydown',function(e){
 	else if (e.keyCode==40)
 	{
 		var next;
-		selected = selected??-1;
-		if (selected != -1) next = (selected % 7) + (((Math.floor(selected/7) % 5) + 1) % 5) * 7;
+		if (selected != null) next = (selected % 7) + (((Math.floor(selected/7) % 5) + 1) % 5) * 7;
 		else next = 0;
 		if (next == 34) next = 6;
 		plants[selected].deselect();
