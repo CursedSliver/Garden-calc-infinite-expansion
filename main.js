@@ -153,6 +153,8 @@ new Plant("Tidygrass", "tidygrass", 31, false, 40, 0.5, 0);
 new Plant("Everdaisy", "everdaisy", 32, false, 75, 0.3, 0);
 new Plant("Ichorpuff", "ichorpuff", 33, true, 35, 1, 1.5);
 
+plants[null] = {'deselect':()=>{}}; // thanks.
+
 // modified from orteils code.
 var keys=[];
 window.addEventListener('keyup',function(e){
