@@ -235,6 +235,52 @@ window.addEventListener('keydown',function(e){
 		updatestages(selected);
 		e.preventDefault();
 	}
+	else if (e.keyCode==65)
+	{
+		var next;
+		if (selected != null) next = selected - (selected % 7) + (((selected % 7) + 6) % 7);
+		else next = 0;
+		plants[selected].deselect();
+		selected = next;
+		plants[selected].select();
+		updatestages(selected);
+		e.preventDefault();
+	}
+	else if (e.keyCode==68)
+	{
+		var next;
+		if (selected != null) next = selected - (selected % 7) + (((selected % 7) + 1) % 7);
+		else next = 0;
+		plants[selected].deselect();
+		selected = next;
+		plants[selected].select();
+		updatestages(selected);
+		e.preventDefault();
+	}
+	else if (e.keyCode==87)
+	{
+		var next;
+		if (selected != null) next = (selected % 7) + (((Math.floor(selected/7) % 5) + 4) % 5) * 7;
+		else next = 0;
+		if (next == 34) next = 6;
+		plants[selected].deselect();
+		selected = next;
+		plants[selected].select();
+		updatestages(selected);
+		e.preventDefault();
+	}
+	else if (e.keyCode==83)
+	{
+		var next;
+		if (selected != null) next = (selected % 7) + (((Math.floor(selected/7) % 5) + 1) % 5) * 7;
+		else next = 0;
+		if (next == 34) next = 6;
+		plants[selected].deselect();
+		selected = next;
+		plants[selected].select();
+		updatestages(selected);
+		e.preventDefault();
+	}
 	keys[e.keyCode]=1;
 });
 
