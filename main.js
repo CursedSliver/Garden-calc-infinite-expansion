@@ -177,11 +177,16 @@ window.addEventListener('keydown',function(e){
 		if (!e.shiftKey) {
 			if (selected != null) next = selected - (selected % 7) + (((selected % 7) + 6) % 7);
 			else next = 0;
+			if (next == 34) next = 33;
 			plants[selected].deselect();
 			selected = next;
 			plants[selected].select();
 			updatestages(selected);
 			e.preventDefault();
+		}
+		else {
+			next = (ageSelected + 4) % 5;
+			eval(`stage${next}.click()`); // i'm lazy ok
 		}
 	}
 	else if (e.keyCode==39)
@@ -190,6 +195,7 @@ window.addEventListener('keydown',function(e){
 		if (!e.shiftKey) {
 			if (selected != null) next = selected - (selected % 7) + (((selected % 7) + 1) % 7);
 			else next = 0;
+			if (next == 34) next = 28;
 			plants[selected].deselect();
 			selected = next;
 			plants[selected].select();
