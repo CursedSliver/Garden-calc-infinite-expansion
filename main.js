@@ -165,16 +165,10 @@ window.addEventListener('keydown',function(e){
 	if (e.keyCode==9)
 	{
 		var next;
-		//tab to shift through seeds
-		if (selected != null) {
-			if (e.shiftKey) next = (selected + 33) % 34;
-			else next = (selected + 1) % 34;
-		}
-		else next = 0;
-		plants[selected].deselect();
-		selected = next;
-		plants[selected].select();
-		updatestages(selected);
+		//tab to shift through ages
+		if (e.shiftKey) next = (ageSelected + 4) % 5;
+		else next = (ageSelected + 1) % 5;
+		eval(`stage${next}.click()`); // i'm lazy ok
 		e.preventDefault();
 	}
 	else if (e.keyCode==37)
@@ -188,10 +182,6 @@ window.addEventListener('keydown',function(e){
 			plants[selected].select();
 			updatestages(selected);
 			e.preventDefault();
-		}
-		else {
-			next = (ageSelected + 4) % 5;
-			eval(`stage${next}.click()`); // i'm lazy ok
 		}
 	}
 	else if (e.keyCode==39)
@@ -238,36 +228,24 @@ window.addEventListener('keydown',function(e){
 	else if (e.keyCode==65)
 	{
 		var next;
-		if (!e.shiftKey) {
-			if (selected != null) next = selected - (selected % 7) + (((selected % 7) + 6) % 7);
-			else next = 0;
-			plants[selected].deselect();
-			selected = next;
-			plants[selected].select();
-			updatestages(selected);
-			e.preventDefault();
-		}
-		else {
-			next = (ageSelected + 4) % 5;
-			eval(`stage${next}.click()`); // i'm lazy ok
-		}
+		if (selected != null) next = selected - (selected % 7) + (((selected % 7) + 6) % 7);
+		else next = 0;
+		plants[selected].deselect();
+		selected = next;
+		plants[selected].select();
+		updatestages(selected);
+		e.preventDefault();
 	}
 	else if (e.keyCode==68)
 	{
 		var next;
-		if (!e.shiftKey) {
-			if (selected != null) next = selected - (selected % 7) + (((selected % 7) + 1) % 7);
-			else next = 0;
-			plants[selected].deselect();
-			selected = next;
-			plants[selected].select();
-			updatestages(selected);
-			e.preventDefault();
-		}
-		else {
-			next = (ageSelected + 1) % 5;
-			eval(`stage${next}.click()`); // i'm lazy ok
-		}
+		if (selected != null) next = selected - (selected % 7) + (((selected % 7) + 1) % 7);
+		else next = 0;
+		plants[selected].deselect();
+		selected = next;
+		plants[selected].select();
+		updatestages(selected);
+		e.preventDefault();
 	}
 	else if (e.keyCode==87)
 	{
