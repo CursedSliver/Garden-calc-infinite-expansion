@@ -153,6 +153,138 @@ new Plant("Tidygrass", "tidygrass", 31, false, 40, 0.5, 0);
 new Plant("Everdaisy", "everdaisy", 32, false, 75, 0.3, 0);
 new Plant("Ichorpuff", "ichorpuff", 33, true, 35, 1, 1.5);
 
+plants[null] = {'deselect':()=>{}}; // thanks.
+
+// modified from orteils code.
+var keys=[];
+window.addEventListener('keyup',function(e){
+	keys[e.keyCode]=0;
+});
+
+window.addEventListener('keydown',function(e){
+	if (e.keyCode==9)
+	{
+		var next;
+		//tab to shift through ages
+		if (e.shiftKey) next = (ageSelected + 4) % 5;
+		else next = (ageSelected + 1) % 5;
+		eval(`stage${next}.click()`); // i'm lazy ok
+		e.preventDefault();
+	}
+	else if (e.keyCode==37)
+	{
+		var next;
+		if (!e.shiftKey) {
+			if (selected != null) next = selected - (selected % 7) + (((selected % 7) + 6) % 7);
+			else next = 0;
+			if (next == 34) next = 33;
+			plants[selected].deselect();
+			selected = next;
+			plants[selected].select();
+			updatestages(selected);
+			e.preventDefault();
+		}
+		else {
+			next = (ageSelected + 4) % 5;
+			eval(`stage${next}.click()`); // i'm lazy ok
+		}
+	}
+	else if (e.keyCode==39)
+	{
+		var next;
+		if (!e.shiftKey) {
+			if (selected != null) next = selected - (selected % 7) + (((selected % 7) + 1) % 7);
+			else next = 0;
+			if (next == 34) next = 28;
+			plants[selected].deselect();
+			selected = next;
+			plants[selected].select();
+			updatestages(selected);
+			e.preventDefault();
+		}
+		else {
+			next = (ageSelected + 1) % 5;
+			eval(`stage${next}.click()`); // i'm lazy ok
+		}
+	}
+	else if (e.keyCode==38)
+	{
+		var next;
+		if (selected != null) next = (selected % 7) + (((Math.floor(selected/7) % 5) + 4) % 5) * 7;
+		else next = 0;
+		if (next == 34) next = 6;
+		plants[selected].deselect();
+		selected = next;
+		plants[selected].select();
+		updatestages(selected);
+		e.preventDefault();
+	}
+	else if (e.keyCode==40)
+	{
+		var next;
+		if (selected != null) next = (selected % 7) + (((Math.floor(selected/7) % 5) + 1) % 5) * 7;
+		else next = 0;
+		if (next == 34) next = 6;
+		plants[selected].deselect();
+		selected = next;
+		plants[selected].select();
+		updatestages(selected);
+		e.preventDefault();
+	}
+	else if (e.keyCode==65)
+	{
+		var next;
+		if (selected != null) next = selected - (selected % 7) + (((selected % 7) + 6) % 7);
+		else next = 0;
+		if (next == 34) next = 33;
+		plants[selected].deselect();
+		selected = next;
+		plants[selected].select();
+		updatestages(selected);
+		e.preventDefault();
+	}
+	else if (e.keyCode==68)
+	{
+		var next;
+		if (selected != null) next = selected - (selected % 7) + (((selected % 7) + 1) % 7);
+		else next = 0;
+		if (next == 34) next = 28;
+		plants[selected].deselect();
+		selected = next;
+		plants[selected].select();
+		updatestages(selected);
+		e.preventDefault();
+	}
+	else if (e.keyCode==87)
+	{
+		var next;
+		if (selected != null) next = (selected % 7) + (((Math.floor(selected/7) % 5) + 4) % 5) * 7;
+		else next = 0;
+		if (next == 34) next = 6;
+		plants[selected].deselect();
+		selected = next;
+		plants[selected].select();
+		updatestages(selected);
+		e.preventDefault();
+	}
+	else if (e.keyCode==83)
+	{
+		var next;
+		if (selected != null) next = (selected % 7) + (((Math.floor(selected/7) % 5) + 1) % 5) * 7;
+		else next = 0;
+		if (next == 34) next = 6;
+		plants[selected].deselect();
+		selected = next;
+		plants[selected].select();
+		updatestages(selected);
+		e.preventDefault();
+	}
+	keys[e.keyCode]=1;
+});
+
+window.addEventListener('visibilitychange',function(e){
+	keys=[];//reset all key pressed on visibility change (should help prevent ctrl still being down after ctrl-tab)
+});
 
 let mutations = [
 	[{"bakerWheat": [2, 8, 1]}, {"bakerWheat": 0.2, "thumbcorn": 0.05, "bakeberry": 0.001}],

@@ -6,5 +6,6 @@ Garden Calc Infinite Expansion is an upgraded version of the Garden Calculator (
 - Now supports Tidygrass and Everdaisy's suppression of weeds and fungus.
 - The ability to import, export, custom resize, and capture garden.
 - The expansion of the stats from 2 digits of precision to 7.
+- New hotkeys! Use tab and arrow keys to navigate around the seed menu.
 
 Originally made as a mod. 
