@@ -236,6 +236,7 @@ window.addEventListener('keydown',function(e){
 		var next;
 		if (selected != null) next = selected - (selected % 7) + (((selected % 7) + 6) % 7);
 		else next = 0;
+		if (next == 34) next = 33;
 		plants[selected].deselect();
 		selected = next;
 		plants[selected].select();
@@ -247,6 +248,7 @@ window.addEventListener('keydown',function(e){
 		var next;
 		if (selected != null) next = selected - (selected % 7) + (((selected % 7) + 1) % 7);
 		else next = 0;
+		if (next == 34) next = 28;
 		plants[selected].deselect();
 		selected = next;
 		plants[selected].select();
