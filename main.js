@@ -238,24 +238,36 @@ window.addEventListener('keydown',function(e){
 	else if (e.keyCode==65)
 	{
 		var next;
-		if (selected != null) next = selected - (selected % 7) + (((selected % 7) + 6) % 7);
-		else next = 0;
-		plants[selected].deselect();
-		selected = next;
-		plants[selected].select();
-		updatestages(selected);
-		e.preventDefault();
+		if (!e.shiftKey) {
+			if (selected != null) next = selected - (selected % 7) + (((selected % 7) + 6) % 7);
+			else next = 0;
+			plants[selected].deselect();
+			selected = next;
+			plants[selected].select();
+			updatestages(selected);
+			e.preventDefault();
+		}
+		else {
+			next = (ageSelected + 4) % 5;
+			eval(`stage${next}.click()`); // i'm lazy ok
+		}
 	}
 	else if (e.keyCode==68)
 	{
 		var next;
-		if (selected != null) next = selected - (selected % 7) + (((selected % 7) + 1) % 7);
-		else next = 0;
-		plants[selected].deselect();
-		selected = next;
-		plants[selected].select();
-		updatestages(selected);
-		e.preventDefault();
+		if (!e.shiftKey) {
+			if (selected != null) next = selected - (selected % 7) + (((selected % 7) + 1) % 7);
+			else next = 0;
+			plants[selected].deselect();
+			selected = next;
+			plants[selected].select();
+			updatestages(selected);
+			e.preventDefault();
+		}
+		else {
+			next = (ageSelected + 1) % 5;
+			eval(`stage${next}.click()`); // i'm lazy ok
+		}
 	}
 	else if (e.keyCode==87)
 	{
