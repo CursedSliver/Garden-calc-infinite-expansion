@@ -19,7 +19,7 @@ function tooltipShow(element, content) {
 
 
 let woodchips = false;
-let selected = 0;
+let selected = null;
 
 let level = 8;
 let plotLimits = [
@@ -153,6 +153,94 @@ new Plant("Tidygrass", "tidygrass", 31, false, 40, 0.5, 0);
 new Plant("Everdaisy", "everdaisy", 32, false, 75, 0.3, 0);
 new Plant("Ichorpuff", "ichorpuff", 33, true, 35, 1, 1.5);
 
+// modified from orteils code.
+var keys=[];
+window.addEventListener('keyup',function(e){
+	keys[e.keyCode]=0;
+});
+
+window.addEventListener('keydown',function(e){
+	if (e.keyCode==9)
+	{
+		var next;
+		selected = selected??-1;
+		//tab to shift through seeds
+		if (e.shiftKey) next = (selected + 33) % 34;
+		else next = (selected + 1) % 34;
+		plants[selected].deselect();
+		selected = next;
+		plants[selected].select();
+		updatestages(selected);
+		e.preventDefault();
+	}
+	else if (e.keyCode==37)
+	{
+		var next;
+		if (!e.shiftKey) {
+			selected = selected??-1;
+			if (selected != -1) next = selected - (selected % 7) + (((selected % 7) + 6) % 7);
+			else next = 0;
+			plants[selected].deselect();
+			selected = next;
+			plants[selected].select();
+			updatestages(selected);
+			e.preventDefault();
+		}
+		else {
+			next = (ageSelected + 4) % 5;
+			eval(`stage${next}.click()`); // i'm lazy ok
+		}
+	}
+	else if (e.keyCode==39)
+	{
+		var next;
+		if (!e.shiftKey) {
+			selected = selected??-1;
+			if (selected != -1) next = selected - (selected % 7) + (((selected % 7) + 1) % 7);
+			else next = 0;
+			plants[selected].deselect();
+			selected = next;
+			plants[selected].select();
+			updatestages(selected);
+			e.preventDefault();
+		}
+		else {
+			next = (ageSelected + 1) % 5;
+			eval(`stage${next}.click()`); // i'm lazy ok
+		}
+	}
+	else if (e.keyCode==38)
+	{
+		var next;
+		selected = selected??-1;
+		if (selected != -1) next = (selected % 7) + (((Math.floor(selected/7) % 5) + 4) % 5) * 7;
+		else next = 0;
+		if (next == 34) next = 6;
+		plants[selected].deselect();
+		selected = next;
+		plants[selected].select();
+		updatestages(selected);
+		e.preventDefault();
+	}
+	else if (e.keyCode==40)
+	{
+		var next;
+		selected = selected??-1;
+		if (selected != -1) next = (selected % 7) + (((Math.floor(selected/7) % 5) + 1) % 5) * 7;
+		else next = 0;
+		if (next == 34) next = 6;
+		plants[selected].deselect();
+		selected = next;
+		plants[selected].select();
+		updatestages(selected);
+		e.preventDefault();
+	}
+	keys[e.keyCode]=1;
+});
+
+window.addEventListener('visibilitychange',function(e){
+	keys=[];//reset all key pressed on visibility change (should help prevent ctrl still being down after ctrl-tab)
+});
 
 let mutations = [
 	[{"bakerWheat": [2, 8, 1]}, {"bakerWheat": 0.2, "thumbcorn": 0.05, "bakeberry": 0.001}],
