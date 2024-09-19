@@ -19,7 +19,7 @@ function tooltipShow(element, content) {
 
 
 let woodchips = false;
-let selected = null;
+let selected = 0;
 
 let level = 8;
 let plotLimits = [
