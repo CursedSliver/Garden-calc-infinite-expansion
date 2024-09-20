@@ -1,27 +1,3 @@
-document.getElementById('import').addEventListener('keyup',function(e){
-	if (e.keyCode!=13)
-	{
-		e.preventDefault();
-		e.stopPropagation();
-	}
-},true);
-
-document.getElementById('xDim').addEventListener('keyup',function(e){
-	if (e.keyCode!=13)
-	{
-		e.preventDefault();
-		e.stopPropagation();
-	}
-},true);
-
-document.getElementById('yDim').addEventListener('keyup',function(e){
-	if (e.keyCode!=13)
-	{
-		e.preventDefault();
-		e.stopPropagation();
-	}
-},true);
-
 let tooltip = document.createElement("div");
 tooltip.id = "tooltip";
 tooltip.className = "framed";
@@ -234,7 +210,7 @@ window.addEventListener('keydown',function(e){
 		var next;
 		if (selected != null) next = (selected % 7) + (((Math.floor(selected/7) % 5) + 4) % 5) * 7;
 		else next = 0;
-		if (next == 34) next = 6;
+		if (next == 34) next = 27;
 		plants[selected].deselect();
 		selected = next;
 		plants[selected].select();
@@ -282,7 +258,7 @@ window.addEventListener('keydown',function(e){
 		var next;
 		if (selected != null) next = (selected % 7) + (((Math.floor(selected/7) % 5) + 4) % 5) * 7;
 		else next = 0;
-		if (next == 34) next = 6;
+		if (next == 34) next = 27;
 		plants[selected].deselect();
 		selected = next;
 		plants[selected].select();
@@ -1023,3 +999,24 @@ function loadTheMod() {
 }
 		
 window.addEventListener("DOMContentLoaded", init);
+
+document.getElementById('import').addEventListener('keydown',function(e){
+	if (e.keyCode!=13)
+	{
+		e.stopPropagation();
+	}
+},true);
+
+document.getElementById('xDim').addEventListener('keydown',function(e){
+	if (e.keyCode!=13)
+	{
+		e.stopPropagation();
+	}
+},true);
+
+document.getElementById('yDim').addEventListener('keydown',function(e){
+	if (e.keyCode!=13)
+	{
+		e.stopPropagation();
+	}
+},true);
