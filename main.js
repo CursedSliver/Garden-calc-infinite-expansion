@@ -1,30 +1,3 @@
-document.getElementById('import').addEventListener('keydown',function(e){
-	if (e.keyCode!=13)
-	{
-		e.stopPropagation();
-	}
-	else importButton.click();
-},true);
-
-document.getElementById('xDim').addEventListener('keydown',function(e){
-	if (e.keyCode!=13)
-	{
-		e.stopPropagation();
-	}
-	else {
-		yDim.focus();
-		yDim.click();
-	}
-},true);
-
-document.getElementById('yDim').addEventListener('keydown',function(e){
-	if (e.keyCode!=13)
-	{
-		e.stopPropagation();
-	}
-	else document.getElementById('resize').click();
-},true);
-
 let tooltip = document.createElement("div");
 tooltip.id = "tooltip";
 tooltip.className = "framed";
@@ -181,6 +154,33 @@ new Plant("Ichorpuff", "ichorpuff", 33, true, 35, 1, 1.5);
 plants[null] = {'deselect':()=>{}}; // thanks.
 
 // modified from orteils code.
+document.getElementById('import').addEventListener('keydown',function(e){
+	if (e.keyCode!=13)
+	{
+		e.stopPropagation();
+	}
+	else importButton.click();
+},true);
+
+document.getElementById('xDim').addEventListener('keydown',function(e){
+	if (e.keyCode!=13)
+	{
+		e.stopPropagation();
+	}
+	else {
+		yDim.focus();
+		yDim.click();
+	}
+},true);
+
+document.getElementById('yDim').addEventListener('keydown',function(e){
+	if (e.keyCode!=13)
+	{
+		e.stopPropagation();
+	}
+	else document.getElementById('resize').click();
+},true);
+
 var keys=[];
 window.addEventListener('keyup',function(e){
 	keys[e.keyCode]=0;
