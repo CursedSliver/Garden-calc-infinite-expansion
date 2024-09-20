@@ -1,3 +1,27 @@
+document.getElementById('import').addEventListener('keyup',function(e){
+	if (e.keyCode!=13)
+	{
+		e.preventDefault();
+		e.stopPropagation();
+	}
+},true);
+
+document.getElementById('xDim').addEventListener('keyup',function(e){
+	if (e.keyCode!=13)
+	{
+		e.preventDefault();
+		e.stopPropagation();
+	}
+},true);
+
+document.getElementById('yDim').addEventListener('keyup',function(e){
+	if (e.keyCode!=13)
+	{
+		e.preventDefault();
+		e.stopPropagation();
+	}
+},true);
+
 let tooltip = document.createElement("div");
 tooltip.id = "tooltip";
 tooltip.className = "framed";
@@ -15,8 +39,6 @@ function tooltipShow(element, content) {
 	tooltip.style.top = bounds.bottom + 8 + "px";
 	tooltip.style.left = bounds.left + bounds.width / 2 - tooltip.clientWidth / 2 + "px";
 }
-
-
 
 let woodchips = false;
 let selected = null;
