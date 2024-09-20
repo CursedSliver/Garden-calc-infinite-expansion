@@ -1,3 +1,30 @@
+document.getElementById('import').addEventListener('keydown',function(e){
+	if (e.keyCode!=13)
+	{
+		e.stopPropagation();
+	}
+	else importButton.click();
+},true);
+
+document.getElementById('xDim').addEventListener('keydown',function(e){
+	if (e.keyCode!=13)
+	{
+		e.stopPropagation();
+	}
+	else {
+		yDim.focus();
+		yDim.click();
+	}
+},true);
+
+document.getElementById('yDim').addEventListener('keydown',function(e){
+	if (e.keyCode!=13)
+	{
+		e.stopPropagation();
+	}
+	else document.getElementById('resize').click();
+},true);
+
 let tooltip = document.createElement("div");
 tooltip.id = "tooltip";
 tooltip.className = "framed";
@@ -999,24 +1026,3 @@ function loadTheMod() {
 }
 		
 window.addEventListener("DOMContentLoaded", init);
-
-document.getElementById('import').addEventListener('keydown',function(e){
-	if (e.keyCode!=13)
-	{
-		e.stopPropagation();
-	}
-},true);
-
-document.getElementById('xDim').addEventListener('keydown',function(e){
-	if (e.keyCode!=13)
-	{
-		e.stopPropagation();
-	}
-},true);
-
-document.getElementById('yDim').addEventListener('keydown',function(e){
-	if (e.keyCode!=13)
-	{
-		e.stopPropagation();
-	}
-},true);
