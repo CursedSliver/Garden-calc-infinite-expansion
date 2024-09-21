@@ -66,9 +66,7 @@
 				<div id="misc" class="framed">
 					<div class="title">Miscellaneous</div>
 					<div class="line"></div>
-					<label for="import">Import save/garden:</label>
-					<input type="text" id="import"></input>
-					<button id="importButton" class="framed small">Import!</button>
+					<button id="importButton" class="framed small">Import</button>
 					<button id="exportButton" class="framed small" style="margin-bottom:0px">Export garden</button>
 					<label for="import">(to clipboard)</label>
 					<div class="line"></div>
@@ -87,20 +85,35 @@
 				<div id="gardenBGDiv" class="gardenBG hasShadow" style=""></div>
 			</div>
 			<div class="bar"></div>
+			<div id="gardenMask" style="display:none;"></div>
 		</div>
-		<div id="info" class="framed inactive">
-			<div id="xCancel"></div>
-			<h1>
-				Garden Calculator
-			</h1>
-			<br>
-			<h3>
-				-> Infinite Expansion mod <-
-			</h3>
-			<div class="line"></div>
-			<p>The Garden Calculator was originally made by <b>Daydun</b> and hosted at <a href="https://daydun.com/cookie/garden/" target="_blank">https://daydun.com/cookie/garden</a> for the Garden minigame in <a href="https://orteil.dashnet.org/cookieclicker" target="_blank">Cookie Clicker</a>. It was intended to be a way to test the efficiency of your Garden configurations by displaying the probabilities for plants to mutate in a given configuration.</p> 
-			<p>It was upgraded by CursedSliver to include many new features and improvements; mainly for <a href="https://docs.google.com/document/d/1CXzO7URuWWs7v4G8lDWUTSDdz0zdiQ-Ni9vCferVhJI/edit?usp=sharing" target="_blank">Garden Puzzles</a>, but has also picked up on Daydun's unfinished agenda with the addition of features also helpful to ordinary players.</p>
-			<p>To report bugs or leave comments/suggestions, go to the <a href="https://github.com/CursedSliver/Garden-calc-infinite-expansion" target="_blank">github page</a>.</p>
+		<div id="promptAnchor">
+			<div id="info" class="framed inactive prompt">
+				<!-- <div id="xCancel"></div> -->
+				<h1>
+					Garden Calculator
+				</h1>
+				<br>
+				<h3>
+					-> Infinite Expansion mod <-
+				</h3>
+				<div class="line"></div>
+				<p>The Garden Calculator was originally made by <b>Daydun</b> and hosted at <a href="https://daydun.com/cookie/garden/" target="_blank">https://daydun.com/cookie/garden</a> for the Garden minigame in <a href="https://orteil.dashnet.org/cookieclicker" target="_blank">Cookie Clicker</a>. It was intended to be a way to test the efficiency of your Garden configurations by displaying the probabilities for plants to mutate in a given configuration.</p> 
+				<p>It was upgraded by CursedSliver to include many new features and improvements; mainly for <a href="https://docs.google.com/document/d/1CXzO7URuWWs7v4G8lDWUTSDdz0zdiQ-Ni9vCferVhJI/edit?usp=sharing" target="_blank">Garden Puzzles</a>, but has also picked up on Daydun's unfinished agenda with the addition of features also helpful to ordinary players.</p>
+				<p>To report bugs or leave comments/suggestions, go to the <a href="https://github.com/CursedSliver/Garden-calc-infinite-expansion" target="_blank">github page</a>.</p>
+				<div class="closeNotice">Click outside of this propmpt to close this prompt.</div>
+			</div>
+			<div id="import" class="framed inactive prompt">
+				<!-- <div id="xCancel"></div> -->
+				<h1>
+					Import garden or save
+				</h1>
+				<div class="line"></div>
+				<p>Input your save or a garden code below. (will override the current garden on import)</p>
+				<textarea id="textareaPrompt"></textarea>
+				<button id="importPromptButton" class="framed small" style="text-align: center; text-decoration: underline;">Import!</div>
+				<div class="closeNotice">Click outside of this propmpt to close this prompt.</div>
+			</div>
 		</div>
 	</body>
 </html>
