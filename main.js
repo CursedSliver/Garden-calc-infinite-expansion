@@ -847,7 +847,7 @@ function init() {
 			'<div class="icon" style="background-image:url(images/clear.png);float:left;margin-left:-8px;margin-top:-8px;"></div>' +
 			'<div><div class="name">Clear garden</div></div>' +
 			'<div class="line"></div>' +
-			'<div class="description">Removes all plants from your garden.<br>Shift-click to clear all null tiles, or toggle all null tiles if there are none present. (You can make individual tiles null by shift-clicking them)</div></div>'
+			'<div class="description">Removes all plants from your garden.<br>Shift-click to clear all null tiles, or toggle all null tiles if there are none present. <br>(You can make individual tiles null by shift-clicking them)</div></div>'
 		);
 	});
 	document.getElementById("clear").addEventListener("mouseout", function() {
