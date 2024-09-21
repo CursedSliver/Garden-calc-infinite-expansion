@@ -440,13 +440,13 @@ input[type="text"] {
 }
 
 #xDim { 
-	width: 45%; 
-	margin-left: 4px; 
+	width: 40%; 
+	margin-left: 4px;
 }
 
 #yDim { 
-	width: 45%; 
-	margin-left: 4px; 
+	width: 40%; 
+	margin-right: 4px; 
 }
 
 #stats {
