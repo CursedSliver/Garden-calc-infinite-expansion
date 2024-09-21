@@ -847,7 +847,7 @@ function init() {
 			'<div class="icon" style="background-image:url(images/clear.png);float:left;margin-left:-8px;margin-top:-8px;"></div>' +
 			'<div><div class="name">Clear garden</div></div>' +
 			'<div class="line"></div>' +
-			'<div class="description">Removes all plants from your garden.</div></div>'
+			'<div class="description">Removes all plants from your garden.<br>Shift-click to clear all null tiles, or toggle all null tiles if there are none present. (You can make individual tiles null by shift-clicking them)</div></div>'
 		);
 	});
 	document.getElementById("clear").addEventListener("mouseout", function() {
@@ -884,6 +884,21 @@ function init() {
 	document.getElementById('captureButton').addEventListener('click', function() {
 		download();
 	});
+	document.getElementById('cycleButton').addEventListener('mouseover', function() {
+		tooltipShow(this,
+			'<div style="min-width:350px;padding:8px;">' +
+			'<div><div class="name">Cycle tool</div></div>' +
+			'<div class="line"></div>' +
+			'<div class="description">Cycles the tool on the left of the leveling box.<br>Alternative hotkey: enter</div></div>'
+		);
+	});
+	document.getElementById('cycleButton').addEventListener('click', function() {
+		
+	});
+	document.addEventListener('keydown', function(e) {
+		if (e.key != 'Enter') { return; }
+		document.getElementById('cycleButton').click();
+	})
 	document.getElementById('infoButton').addEventListener('click', function() {
 		toggleDarkMode(true);
 		document.getElementById('info').classList.remove('inactive');
