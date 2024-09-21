@@ -1080,6 +1080,7 @@ function reapply() {
 	for (let i in plot) {
 		if (plot[i].activeStatus()) {
 			plot[i].setPlant(backupPlot[i].plant, true, backupPlot[i].age);
+			plot[i].setNull(backupPlot[i].isNull, true);
 		}
 	}
 	maxX = Math.max(6, gmfl(level)[0]);
