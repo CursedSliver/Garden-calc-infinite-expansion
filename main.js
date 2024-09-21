@@ -937,7 +937,7 @@ function load(str, noResize) {
 	uplim(); 
 	if (!skip) { str = str[str.length-1]; }
 	for (let i = 0; i < str.length; i+=2) { 
-		const agePlusNull = parseP(str[i+1]);
+		let agePlusNull = parseP(str[i+1]);
 		if (agePlusNull > 4) {
 			agePlusNull -= 5;
 			plot[i/2].setNull(true);
