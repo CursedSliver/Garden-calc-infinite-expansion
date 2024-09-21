@@ -41,7 +41,7 @@ let plantsById = {};
 
 var maxX = 6; var maxY = 6; var cdim = [6, 6]; var useLev = true; var ageSelected = 3; var importStr = ''; var target = document.styleSheets.length - 1; //target is for fonts dying, usually 1
 var tl = {0:'=',1:'a',2:'b',3:'c',4:'d',5:'e',6:'f',7:'g',8:'h',9:'i',10:'j',11:'k',12:'l',13:'m',14:'n',15:'o',16:'p',17:'q',18:'r',19:'s',20:'t',21:'u',22:'v',23:'w',24:'x',25:'y',26:'z',27:'!',28:'@',29:'#',30:'$',31:'%',32:'^',33:'&',34:'*',undefined:';',null:';'}; 
-var rtl = Object.fromEntries(Object.entries(tl).map(([key, value]) => [value, key])); var ag = {undefined:'3',0:'0',1:'1',2:'2',3:'3',4:'4'}; 
+var rtl = Object.fromEntries(Object.entries(tl).map(([key, value]) => [value, key])); var ag = {undefined:'3',0:'0',1:'1',2:'2',3:'3',4:'4',100:'5',101:'6',102:'7',103:'8',104:'9'}; 
 var strIdToIndex = {}; var altLims = [0,[3,3],[3,4],[2,4],[2,5],[1,5],[1,6]]; var plotCSS = 28; 
 for (let i in document.styleSheets[target].cssRules) { if (document.styleSheets[target].cssRules[i].selectorText == '#gardenPlot') { plotCSS = i; } }
 
@@ -385,7 +385,7 @@ function updateStats() {
 	
 	for (let y=0; y<maxY; y++) {
 		for (let x=0; x<maxX; x++) {
-			if (getTile(x, y) !== null) {
+			if (getTile(x, y) !== null || plot[y * maxX + x].isNull) {
 				continue;
 			}
 			
@@ -906,7 +906,7 @@ function getAge(x,y) {if (x < 0 || y < 0 || x >= maxX || y >= maxY || (plot[y*ma
 function updateEffects() { for (let i in plot) { plot[i].suppress = checkSup(plot[i].x,plot[i].y); } } 
 function checkSup(x,y) { for (let yy = -2; yy <= 2; yy++) { for (let xx = -2; xx <= 2; xx++) { let t = getTile(x+xx,y+yy);if (xx==0&&yy==0) { continue; } if (t===31) { return 1; } if (t==32) { if (xx != 2 && xx != -2 && yy != 2 && yy != -2) { return 1; } } } } return 0; }
 function parseP(input) { if (input === 'null') { return null; } return parseInt(input); } 
-function save() { var strr = ''; if (useLev) { strr = level+'/'; } else { strr = cdim[0]+'/'+cdim[1]+'/'; } for (let i in plot) { strr+=tl[plot[i].plant]+ag[plot[i].age];} return strr; } 
+function save() { var strr = ''; if (useLev) { strr = level+'/'; } else { strr = cdim[0]+'/'+cdim[1]+'/'; } for (let i in plot) { strr+=tl[plot[i].plant]+ag[plot[i].age+(plot[i].isNull?100:0)];} return strr; } 
 function load(str, noResize) {
 	if (typeof noResize === 'undefined') { noResize = false; }
 	let skip = false;
@@ -942,7 +942,12 @@ function load(str, noResize) {
 	uplim(); 
 	if (!skip) { str = str[str.length-1]; }
 	for (let i = 0; i < str.length; i+=2) { 
-		plot[i/2].setPlant(parseP(rtl[str[i]]), true, parseP(str[i+1]));
+		const agePlusNull = parseP(str[i+1]);
+		if (agePlusNull > 4) {
+			agePlusNull -= 5;
+			plot[i/2].setNull(true);
+		}
+		plot[i/2].setPlant(parseP(rtl[str[i]]), true, agePlusNull);
 	} 
 	updateStats(); 
 } 
