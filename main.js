@@ -801,7 +801,7 @@ function init() {
 		if (e.shiftKey) {
 			let hasNulls = false;
 			for (let i=0; i<plot.length; i++) {
-				if (plot[i].isNull) { hasNulls = true; }
+				if (plot[i].isNull) { hasNulls = true; break; }
 			}
 			for (let i=0; i<plot.length; i++) {
 				plot[i].setNull(!hasNulls);
