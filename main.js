@@ -931,7 +931,7 @@ function init() {
 
 function triggerPrompt(id) {
 	toggleDarkMode(true);
-	document.getElementById('info').classList.remove('inactive');
+	document.getElementById(id).classList.remove('inactive');
 	document.getElementById('gardenMask').display = '';
 }
 function closePrompt() {
