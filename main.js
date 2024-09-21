@@ -1070,6 +1070,7 @@ function forceResize() {
 	for (let i in backupPlot) {
 		if (backupPlot[i].activeStatus()) {
 			plot[c].setPlant(backupPlot[i].plant, true, backupPlot[i].age);
+			plot[c].setNull(backupPlot[i].isNull);
 			c++;
 		}
 	}
