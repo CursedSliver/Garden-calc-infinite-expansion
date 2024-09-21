@@ -766,7 +766,8 @@ function init() {
 
 	document.getElementById('gardenMask').addEventListener('click', function() {
 		closePrompt();
-	})
+	});
+	document.getElementById('mid').addEventListener('mousedown', function(e) { if (e.shiftKey) { e.preventDefault(); } })
 	
 	document.getElementById("woodchips").addEventListener("click", function() {
 		woodchips = !woodchips;
