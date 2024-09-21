@@ -565,17 +565,12 @@ class Tile {
 
 	setNull(bool) {
 		this.isNull = bool;
-		/*this.element.classList.remove('tile');
+		this.element.classList.remove('tile');
 		this.element.classList.remove('invisTile');
 		if (this.isNull) {
 			this.element.classList.add('invisTile');
 		} else {
 			this.element.classList.add('tile');
-		}*/
-		if (this.isNull) { 
-			this.element.classList.add('disabled'); 
-		} else {
-			this.element.classList.remove('disabled'); 
 		}
 	}
 
