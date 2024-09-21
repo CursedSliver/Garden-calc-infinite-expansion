@@ -573,6 +573,7 @@ class Tile {
 		} else {
 			this.element.classList.add('tile');
 		}
+		updateStats();
 	}
 
 	activeStatus() {
