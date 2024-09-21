@@ -797,9 +797,19 @@ function init() {
 		updateEffects(); 
 	});
 	
-	document.getElementById("clear").addEventListener("click", function() {
-		for (let i=0; i<plot.length; i++) {
-			plot[i].setPlant(null, true);
+	document.getElementById("clear").addEventListener("click", function(e) {
+		if (e.shiftKey) {
+			let hasNulls = false;
+			for (let i=0; i<plot.length; i++) {
+				if (plot[i].isNull) { hasNulls = true; }
+			}
+			for (let i=0; i<plot.length; i++) {
+				plot[i].setNull(!hasNulls);
+			} 
+		} else {
+			for (let i=0; i<plot.length; i++) {
+				plot[i].setPlant(null, true);
+			}
 		}
 		
 		updateStats();
