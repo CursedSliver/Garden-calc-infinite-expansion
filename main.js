@@ -523,6 +523,7 @@ class Tile {
 		this.element.addEventListener("click", e => {
 			if (e.shiftKey) {
 				this.setNull(!this.isNull);
+				return;
 			}
 			
 			if (this.plant !== null) {
@@ -900,7 +901,7 @@ function getAge(x,y) {if (x < 0 || y < 0 || x >= maxX || y >= maxY || (plot[y*ma
 function updateEffects() { for (let i in plot) { plot[i].suppress = checkSup(plot[i].x,plot[i].y); } } 
 function checkSup(x,y) { for (let yy = -2; yy <= 2; yy++) { for (let xx = -2; xx <= 2; xx++) { let t = getTile(x+xx,y+yy);if (xx==0&&yy==0) { continue; } if (t===31) { return 1; } if (t==32) { if (xx != 2 && xx != -2 && yy != 2 && yy != -2) { return 1; } } } } return 0; }
 function parseP(input) { if (input === 'null') { return null; } return parseInt(input); } 
-function save() { var strr = ''; if (useLev) { strr = level+'/'; } else { strr = cdim[0]+'/'+cdim[1]+'/'; } for (let i in plot) { strr+=tl[plot[i].plant]+ag[plot[i].age+(plot[i].isNull?100:0)];} return strr; } 
+function save() { var strr = ''; if (useLev) { strr = level+'/'; } else { strr = cdim[0]+'/'+cdim[1]+'/'; } for (let i in plot) { strr+=tl[plot[i].plant]+ag[plot[i].age??3+(plot[i].isNull?100:0)];} return strr; } 
 function load(str, noResize) {
 	if (typeof noResize === 'undefined') { noResize = false; }
 	let skip = false;
