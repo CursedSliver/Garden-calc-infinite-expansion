@@ -160,7 +160,7 @@ window.addEventListener("DOMContentLoaded", ()=>{
 		{
 			e.stopPropagation();
 		}
-		else importButton.click();
+		else document.getElementById('importPromptButton').click();
 	},true);
 	
 	document.getElementById('xDim').addEventListener('keydown',function(e){
@@ -763,6 +763,10 @@ function init() {
 	for (let i=0; i<plants.length; i++) {
 		document.getElementById("gardenSeeds").appendChild(plants[i].element);
 	}
+
+	document.getElementById('gardenMask').addEventListener('click', function() {
+		closePrompt();
+	})
 	
 	document.getElementById("woodchips").addEventListener("click", function() {
 		woodchips = !woodchips;
@@ -854,8 +858,14 @@ function init() {
 		tooltipHide();
 	});
 	document.getElementById('importButton').addEventListener('click', function() { 
-		load(document.getElementById('import').value); 
+		triggerPrompt('import');
+		document.getElementById('textareaPrompt').value = '';
 	}); 
+	document.getElementById('importPromptButton').addEventListener('click', function() {
+		load(document.getElementById('textareaPrompt').value); 
+		document.getElementById('textareaPrompt').value = '';
+		closePrompt();
+	});
 	document.getElementById('exportButton').addEventListener('click', function() { 
 		let code = save(); 
 		let str = document.createElement('input'); 
@@ -901,12 +911,7 @@ function init() {
 		document.getElementById('cycleButton').click();
 	})
 	document.getElementById('infoButton').addEventListener('click', function() {
-		toggleDarkMode(true);
-		document.getElementById('info').classList.remove('inactive');
-	});
-	document.getElementById('xCancel').addEventListener('click', function() {
-		toggleDarkMode(false);
-		document.getElementById('info').classList.add('inactive');
+		triggerPrompt('info');
 	});
 	for (let i = 0; i < 5; i++) { 
 		let target = document.getElementById('stage'+i); 
@@ -922,6 +927,21 @@ function init() {
 	updateStats();
 
 	loadTheMod();
+}
+
+function triggerPrompt(id) {
+	toggleDarkMode(true);
+	document.getElementById('info').classList.remove('inactive');
+	document.getElementById('gardenMask').display = '';
+}
+function closePrompt() {
+	toggleDarkMode(false);
+	const promptAnchor = document.getElementById('promptAnchor');
+	for (let i in promptAnchor.children) {
+		promptAnchor.children[i].classList.remove('inactive');
+		promptAnchor.children[i].classList.add('inactive');
+	}
+	document.getElementById('gardenMask').display = 'none';
 }
 
 //mod stuff below
