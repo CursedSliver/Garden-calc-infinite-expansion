@@ -509,6 +509,7 @@ class Tile {
 		this.x = x;
 		this.y = y;
 		this.age = 3;
+		this.isNull = false;
 		
 		this.plant = null;
 		
@@ -519,7 +520,12 @@ class Tile {
 		this.icon.classList.add("tile-icon");
 		this.icon.style.display = "none";
 		this.element.appendChild(this.icon);
-		this.element.addEventListener("click", () => {
+		this.element.addEventListener("click", e => {
+			if (e.shiftKey) {
+				this.setNull(!this.isNull);
+				console.log('null set!');
+			}
+			
 			if (this.plant !== null) {
 				this.setPlant(null);
 				return;
@@ -555,6 +561,22 @@ class Tile {
 			this.element.classList.add("disabled");
 		} else {
 			this.element.classList.remove("disabled");
+		}
+	}
+
+	setNull(bool) {
+		this.isNull = bool;
+		/*this.element.classList.remove('tile');
+		this.element.classList.remove('invisTile');
+		if (this.isNull) {
+			this.element.classList.add('invisTile');
+		} else {
+			this.element.classList.add('tile');
+		}*/
+		if (this.isNull) { 
+			this.element.parentNode.classList.add('disabled'); 
+		} else {
+			this.element.parentNode.classList.remove('disabled'); 
 		}
 	}
 
