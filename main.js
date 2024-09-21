@@ -523,7 +523,6 @@ class Tile {
 		this.element.addEventListener("click", e => {
 			if (e.shiftKey) {
 				this.setNull(!this.isNull);
-				console.log('null set!');
 			}
 			
 			if (this.plant !== null) {
@@ -574,9 +573,9 @@ class Tile {
 			this.element.classList.add('tile');
 		}*/
 		if (this.isNull) { 
-			this.element.parentNode.classList.add('disabled'); 
+			this.element.classList.add('disabled'); 
 		} else {
-			this.element.parentNode.classList.remove('disabled'); 
+			this.element.classList.remove('disabled'); 
 		}
 	}
 
