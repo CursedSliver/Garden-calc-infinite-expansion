@@ -932,16 +932,16 @@ function init() {
 function triggerPrompt(id) {
 	toggleDarkMode(true);
 	document.getElementById(id).classList.remove('inactive');
-	document.getElementById('gardenMask').display = '';
+	document.getElementById('gardenMask').style.display = '';
 }
 function closePrompt() {
 	toggleDarkMode(false);
 	const promptAnchor = document.getElementById('promptAnchor');
-	for (let i in promptAnchor.children) {
+	for (let i = 0; i < promptAnchor.length; i++) {
 		promptAnchor.children[i].classList.remove('inactive');
 		promptAnchor.children[i].classList.add('inactive');
 	}
-	document.getElementById('gardenMask').display = 'none';
+	document.getElementById('gardenMask').style.display = 'none';
 }
 
 //mod stuff below
