@@ -591,7 +591,7 @@ class Tile {
 		}
 	}
 
-	setNull(bool) {
+	setNull(bool, skipUpdate) {
 		this.isNull = bool;
 		this.element.classList.remove('tile');
 		this.element.classList.remove('invisTile');
@@ -600,7 +600,7 @@ class Tile {
 		} else {
 			this.element.classList.add('tile');
 		}
-		updateStats();
+		if (!skipUpdate) { updateStats(); }
 	}
 
 	activeStatus() {
@@ -1070,7 +1070,7 @@ function forceResize() {
 	for (let i in backupPlot) {
 		if (backupPlot[i].activeStatus()) {
 			plot[c].setPlant(backupPlot[i].plant, true, backupPlot[i].age);
-			plot[c].setNull(backupPlot[i].isNull);
+			plot[c].setNull(backupPlot[i].isNull, true);
 			c++;
 		}
 	}
