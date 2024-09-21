@@ -937,7 +937,7 @@ function triggerPrompt(id) {
 function closePrompt() {
 	toggleDarkMode(false);
 	const promptAnchor = document.getElementById('promptAnchor');
-	for (let i = 0; i < promptAnchor.length; i++) {
+	for (let i = 0; i < promptAnchor.children.length; i++) {
 		promptAnchor.children[i].classList.remove('inactive');
 		promptAnchor.children[i].classList.add('inactive');
 	}
