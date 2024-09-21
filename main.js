@@ -887,10 +887,11 @@ function init() {
 	document.getElementById('cycleButton').addEventListener('mouseover', function() {
 		tooltipShow(this,
 			'<div style="min-width:350px;padding:8px;">' +
-			'<div><div class="name">Cycle tool</div></div>' +
-			'<div class="line"></div>' +
-			'<div class="description">Cycles the tool on the left of the leveling box.<br>Alternative hotkey: enter</div></div>'
+			'<div class="description">Cycles the tool on the left of the leveling box.<br>(Alternative hotkey: enter)</div></div>'
 		);
+	});
+	document.getElementById("cycleButton").addEventListener("mouseout", function() {
+		tooltipHide();
 	});
 	document.getElementById('cycleButton').addEventListener('click', function() {
 		
