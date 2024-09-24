@@ -860,6 +860,7 @@ function init() {
 	});
 	document.getElementById('importButton').addEventListener('click', function() { 
 		triggerPrompt('import');
+		document.getElementById('textareaPrompt').focus();
 		document.getElementById('textareaPrompt').value = '';
 	}); 
 	document.getElementById('importPromptButton').addEventListener('click', function() {
