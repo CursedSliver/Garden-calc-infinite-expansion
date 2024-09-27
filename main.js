@@ -800,12 +800,6 @@ const rightActivatableList = [{
 		}
 	}
 }];
-var createVarFitFunc = function(id) {
-	return function() {
-		leftToggleableStatuses[id] = !leftToggleableStatuses[id];
-		document.getElementById(id).className = leftToggleableStatuses[id] ? '' : 'toggleOff';
-	};
-}
 function createAllTools() {
 	document.getElementById('leftToggleable').addEventListener('click', function() {
 		updateStats();
@@ -824,7 +818,10 @@ function createAllTools() {
 	document.getElementById('leftToggleable').innerHTML = leftToggleableInnerHTML;
 	for (let i in leftToggleableList) {
 		let me = leftToggleableList[i];
-		document.getElementById(me.id).addEventListener('click', createVarFitFunc(me.id));
+		document.getElementById(me.id).addEventListener('click', function() {
+			leftToggleableStatuses[me.id] = !leftToggleableStatuses[me.id];
+			document.getElementById(me.id).className = leftToggleableStatuses[me.id] ? '' : 'toggleOff';
+		});
 		if (me.func) {
 			document.getElementById(me.id).addEventListener('click', function(e) { me.func(e); });
 		}
