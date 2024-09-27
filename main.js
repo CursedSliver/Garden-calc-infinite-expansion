@@ -16,7 +16,6 @@ function tooltipShow(element, content) {
 	tooltip.style.left = bounds.left + bounds.width / 2 - tooltip.clientWidth / 2 + "px";
 }
 
-let  = false;
 let selected = null;
 
 let level = 8;
@@ -446,7 +445,7 @@ function updateStats() {
 			}
 			
 			if (alone) {
-				chances["meddleweed"].push(( ? 0.1 : 1) * 0.002);
+				chances["meddleweed"].push((leftToggleableStatuses.woodchips ? 0.1 : 1) * 0.002);
 				continue;
 			}
 			
@@ -492,7 +491,7 @@ function updateStats() {
 			
 			for (let i=0; i<muts.length; i++) {
 				let prob = 0;
-				if () {
+				if (leftToggleableStatuses.woodchips) {
 					for (let j=0; j<3; j++) {
 						prob += probs[i] * Math.pow(noneChance, j);
 					}
@@ -772,25 +771,33 @@ function init() {
 	document.getElementById('mid').addEventListener('mousedown', function(e) { if (e.shiftKey) { e.preventDefault(); } });
 
 	const leftToggleableList = [{
-		id: '',
+		id: 'woodchips',
 		image: 'images/gardenPlants.png',
 		posX: -192,
-		posY: -1632
+		posY: -1632,
+		name: 'Toggle wood chips',
+		desc: 'Triples mutation rate when enabled.'
 	}, {
 		id: 'si',
 		image: 'images/icons.png',
 		posX: -34*48,
-		posY: -25*48
+		posY: -25*48,
+		name: 'Toggle Supreme Intellect',
+		desc: 'Increases mutation rate by 5% when enabled.'
 	}, {
 		id: 'rb',
 		image: 'images/icons.png',
 		posX: -32*48,
-		posY: -25*48
+		posY: -25*48,
+		name: 'Toggle Reality Bending',
+		desc: 'Increases mutation rate by 10% of Supreme Intellect when enabled. Stacks additively with Supreme Intellect.'
 	}];
 
 	const rightActivatableList = [{
 		id: 'clear',
 		image: 'images/clear.png',
+		name: 'Clear garden',
+		desc: 'Removes all plants from your garden.<br>Shift-click to clear all null tiles, or toggle all null tiles if there are none present. <br>(You can make individual tiles null by shift-clicking them)',
 		func: function(e) {
 			if (e.shiftKey) {
 				let hasNulls = false;
@@ -836,6 +843,16 @@ function init() {
 		if (me.func) {
 			document.getElementById(me.id).addEventListener('click', function(e) { me.func(e); });
 		}
+		document.getElementById(me.id).addEventListener('mouseout', function() { tooltipHide(); });
+		document.getElementById(me.id).addEventListener('mouseover', function() {
+			tooltipShow(this, 
+				'<div style="min-width:350px;padding:8px;">' +
+				'<div class="icon" style="background-image:url('+me.image+');background-position:'+me.posX??0+'px '+me.posY??0+'px;float:left;margin-left:-8px;margin-top:-8px;"></div>' +
+				'<div><div class="name">'+me.name+'</div></div>' +
+				'<div class="line"></div>' +
+				'<div class="description">'+me.desc+'</div></div>'	
+			);
+		});
 	}
 	let rightActivatableInnerHTML = '';
 	for (let i in rightActivatableList) {
@@ -845,20 +862,17 @@ function init() {
 	for (let i in rightActivatableList) {
 		let me = rightActivatableList[i];
 		document.getElementById(me.id).addEventListener('click', function(e) { me.func(e); });
+		document.getElementById(me.id).addEventListener('mouseout', function() { tooltipHide(); });
+		document.getElementById(me.id).addEventListener('mouseover', function() {
+			tooltipShow(this, 
+				'<div style="min-width:350px;padding:8px;">' +
+				'<div class="icon" style="background-image:url('+me.image+');background-position:'+me.posX??0+'px '+me.posY??0+'px;float:right;margin-left:-8px;margin-top:-8px;"></div>' +
+				'<div><div class="name">'+me.name+'</div></div>' +
+				'<div class="line"></div>' +
+				'<div class="description">'+me.desc+'</div></div>'	
+			);
+		});
 	}
-	
-	document.getElementById("").addEventListener("mouseover", function() {
-		tooltipShow(this,
-			'<div style="min-width:350px;padding:8px;">' +
-			'<div class="icon" style="background-image:url(images/gardenPlants.png);background-position:-192px -1632px;float:left;margin-left:-8px;margin-top:-8px;"></div>' +
-			'<div><div class="name">Toggle wood chips</div></div>' +
-			'<div class="line"></div>' +
-			'<div class="description">Triples mutation rate when enabled.</div></div>'
-		);
-	});
-	document.getElementById("").addEventListener("mouseout", function() {
-		tooltipHide();
-	});
 	
 	document.getElementById("level-sub").addEventListener("click", function() {
 		cachedSave = save(); 
@@ -901,18 +915,6 @@ function init() {
 		updateEffects(); 
 	});
 	
-	document.getElementById("clear").addEventListener("mouseover", function() {
-		tooltipShow(this,
-			'<div style="min-width:350px;padding:8px;">' +
-			'<div class="icon" style="background-image:url(images/clear.png);float:left;margin-left:-8px;margin-top:-8px;"></div>' +
-			'<div><div class="name">Clear garden</div></div>' +
-			'<div class="line"></div>' +
-			'<div class="description">Removes all plants from your garden.<br>Shift-click to clear all null tiles, or toggle all null tiles if there are none present. <br>(You can make individual tiles null by shift-clicking them)</div></div>'
-		);
-	});
-	document.getElementById("clear").addEventListener("mouseout", function() {
-		tooltipHide();
-	});
 	document.getElementById('importButton').addEventListener('click', function() { 
 		triggerPrompt('import');
 		document.getElementById('textareaPrompt').focus();
