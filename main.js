@@ -849,7 +849,7 @@ function createAllTools() {
 		document.getElementById(me.id).addEventListener('mouseover', function() {
 			tooltipShow(document.getElementById(me.id), 
 				'<div style="min-width:350px;padding:8px;">' +
-				'<div class="icon" style="background-image:url('+me.image+');background-position:'+(me.posX??0)+'px '+(me.posY??0)+'px;float:right;margin-left:-8px;margin-top:-8px;"></div>' +
+				'<div class="icon" style="background-image:url('+me.image+');background-position:'+(me.posX??0)+'px '+(me.posY??0)+'px;float:left;margin-left:-8px;margin-top:-8px;"></div>' +
 				'<div><div class="name">'+me.name+'</div></div>' +
 				'<div class="line"></div>' +
 				'<div class="description">'+me.desc+'</div></div>'	
