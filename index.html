@@ -47,13 +47,13 @@
 				<div id="mid">
 					<div id="gardenPlot"></div>
 					<div id="settings">
-						<button id="woodchips" class="disabled"></button>
+						<div id="leftToggleable" class="disabled"></div>
 						<div id="level-select" class="framed">
 							<button id="level-sub">-</button>
 							<div id="level-mid">Level <span id="level">9</span></div>
 							<button id="level-add">+</button>
 						</div>
-						<button id="clear"></button>
+						<div id="rightActivatable"></div>
 					</div>
 				</div>
 				<div id="gardenStats" class="framed">
@@ -78,7 +78,11 @@
 					</div>
 					<button id="resize" class="framed small">Custom resize</button>
 					<div class="line"></div>
-					<button id="cycleButton" class="framed small" style="display:none;">Cycle tool</button>
+					<label for="cycleSet">Cycle tools</label>
+					<div id="cycleSet"> 
+						<button id="cycleLeft" class="framed small">left</button>
+						<button id="cycleRight" class="framed small">right</button>
+					</div>
 					<button id="captureButton" class="framed small">Capture garden</button>
 					<label for="captureButton" id="captureWarning" class="inactive">May causes minor distortions for gardens this big.</label>
 				</div>
