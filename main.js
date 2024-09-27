@@ -755,66 +755,52 @@ function sliceSide(arr, order) {
 }
 
 var leftToggleableStatuses = {};
-
-function init() {
-	document.body.appendChild(tooltip);
-	
-	generatePlot();
-	
-	for (let i=0; i<plants.length; i++) {
-		document.getElementById("gardenSeeds").appendChild(plants[i].element);
-	}
-
-	document.getElementById('gardenMask').addEventListener('click', function() {
-		closePrompt();
-	});
-	document.getElementById('mid').addEventListener('mousedown', function(e) { if (e.shiftKey) { e.preventDefault(); } });
-
-	const leftToggleableList = [{
-		id: 'woodchips',
-		image: 'images/gardenPlants.png',
-		posX: -192,
-		posY: -1632,
-		name: 'Toggle wood chips',
-		desc: 'Triples mutation rate when enabled.'
-	}, {
-		id: 'si',
-		image: 'images/icons.png',
-		posX: -34*48,
-		posY: -25*48,
-		name: 'Toggle Supreme Intellect',
-		desc: 'Increases mutation rate by 5% when enabled.'
-	}, {
-		id: 'rb',
-		image: 'images/icons.png',
-		posX: -32*48,
-		posY: -25*48,
-		name: 'Toggle Reality Bending',
-		desc: 'Increases mutation rate by 10% of Supreme Intellect when enabled. Stacks additively with Supreme Intellect.'
-	}];
-
-	const rightActivatableList = [{
-		id: 'clear',
-		image: 'images/clear.png',
-		name: 'Clear garden',
-		desc: 'Removes all plants from your garden.<br>Shift-click to clear all null tiles, or toggle all null tiles if there are none present. <br>(You can make individual tiles null by shift-clicking them)',
-		func: function(e) {
-			if (e.shiftKey) {
-				let hasNulls = false;
-				for (let i=0; i<plot.length; i++) {
-					if (plot[i].isNull) { hasNulls = true; break; }
-				}
-				for (let i=0; i<plot.length; i++) {
-					plot[i].setNull(!hasNulls);
-				} 
-			} else {
-				for (let i=0; i<plot.length; i++) {
-					plot[i].setPlant(null, true);
-				}
+var leftOn = 0;
+var rightOn = 0;
+const leftToggleableList = [{
+	id: 'woodchips',
+	image: 'images/gardenPlants.png',
+	posX: -192,
+	posY: -1632,
+	name: 'Toggle wood chips',
+	desc: 'Triples mutation rate when enabled.'
+}, {
+	id: 'si',
+	image: 'images/icons.png',
+	posX: -34*48,
+	posY: -25*48,
+	name: 'Toggle Supreme Intellect',
+	desc: 'Increases mutation rate by 5% when enabled.'
+}, {
+	id: 'rb',
+	image: 'images/icons.png',
+	posX: -32*48,
+	posY: -25*48,
+	name: 'Toggle Reality Bending',
+	desc: 'Increases mutation rate by 10% of Supreme Intellect when enabled. Stacks additively with Supreme Intellect.'
+}];
+const rightActivatableList = [{
+	id: 'clear',
+	image: 'images/clear.png',
+	name: 'Clear garden',
+	desc: 'Removes all plants from your garden.<br>Shift-click to clear all null tiles, or toggle all null tiles if there are none present. <br>(You can make individual tiles null by shift-clicking them)',
+	func: function(e) {
+		if (e.shiftKey) {
+			let hasNulls = false;
+			for (let i=0; i<plot.length; i++) {
+				if (plot[i].isNull) { hasNulls = true; break; }
+			}
+			for (let i=0; i<plot.length; i++) {
+				plot[i].setNull(!hasNulls);
+			} 
+		} else {
+			for (let i=0; i<plot.length; i++) {
+				plot[i].setPlant(null, true);
 			}
 		}
-	}];
-
+	}
+}];
+function createAllTools() {
 	let createVarFitFunc = function(id) {
 		return (function(id) {
 			leftToggleableStatuses[id] = !leftToggleableStatuses[id];
@@ -834,7 +820,7 @@ function init() {
 	for (let i in leftToggleableList) {
 		let me = leftToggleableList[i];
 		leftToggleableStatuses[me.id] = me.defaultState??false;
-		leftToggleableInnerHTML += '<button id="'+me.id+'" class="'+(leftToggleableStatuses[me.id]?'':'iconDisabled')+'" style="width:48px;height:48px;float:left;background: url("'+me.image+'");background-position:'+(me.posX??0)+'px '+(me.posY??0)+'px;"></button>';
+		leftToggleableInnerHTML += '<button id="'+me.id+'" class="'+(leftToggleableStatuses[me.id]?'':'iconDisabled')+'" style="width:48px;height:48px;float:left;background: url("'+me.image+'");background-position:'+(me.posX??0)+'px '+(me.posY??0)+'px;display:none;"></button>';
 	}
 	document.getElementById('leftToggleable').innerHTML = leftToggleableInnerHTML;
 	for (let i in leftToggleableList) {
@@ -845,7 +831,7 @@ function init() {
 		}
 		document.getElementById(me.id).addEventListener('mouseout', function() { tooltipHide(); });
 		document.getElementById(me.id).addEventListener('mouseover', function() {
-			tooltipShow(this, 
+			tooltipShow(document.getElementById(me.id), 
 				'<div style="min-width:350px;padding:8px;">' +
 				'<div class="icon" style="background-image:url('+me.image+');background-position:'+me.posX??0+'px '+me.posY??0+'px;float:left;margin-left:-8px;margin-top:-8px;"></div>' +
 				'<div><div class="name">'+me.name+'</div></div>' +
@@ -857,14 +843,15 @@ function init() {
 	let rightActivatableInnerHTML = '';
 	for (let i in rightActivatableList) {
 		let me = rightActivatableList[i];
-		rightActivatableInnerHTML += '<button id="'+me.id+'" class="'+(leftToggleableStatuses[me.id]?'':'iconDisabled')+'" style="width:48px;height:48px;float:left;background: url("'+me.image+'");background-position:'+(me.posX??0)+'px '+(me.posY??0)+'px;"></button>';
+		rightActivatableInnerHTML += '<button id="'+me.id+'" class="'+(leftToggleableStatuses[me.id]?'':'iconDisabled')+'" style="width:48px;height:48px;float:left;background: url("'+me.image+'");background-position:'+(me.posX??0)+'px '+(me.posY??0)+'px;display:none;"></button>';
 	}
+	document.getElementById('rightActivatable').innerHTML = rightActivatableInnerHTML;
 	for (let i in rightActivatableList) {
 		let me = rightActivatableList[i];
 		document.getElementById(me.id).addEventListener('click', function(e) { me.func(e); });
 		document.getElementById(me.id).addEventListener('mouseout', function() { tooltipHide(); });
 		document.getElementById(me.id).addEventListener('mouseover', function() {
-			tooltipShow(this, 
+			tooltipShow(document.getElementById(me.id), 
 				'<div style="min-width:350px;padding:8px;">' +
 				'<div class="icon" style="background-image:url('+me.image+');background-position:'+me.posX??0+'px '+me.posY??0+'px;float:right;margin-left:-8px;margin-top:-8px;"></div>' +
 				'<div><div class="name">'+me.name+'</div></div>' +
@@ -873,6 +860,40 @@ function init() {
 			);
 		});
 	}
+
+	document.getElementById(leftOn).style.display = '';
+	document.getElementById(rightOn).style.display = '';
+}
+function cycleLeft(reversed) {
+	document.getElementById(leftToggleableList[leftOn].id).style.display = 'none';
+	if (reversed) { leftOn--; } else { leftOn++; }
+	if (leftOn >= leftToggleableList.length) { leftOn = 0; }
+	if (leftOn < 0) { leftOn = leftToggleableList.length - 1; }
+	document.getElementById(leftToggleableList[leftOn].id).style.display = '';
+}
+function cycleRight(reversed) {
+	document.getElementById(rightActivatableList[rightOn].id).style.display = 'none';
+	if (reversed) { rightOn--; } else { rightOn++; }
+	if (rightOn >= rightActivatableList.length) { rightOn = 0; }
+	if (rightOn < 0) { rightOn = rightActivatableList.length - 1; }
+	document.getElementById(rightActivatableList[rightOn].id).style.display = '';
+}
+
+function init() {
+	document.body.appendChild(tooltip);
+	
+	generatePlot();
+	
+	for (let i=0; i<plants.length; i++) {
+		document.getElementById("gardenSeeds").appendChild(plants[i].element);
+	}
+
+	document.getElementById('gardenMask').addEventListener('click', function() {
+		closePrompt();
+	});
+	document.getElementById('mid').addEventListener('mousedown', function(e) { if (e.shiftKey) { e.preventDefault(); } });
+
+	createAllTools();
 	
 	document.getElementById("level-sub").addEventListener("click", function() {
 		cachedSave = save(); 
@@ -956,17 +977,23 @@ function init() {
 	document.getElementById('cycleSet').addEventListener('mouseover', function() {
 		tooltipShow(this,
 			'<div style="min-width:350px;padding:8px;">' +
-			'<div class="description">Cycles the tools on the left and right of the leveling box.<br>(Alternative hotkey: Z for left, C for right)</div></div>'
+			'<div class="description">Cycles the tools on the left and right of the leveling box.<br>(Alternative hotkey: Z for left, C for right; Shift to cycle the opposite direction)</div></div>'
 		);
 	});
 	document.getElementById("cycleSet").addEventListener("mouseout", function() {
 		tooltipHide();
 	});
+	document.getElementById("cycleLeft").addEventListener('click', function(e) {
+		cycleLeft(e.shiftKey);
+	});
+	document.getElementById("cycleRight").addEventListener('click', function(e) {
+		cycleRight(e.shiftKey);
+	});
 	document.addEventListener('keydown', function(e) {
 		if (e.key.toLowerCase() != 'z' && e.key.toLowerCase() != 'c') { return; }
-		if (e.key.toLowerCase() == 'z') { document.getElementById('cycleLeft').click(); }
-		else if (e.key.toLowerCase() == 'c') { document.getElementById('cycleRight').click(); }
-	})
+		if (e.key.toLowerCase() == 'z') { cycleLeft(e.shiftKey); }
+		else if (e.key.toLowerCase() == 'c') { cycleRight(e.shiftKey); }
+	});
 	document.getElementById('infoButton').addEventListener('click', function() {
 		triggerPrompt('info');
 	});
