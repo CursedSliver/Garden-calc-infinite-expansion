@@ -861,8 +861,8 @@ function createAllTools() {
 		});
 	}
 
-	document.getElementById(leftOn).style.display = '';
-	document.getElementById(rightOn).style.display = '';
+	document.getElementById(leftToggleableList[leftOn].id).style.display = '';
+	document.getElementById(rightActivatableList[rightOn].id).style.display = '';
 }
 function cycleLeft(reversed) {
 	document.getElementById(leftToggleableList[leftOn].id).style.display = 'none';
