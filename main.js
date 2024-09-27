@@ -763,7 +763,7 @@ const leftToggleableList = [{
 	posX: -192,
 	posY: -1632,
 	name: 'Toggle wood chips',
-	desc: 'Triples mutation rate when enabled.'
+	desc: 'Triples mutation rate when enabled, but also reduces the chance of weed spawns by 90%.'
 }, {
 	id: 'si',
 	image: 'images/icons.png',
