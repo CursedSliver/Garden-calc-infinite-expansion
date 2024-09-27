@@ -800,14 +800,13 @@ const rightActivatableList = [{
 		}
 	}
 }];
+var createVarFitFunc = function(id) {
+	return function() {
+		leftToggleableStatuses[id] = !leftToggleableStatuses[id];
+		document.getElementById(id).className = leftToggleableStatuses[id] ? '' : 'toggleOff';
+	};
+}
 function createAllTools() {
-	let createVarFitFunc = function(id) {
-		return (function(id) {
-			leftToggleableStatuses[id] = !leftToggleableStatuses[id];
-			document.getElementById(id).className = leftToggleableStatuses[id] ? '' : 'toggleOff';
-		})(id);
-	}
-
 	document.getElementById('leftToggleable').addEventListener('click', function() {
 		updateStats();
 	});
