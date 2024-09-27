@@ -818,7 +818,7 @@ function init() {
 	let createVarFitFunc = function(id) {
 		return (function(id) {
 			leftToggleableStatuses[id] = !leftToggleableStatuses[id];
-			document.getElementById[id].className = leftToggleableStatuses[id] ? '' : 'toggleOff';
+			document.getElementById(id).className = leftToggleableStatuses[id] ? '' : 'toggleOff';
 		})(id);
 	}
 
