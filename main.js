@@ -858,6 +858,7 @@ function createAllTools() {
 	}
 
 	document.getElementById(leftToggleableList[leftOn].id).style.display = '';
+	document.getElementById(leftToggleableList[leftOn].id).className = 'toggleOff';
 	document.getElementById(rightActivatableList[rightOn].id).style.display = '';
 }
 function cycleLeft(reversed) {
