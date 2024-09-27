@@ -393,6 +393,9 @@ input[type="text"] {
 #leftToggleable.disabled, #rightActivatable.disabled {
 	filter: brightness(30%) drop-shadow(0px 3px 2px #000);
 }
+.toggleOff {
+	filter: brightness(30%) drop-shadow(0px 3px 2px #000);
+}
 
 #level-select {
 	display: inline-flex;
