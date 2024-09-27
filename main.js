@@ -16,7 +16,7 @@ function tooltipShow(element, content) {
 	tooltip.style.left = bounds.left + bounds.width / 2 - tooltip.clientWidth / 2 + "px";
 }
 
-let woodchips = false;
+let  = false;
 let selected = null;
 
 let level = 8;
@@ -446,7 +446,7 @@ function updateStats() {
 			}
 			
 			if (alone) {
-				chances["meddleweed"].push((woodchips ? 0.1 : 1) * 0.002);
+				chances["meddleweed"].push(( ? 0.1 : 1) * 0.002);
 				continue;
 			}
 			
@@ -492,7 +492,7 @@ function updateStats() {
 			
 			for (let i=0; i<muts.length; i++) {
 				let prob = 0;
-				if (woodchips) {
+				if () {
 					for (let j=0; j<3; j++) {
 						prob += probs[i] * Math.pow(noneChance, j);
 					}
@@ -755,6 +755,8 @@ function sliceSide(arr, order) {
 	return false;
 }
 
+var leftToggleableStatuses = {};
+
 function init() {
 	document.body.appendChild(tooltip);
 	
@@ -767,15 +769,85 @@ function init() {
 	document.getElementById('gardenMask').addEventListener('click', function() {
 		closePrompt();
 	});
-	document.getElementById('mid').addEventListener('mousedown', function(e) { if (e.shiftKey) { e.preventDefault(); } })
-	
-	document.getElementById("woodchips").addEventListener("click", function() {
-		woodchips = !woodchips;
-		this.className = woodchips ? "" : "disabled";
-		
+	document.getElementById('mid').addEventListener('mousedown', function(e) { if (e.shiftKey) { e.preventDefault(); } });
+
+	const leftToggleableList = [{
+		id: '',
+		image: 'images/gardenPlants.png',
+		posX: -192,
+		posY: -1632
+	}, {
+		id: 'si',
+		image: 'images/icons.png',
+		posX: -34*48,
+		posY: -25*48
+	}, {
+		id: 'rb',
+		image: 'images/icons.png',
+		posX: -32*48,
+		posY: -25*48
+	}];
+
+	const rightActivatableList = [{
+		id: 'clear',
+		image: 'images/clear.png',
+		func: function(e) {
+			if (e.shiftKey) {
+				let hasNulls = false;
+				for (let i=0; i<plot.length; i++) {
+					if (plot[i].isNull) { hasNulls = true; break; }
+				}
+				for (let i=0; i<plot.length; i++) {
+					plot[i].setNull(!hasNulls);
+				} 
+			} else {
+				for (let i=0; i<plot.length; i++) {
+					plot[i].setPlant(null, true);
+				}
+			}
+		}
+	}];
+
+	let createVarFitFunc = function(id) {
+		return (function(id) {
+			leftToggleableStatuses[id] = !leftToggleableStatuses[id];
+			document.getElementById[id].className = leftToggleableStatuses[id] ? '' : 'toggleOff';
+		})(id);
+	}
+
+	document.getElementById('leftToggleable').addEventListener('click', function() {
 		updateStats();
 	});
-	document.getElementById("woodchips").addEventListener("mouseover", function() {
+	document.getElementById('rightActivatable').addEventListener('click', function() {
+		updateStats();
+	});
+
+	//create all tools
+	let leftToggleableInnerHTML = '';
+	for (let i in leftToggleableList) {
+		let me = leftToggleableList[i];
+		leftToggleableStatuses[me.id] = me.defaultState??false;
+		leftToggleableInnerHTML += '<button id="'+me.id+'" class="'+(leftToggleableStatuses[me.id]?'':'iconDisabled')+'" style="width:48px;height:48px;float:left;background: url("'+me.image+'");background-position:'+(me.posX??0)+'px '+(me.posY??0)+'px;"></button>';
+	}
+	document.getElementById('leftToggleable').innerHTML = leftToggleableInnerHTML;
+	for (let i in leftToggleableList) {
+		let me = leftToggleableList[i];
+		document.getElementById(me.id).addEventListener('click', createVarFitFunc(me.id));
+		if (me.func) {
+			document.getElementById(me.id).addEventListener('click', function(e) { me.func(e); });
+		}
+	}
+	let rightActivatableInnerHTML = '';
+	for (let i in rightActivatableList) {
+		let me = rightActivatableList[i];
+		rightActivatableInnerHTML += '<button id="'+me.id+'" class="'+(leftToggleableStatuses[me.id]?'':'iconDisabled')+'" style="width:48px;height:48px;float:left;background: url("'+me.image+'");background-position:'+(me.posX??0)+'px '+(me.posY??0)+'px;"></button>';
+	}
+	for (let i in rightActivatableList) {
+		let me = rightActivatableList[i];
+		document.getElementById(me.id).addEventListener('click', function(e) { me.func(e); });
+	}
+	
+	document.getElementById("").addEventListener("mouseover", function() {
 		tooltipShow(this,
 			'<div style="min-width:350px;padding:8px;">' +
 			'<div class="icon" style="background-image:url(images/gardenPlants.png);background-position:-192px -1632px;float:left;margin-left:-8px;margin-top:-8px;"></div>' +
@@ -784,7 +856,7 @@ function init() {
 			'<div class="description">Triples mutation rate when enabled.</div></div>'
 		);
 	});
-	document.getElementById("woodchips").addEventListener("mouseout", function() {
+	document.getElementById("").addEventListener("mouseout", function() {
 		tooltipHide();
 	});
 	
@@ -829,23 +901,6 @@ function init() {
 		updateEffects(); 
 	});
 	
-	document.getElementById("clear").addEventListener("click", function(e) {
-		if (e.shiftKey) {
-			let hasNulls = false;
-			for (let i=0; i<plot.length; i++) {
-				if (plot[i].isNull) { hasNulls = true; break; }
-			}
-			for (let i=0; i<plot.length; i++) {
-				plot[i].setNull(!hasNulls);
-			} 
-		} else {
-			for (let i=0; i<plot.length; i++) {
-				plot[i].setPlant(null, true);
-			}
-		}
-		
-		updateStats();
-	});
 	document.getElementById("clear").addEventListener("mouseover", function() {
 		tooltipShow(this,
 			'<div style="min-width:350px;padding:8px;">' +
@@ -896,21 +951,19 @@ function init() {
 	document.getElementById('captureButton').addEventListener('click', function() {
 		download();
 	});
-	document.getElementById('cycleButton').addEventListener('mouseover', function() {
+	document.getElementById('cycleSet').addEventListener('mouseover', function() {
 		tooltipShow(this,
 			'<div style="min-width:350px;padding:8px;">' +
-			'<div class="description">Cycles the tool on the left of the leveling box.<br>(Alternative hotkey: enter)</div></div>'
+			'<div class="description">Cycles the tools on the left and right of the leveling box.<br>(Alternative hotkey: Z for left, C for right)</div></div>'
 		);
 	});
-	document.getElementById("cycleButton").addEventListener("mouseout", function() {
+	document.getElementById("cycleSet").addEventListener("mouseout", function() {
 		tooltipHide();
 	});
-	document.getElementById('cycleButton').addEventListener('click', function() {
-		
-	});
 	document.addEventListener('keydown', function(e) {
-		if (e.key != 'Enter') { return; }
-		document.getElementById('cycleButton').click();
+		if (e.key.toLowerCase() != 'z' && e.key.toLowerCase() != 'c') { return; }
+		if (e.key.toLowerCase() == 'z') { document.getElementById('cycleLeft').click(); }
+		else if (e.key.toLowerCase() == 'c') { document.getElementById('cycleRight').click(); }
 	})
 	document.getElementById('infoButton').addEventListener('click', function() {
 		triggerPrompt('info');
