@@ -820,7 +820,7 @@ function createAllTools() {
 	for (let i in leftToggleableList) {
 		let me = leftToggleableList[i];
 		leftToggleableStatuses[me.id] = me.defaultState??false;
-		leftToggleableInnerHTML += '<button id="'+me.id+'" class="'+(leftToggleableStatuses[me.id]?'':'iconDisabled')+'" style="width:48px;height:48px;float:left;background: url("'+me.image+'");background-position:'+(me.posX??0)+'px '+(me.posY??0)+'px;display:none;"></button>';
+		leftToggleableInnerHTML += '<button id="'+me.id+'" class="'+(leftToggleableStatuses[me.id]?'':'iconDisabled')+'" style="width:48px;height:48px;float:left;background: url('+me.image+');background-position:'+(me.posX??0)+'px '+(me.posY??0)+'px;display:none;"></button>';
 	}
 	document.getElementById('leftToggleable').innerHTML = leftToggleableInnerHTML;
 	for (let i in leftToggleableList) {
@@ -843,7 +843,7 @@ function createAllTools() {
 	let rightActivatableInnerHTML = '';
 	for (let i in rightActivatableList) {
 		let me = rightActivatableList[i];
-		rightActivatableInnerHTML += '<button id="'+me.id+'" class="'+(leftToggleableStatuses[me.id]?'':'iconDisabled')+'" style="width:48px;height:48px;float:left;background: url("'+me.image+'");background-position:'+(me.posX??0)+'px '+(me.posY??0)+'px;display:none;"></button>';
+		rightActivatableInnerHTML += '<button id="'+me.id+'" class="'+(leftToggleableStatuses[me.id]?'':'iconDisabled')+'" style="width:48px;height:48px;float:left;background: url('+me.image+');background-position:'+(me.posX??0)+'px '+(me.posY??0)+'px;display:none;"></button>';
 	}
 	document.getElementById('rightActivatable').innerHTML = rightActivatableInnerHTML;
 	for (let i in rightActivatableList) {
