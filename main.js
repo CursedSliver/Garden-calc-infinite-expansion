@@ -547,7 +547,7 @@ class Tile {
 		this.icon.style.display = "none";
 		this.element.appendChild(this.icon);
 		this.element.addEventListener("click", e => {
-			if (e.shiftKey) {
+			if (e.shiftKey && leftToggleableStatuses.nullTile) {
 				this.setNull(!this.isNull);
 				return;
 			}
@@ -778,12 +778,17 @@ const leftToggleableList = [{
 	posY: -25*48,
 	name: 'Toggle Reality Bending',
 	desc: 'Increases mutation rate by 10% of Supreme Intellect when enabled. Stacks additively with Supreme Intellect.'
+}, {
+	id: 'nullTile',
+	image: 'images/null_tile_toggle.png',
+	name: 'Toggle null tiles',
+	desc: 'Toggling this on allows you to turn tiles null by shift-clicking them.<br>Note: null tiles do not exist in-game.'
 }];
 const rightActivatableList = [{
 	id: 'clear',
 	image: 'images/clear.png',
 	name: 'Clear garden',
-	desc: 'Removes all plants from your garden.<br>Shift-click to clear all null tiles, or toggle all null tiles if there are none present. <br>(You can make individual tiles null by shift-clicking them)',
+	desc: 'Removes all plants from your garden.<br>Shift-click to clear all null tiles, or toggle all null tiles if there are none present.',
 	func: function(e) {
 		if (e.shiftKey) {
 			let hasNulls = false;
