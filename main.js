@@ -408,6 +408,11 @@ function updateStats() {
 	for (let i=0; i<plants.length; i++) {
 		chances[plants[i].strId] = [];
 	}
+
+	let functionalLoops = 1; 
+	if (leftToggleStatuses.si) { functionalLoops += 1.05; }
+	if (leftToggleStatuses.si) { functionalLoops += 1.005; }
+	if (leftToggleStatuses.woodchips) { functionalLoops *= 3; }
 	
 	for (let y=0; y<maxY; y++) {
 		for (let x=0; x<maxX; x++) {
@@ -487,10 +492,11 @@ function updateStats() {
 			
 			probs = randomListProb(probs);
 			
-			let noneChance = 1 - probs.reduce((a, b) => a + b);
+			let noneChance = 1 - probs.reduce((a, b) => a + b); //1 - the sum of all values in probs
 			
 			for (let i=0; i<muts.length; i++) {
 				let prob = 0;
+				/*
 				if (leftToggleableStatuses.woodchips) {
 					for (let j=0; j<3; j++) {
 						prob += probs[i] * Math.pow(noneChance, j);
@@ -498,6 +504,8 @@ function updateStats() {
 				} else {
 					prob = probs[i];
 				}
+				*/
+				prob += probs[i] * ((1 - Math.pow(noneChance, functionalLoops)) / (1 - noneChance)); 
 				chances[muts[i]].push(prob);
 			}
 		}
