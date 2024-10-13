@@ -410,9 +410,9 @@ function updateStats() {
 	}
 
 	let functionalLoops = 1; 
-	if (leftToggleStatuses.si) { functionalLoops += 1.05; }
-	if (leftToggleStatuses.si) { functionalLoops += 1.005; }
-	if (leftToggleStatuses.woodchips) { functionalLoops *= 3; }
+	if (leftToggleableStatuses.si) { functionalLoops += 1.05; }
+	if (leftToggleableStatuses.si) { functionalLoops += 1.005; }
+	if (leftToggleableStatuses.woodchips) { functionalLoops *= 3; }
 	
 	for (let y=0; y<maxY; y++) {
 		for (let x=0; x<maxX; x++) {
