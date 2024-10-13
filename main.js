@@ -412,8 +412,9 @@ function updateStats() {
 
 	let functionalLoops = 1; 
 	if (leftToggleableStatuses.si) { functionalLoops += 1.05; }
-	if (leftToggleableStatuses.si) { functionalLoops += 1.005; }
+	if (leftToggleableStatuses.rb) { functionalLoops += 1.005; }
 	if (leftToggleableStatuses.woodchips) { functionalLoops *= 3; }
+	console.log('functional loops: '+functionalLoops);
 	
 	for (let y=0; y<maxY; y++) {
 		for (let x=0; x<maxX; x++) {
