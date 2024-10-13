@@ -791,7 +791,7 @@ const leftToggleableList = [{
 	id: 'nullTile',
 	image: 'images/null_tile_toggle.png',
 	name: 'Toggle null tiles',
-	desc: 'Toggling this on allows you to turn tiles null by shift-clicking them.<br>Note: null tiles do not exist in-game.'
+	desc: 'Toggling this on allows you to turn tiles null by shift-clicking them. (hotkey to toggle: <b>n</b>)<br>Note: null tiles do not exist in-game.'
 }];
 const rightActivatableList = [{
 	id: 'clear',
@@ -889,6 +889,7 @@ function cycleRight(reversed) {
 	if (rightOn < 0) { rightOn = rightActivatableList.length - 1; }
 	document.getElementById(rightActivatableList[rightOn].id).style.display = '';
 }
+document.addEventListener('keydown', function(e) { if (e.key == 'n') { document.getElementById('nullTile').click(); } })
 
 function init() {
 	document.body.appendChild(tooltip);
