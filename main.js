@@ -3,6 +3,7 @@ tooltip.id = "tooltip";
 tooltip.className = "framed";
 tooltip.style.display = "none";
 
+
 function tooltipHide() {
 	tooltip.style.display = "none";
 }
