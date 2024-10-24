@@ -366,6 +366,7 @@ let mutations = [
 	[{"tidygrass": [3, 8, 1], "elderwort": [3, 8, 1]}, {"everdaisy": 0.002}],
 	[{"elderwort": [1, 8, 1], "crumbspore": [1, 8, 1]}, {"ichorpuff": 0.002}]
 ];
+let weedsList = ["meddleweed"];
 
 function randomListProb(list) {
 	let out = new Array(list.length).fill(0);
