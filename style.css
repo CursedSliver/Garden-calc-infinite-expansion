@@ -157,6 +157,10 @@ input[type="text"] {
 	margin: 3px; 
 }
 
+.toggleOff {
+	color: #ccc;
+}
+
 .prompt {
 	z-index: 1000;
 	position: fixed;
@@ -437,6 +441,13 @@ input[type="text"] {
 	position: absolute;
     bottom: 0;
     width: 150px;
+    left: 50%;
+    transform: translate(-52%, -10%);
+}
+#nullToggle {
+	position: absolute;
+    bottom: 30px;
+    width: 100px;
     left: 50%;
     transform: translate(-52%, -10%);
 }

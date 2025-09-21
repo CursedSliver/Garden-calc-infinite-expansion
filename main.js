@@ -557,7 +557,7 @@ class Tile {
 		this.icon.style.display = "none";
 		this.element.appendChild(this.icon);
 		this.element.addEventListener("click", e => {
-			if (e.shiftKey && leftToggleableStatuses.nullTile) {
+			if ((e.shiftKey && leftToggleableStatuses.nullTile) || willSetNulls) {
 				this.setNull(!this.isNull);
 				return;
 			}
@@ -794,6 +794,7 @@ const leftToggleableList = [{
 	name: 'Toggle null tiles',
 	desc: 'Toggling this on allows you to turn tiles null by shift-clicking them. (hotkey to toggle: <b>n</b>)<br>Note: null tiles do not exist in-game.'
 }];
+let willSetNulls = false;
 const rightActivatableList = [{
 	id: 'clear',
 	image: 'images/clear.png',
@@ -815,6 +816,31 @@ const rightActivatableList = [{
 		}
 	}
 }];
+function isTouchDevice() {
+	return (
+		"ontouchstart" in window ||
+		navigator.maxTouchPoints > 0 ||
+		navigator.msMaxTouchPoints > 0
+	);
+}
+
+if (/Mobi|Android/i.test(navigator.userAgent) || isTouchDevice()) {
+	const btn = document.getElementById("nullToggle");
+	if (btn) {
+		btn.style.display = '';
+	}
+}
+document.getElementById('nullToggle').addEventListener('click', function() {
+	willSetNulls = !willSetNulls;
+	if (willSetNulls) {
+		document.getElementById('nullToggle').classList.remove('toggleOff');
+		document.getElementById('nullToggle').innerText = 'Null tiles: ON';
+	} else {
+		document.getElementById('nullToggle').classList.add('toggleOff');
+		document.getElementById('nullToggle').innerText = 'Null tiles: OFF';
+	}
+});
+
 function createAllTools() {
 	document.getElementById('leftToggleable').addEventListener('click', function() {
 		updateStats();
